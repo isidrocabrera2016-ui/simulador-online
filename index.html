@@ -7,11 +7,9 @@
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230a2540'/><text x='50' y='68' font-size='55' text-anchor='middle' fill='%23d4a853' font-family='Arial' font-weight='bold'>TK</text></svg>">
     <meta property="og:title" content="TKING - Solicitá tu Crédito Rápido y Fácil">
     <meta property="og:description" content="Evaluá tu crédito en 2 minutos, sin compromiso. Completá el formulario y recibí orientación personalizada.">
-    <meta property="og:image" content="https://isidrocabrera2016-ui.github.io/Simulador_de_Créditos/1000318336.png">
-    <meta property="og:url" content="https://isidrocabrera2016-ui.github.io/Simulador_de_Créditos/">
+    <meta property="og:image" content="https://isidrocabrera2016-ui.github.io/simulador-online/1000318336.png">
+    <meta property="og:url" content="https://isidrocabrera2016-ui.github.io/simulador-online/">
     <meta property="og:type" content="website">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
     <style>
         :root {
             --azul-marino: #0a2540;
@@ -42,25 +40,9 @@
             position: relative;
         }
 
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('fondo-tking.jpg');
-            background-repeat: no-repeat;
-            background-position: center center;
-            background-size: cover;
-            opacity: 0.05;
-            pointer-events: none;
-            z-index: 0;
-        }
-
         .container {
             width: 100%;
-            max-width: 480px;
+            max-width: 500px;
             position: relative;
             z-index: 1;
         }
@@ -82,397 +64,68 @@
             border-bottom: 2px solid var(--dorado);
         }
 
-        .header .logo {
-            font-size: 26px;
-            font-weight: 800;
-            letter-spacing: -0.5px;
-            color: var(--blanco);
-        }
+        .header .logo { font-size: 26px; font-weight: 800; color: var(--blanco); }
+        .header .logo span { color: var(--dorado); }
+        .header .subtitle { font-size: 11px; opacity: 0.9; margin-top: 3px; }
+        .header .agent-info { margin-top: 10px; font-size: 10px; background: rgba(212, 168, 83, 0.2); display: inline-block; padding: 6px 14px; border-radius: 50px; font-weight: 600; }
 
-        .header .logo span {
-            color: var(--dorado);
-        }
-
-        .header .subtitle {
-            font-size: 11px;
-            opacity: 0.9;
-            margin-top: 3px;
-            letter-spacing: 0.3px;
-        }
-
-        .header .agent-info {
-            margin-top: 10px;
-            font-size: 10px;
-            background: rgba(212, 168, 83, 0.2);
-            display: inline-block;
-            padding: 6px 14px;
-            border-radius: 50px;
-            font-weight: 600;
-            border: 1px solid rgba(212, 168, 83, 0.3);
-        }
-
-        .tabs {
-            display: flex;
-            padding: 8px;
-            gap: 6px;
-            background: var(--gris-perla);
-            border-bottom: 1px solid var(--gris-borde);
-        }
-
-        .tab {
-            flex: 1;
-            padding: 10px 8px;
-            border: none;
-            background: none;
-            font-weight: 700;
-            font-size: 12px;
-            color: #7a8490;
-            cursor: pointer;
-            border-radius: 8px;
-            transition: all 0.2s;
-            white-space: nowrap;
-        }
-
-        .tab.active {
-            background: var(--blanco);
-            color: var(--azul-marino);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-            border: 1px solid var(--gris-borde);
-        }
+        .tabs { display: flex; padding: 8px; gap: 6px; background: var(--gris-perla); border-bottom: 1px solid var(--gris-borde); }
+        .tab { flex: 1; padding: 10px 8px; border: none; background: none; font-weight: 700; font-size: 12px; color: #7a8490; cursor: pointer; border-radius: 8px; transition: all 0.2s; }
+        .tab.active { background: var(--blanco); color: var(--azul-marino); box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06); }
 
         .content { padding: 14px; }
-
         .panel { display: none; }
         .panel.active { display: block; animation: fadeIn 0.3s ease; }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(8px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
 
         .form-group { margin-bottom: 12px; }
+        label { display: block; font-size: 10px; font-weight: 700; margin-bottom: 4px; color: #3a4455; text-transform: uppercase; letter-spacing: 0.6px; }
+        input, select, textarea { width: 100%; padding: 12px; border: 2px solid var(--gris-borde); border-radius: 8px; font-size: 14px; background: var(--blanco); color: var(--texto); }
+        textarea { resize: vertical; min-height: 65px; }
+        .row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+        .row-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+        .btn { width: 100%; padding: 13px; border: none; border-radius: 8px; font-size: 14px; font-weight: 700; cursor: pointer; margin-top: 6px; }
+        .btn-primary { background: linear-gradient(135deg, #0a2540, #0d3b66); color: var(--dorado); border: 1px solid var(--dorado); }
+        .btn-whatsapp { background: var(--whatsapp); color: white; animation: pulse 2s infinite; }
 
-        label {
-            display: block;
-            font-size: 10px;
-            font-weight: 700;
-            margin-bottom: 4px;
-            color: #3a4455;
-            text-transform: uppercase;
-            letter-spacing: 0.6px;
-        }
+        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.5); } 70% { box-shadow: 0 0 0 12px rgba(37, 211, 102, 0); } 100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); } }
 
-        input, select, textarea {
-            width: 100%;
-            padding: 12px;
-            border: 2px solid var(--gris-borde);
-            border-radius: 8px;
-            font-size: 14px;
-            transition: all 0.2s;
-            background: var(--blanco);
-            color: var(--texto);
-            -webkit-appearance: none;
-            appearance: none;
-        }
+        .checklist-container { background: var(--gris-perla); border-radius: 10px; padding: 12px; margin-top: 8px; border: 1px solid var(--gris-borde); }
+        .checklist-title { font-weight: 700; font-size: 11px; color: var(--azul-marino); margin-bottom: 10px; text-align: center; }
+        .checklist-item { display: flex; align-items: center; gap: 10px; padding: 7px 0; border-bottom: 1px solid #e8eaf0; font-size: 12px; cursor: pointer; }
+        .checklist-item:last-child { border-bottom: none; }
+        .checklist-item input[type="checkbox"] { display: none; }
+        .custom-check { width: 22px; height: 22px; border: 2px solid #b0b8c4; border-radius: 4px; display: flex; align-items: center; justify-content: center; background: white; }
+        .checklist-item input:checked + .custom-check { background: var(--azul-marino); border-color: var(--azul-marino); }
+        .custom-check::after { content: '✓'; color: white; font-size: 14px; font-weight: 800; display: none; }
+        .checklist-item input:checked + .custom-check::after { display: block; }
+        .checklist-label { font-size: 12px; cursor: pointer; }
 
-        textarea {
-            resize: vertical;
-            min-height: 65px;
-            font-family: inherit;
-        }
-
-        input:focus, select:focus, textarea:focus {
-            outline: none;
-            border-color: var(--azul-real);
-            box-shadow: 0 0 0 3px rgba(21, 101, 192, 0.08);
-        }
-
-        .row-2 {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 8px;
-        }
-
-        .row-3 {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            gap: 8px;
-        }
-
-        .btn {
-            width: 100%;
-            padding: 13px;
-            border: none;
-            border-radius: 8px;
-            font-size: 14px;
-            font-weight: 700;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
-            transition: all 0.2s;
-            margin-top: 6px;
-            letter-spacing: 0.3px;
-        }
-
-        .btn:active { transform: scale(0.97); }
-
-        .btn-primary {
-            background: linear-gradient(135deg, #0a2540, #0d3b66);
-            color: var(--dorado);
-            font-size: 15px;
-            border: 1px solid var(--dorado);
-        }
-
-        .btn-whatsapp {
-            background: var(--whatsapp);
-            color: white;
-            font-size: 14px;
-            padding: 14px;
-            animation: pulse 2s infinite;
-            border-radius: 8px;
-        }
-
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.5); }
-            70% { box-shadow: 0 0 0 12px rgba(37, 211, 102, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
-        }
-
-        /* Checklist personalizado */
-        .checklist-container {
-            background: var(--gris-perla);
-            border-radius: 10px;
-            padding: 12px;
-            margin-top: 8px;
-            border: 1px solid var(--gris-borde);
-        }
-
-        .checklist-title {
-            font-weight: 700;
-            font-size: 11px;
-            color: var(--azul-marino);
-            margin-bottom: 10px;
-            text-align: center;
-        }
-
-        .checklist-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 7px 0;
-            border-bottom: 1px solid #e8eaf0;
-            font-size: 12px;
-            color: var(--texto);
-            cursor: pointer;
-        }
-
-        .checklist-item:last-child {
-            border-bottom: none;
-        }
-
-        .checklist-item input[type="checkbox"] {
-            display: none;
-        }
-
-        .custom-check {
-            width: 22px;
-            height: 22px;
-            min-width: 22px;
-            border: 2px solid #b0b8c4;
-            border-radius: 4px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.2s;
-            flex-shrink: 0;
-            background: white;
-        }
-
-        .checklist-item input:checked + .custom-check {
-            background: var(--azul-marino);
-            border-color: var(--azul-marino);
-        }
-
-        .custom-check::after {
-            content: '✓';
-            color: white;
-            font-size: 14px;
-            font-weight: 800;
-            display: none;
-        }
-
-        .checklist-item input:checked + .custom-check::after {
-            display: block;
-        }
-
-        .checklist-label {
-            flex: 1;
-            font-size: 12px;
-            color: var(--texto);
-            text-transform: none;
-            letter-spacing: 0;
-            margin: 0;
-            cursor: pointer;
-        }
-
-        .table-container {
-            overflow-x: auto;
-            border-radius: 10px;
-            border: 1px solid var(--gris-borde);
-            margin-bottom: 10px;
-            -webkit-overflow-scrolling: touch;
-            display: none; /* Oculto hasta que se seleccione monto */
-        }
-
+        .table-container { overflow-x: auto; border-radius: 10px; border: 1px solid var(--gris-borde); display: none; }
         table { width: 100%; border-collapse: collapse; font-size: 11px; min-width: 420px; }
-
-        th {
-            background: var(--azul-marino);
-            padding: 10px 6px;
-            font-weight: 700;
-            font-size: 10px;
-            color: var(--dorado);
-            white-space: nowrap;
-            letter-spacing: 0.3px;
-        }
-
-        td {
-            padding: 10px 6px;
-            text-align: center;
-            border-bottom: 1px solid #e8eaf0;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.15s;
-            white-space: nowrap;
-            color: var(--texto);
-        }
-
-        td:hover { background: #e8ecf2; }
+        th { background: var(--azul-marino); padding: 10px 6px; color: var(--dorado); font-size: 10px; }
+        td { padding: 10px 6px; text-align: center; border-bottom: 1px solid #e8eaf0; cursor: pointer; }
         td.selected { background: var(--azul-marino); color: var(--dorado); font-weight: 800; }
+        .sim-info { background: var(--gris-perla); padding: 16px; border-radius: 12px; text-align: center; border: 2px dashed var(--gris-borde); margin-top: 10px; display: none; }
+        .sim-info.show { display: block; }
 
-        .sim-info {
-            background: var(--gris-perla);
-            padding: 16px;
-            border-radius: 12px;
-            text-align: center;
-            border: 2px dashed var(--gris-borde);
-            margin-top: 10px;
-            display: none;
-        }
+        .footer-note { font-size: 10px; text-align: center; color: rgba(255, 255, 255, 0.7); margin-top: 12px; }
 
-        .sim-info.show { display: block; animation: fadeIn 0.3s ease; }
-
-        .footer-note {
-            font-size: 10px;
-            text-align: center;
-            color: rgba(255, 255, 255, 0.7);
-            margin-top: 12px;
-            letter-spacing: 0.3px;
-        }
-
-        .intro-text {
-            text-align: center;
-            font-size: 12px;
-            color: var(--texto-claro);
-            margin-bottom: 14px;
-            line-height: 1.4;
-        }
-
-        /* Prueba social mini */
-        .social-proof-mini {
-            position: fixed;
-            left: 8px;
-            bottom: 80px;
-            background: var(--blanco);
-            border-radius: 10px;
-            padding: 8px 10px;
-            box-shadow: 0 6px 20px rgba(10, 37, 64, 0.2);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            z-index: 998;
-            max-width: 220px;
-            transform: translateX(-120%);
-            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            border-left: 3px solid var(--dorado);
-        }
-
+        .social-proof-mini { position: fixed; left: 8px; bottom: 80px; background: var(--blanco); border-radius: 10px; padding: 8px 10px; box-shadow: 0 6px 20px rgba(10, 37, 64, 0.2); display: flex; align-items: center; gap: 8px; z-index: 998; max-width: 220px; transform: translateX(-120%); transition: transform 0.5s; border-left: 3px solid var(--dorado); }
         .social-proof-mini.show { transform: translateX(0); }
+        .social-proof-mini .avatar-mini { width: 30px; height: 30px; border-radius: 50%; background: var(--azul-marino); color: var(--dorado); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 13px; }
+        .social-proof-mini .name-mini { font-weight: 700; font-size: 11px; }
+        .social-proof-mini .msg-mini { font-size: 10px; color: #777; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
-        .social-proof-mini .avatar-mini {
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            background: var(--azul-marino);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--dorado);
-            font-weight: 700;
-            font-size: 13px;
-            flex-shrink: 0;
-        }
-
-        .social-proof-mini .info-mini { flex: 1; min-width: 0; }
-
-        .social-proof-mini .name-mini { font-weight: 700; font-size: 11px; color: var(--texto); }
-        .social-proof-mini .msg-mini { font-size: 10px; color: #777; margin-top: 1px; line-height: 1.2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        .social-proof-mini .time-mini { font-size: 9px; color: #aaa; margin-top: 1px; }
-
-        /* Botón WhatsApp flotante */
-        .wa-float-btn {
-            position: fixed;
-            right: 12px;
-            bottom: 20px;
-            width: 50px;
-            height: 50px;
-            background: var(--whatsapp);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            z-index: 998;
-            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
-            animation: floatPulse 2s infinite;
-        }
-
-        .wa-float-btn:active { transform: scale(0.9); }
-
+        .wa-float-btn { position: fixed; right: 12px; bottom: 20px; width: 50px; height: 50px; background: var(--whatsapp); border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 998; box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4); animation: floatPulse 2s infinite; }
         .wa-float-btn svg { width: 28px; height: 28px; fill: white; }
-
-        @keyframes floatPulse {
-            0% { box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4); }
-            50% { box-shadow: 0 6px 30px rgba(37, 211, 102, 0.7); }
-            100% { box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4); }
-        }
-
-        @media (max-width: 380px) {
-            .header .logo { font-size: 20px; }
-            .tab { font-size: 11px; padding: 8px 6px; }
-            input, select, textarea { padding: 10px; font-size: 13px; }
-            .btn { font-size: 13px; padding: 12px; }
-        }
+        @keyframes floatPulse { 0% { box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4); } 50% { box-shadow: 0 6px 30px rgba(37, 211, 102, 0.7); } 100% { box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4); } }
     </style>
 </head>
 <body>
-
-    <!-- Prueba social mini -->
-    <div class="social-proof-mini" id="socialProofMini">
-        <div class="avatar-mini" id="avatarMini">M</div>
-        <div class="info-mini">
-            <div class="name-mini" id="nameMini"></div>
-            <div class="msg-mini" id="msgMini"></div>
-            <div class="time-mini" id="timeMini"></div>
-        </div>
-    </div>
-
-    <!-- Botón WhatsApp flotante (Atención Personalizada) -->
-    <div class="wa-float-btn" onclick="abrirWhatsAppDirecto()" title="Consultá por WhatsApp">
-        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-    </div>
+    <div class="social-proof-mini" id="socialProofMini"><div class="avatar-mini" id="avatarMini">M</div><div class="info-mini"><div class="name-mini" id="nameMini"></div><div class="msg-mini" id="msgMini"></div></div></div>
+    <div class="wa-float-btn" onclick="abrirWhatsAppDirecto()"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></div>
 
     <div class="container">
         <div class="app-card">
@@ -481,544 +134,257 @@
                 <div class="subtitle">Asesoría Profesional de Crédito</div>
                 <div class="agent-info">0971 992 363 · Respuesta inmediata</div>
             </div>
-
             <div class="tabs">
-                <button class="tab active" onclick="abrirPestana('evaluacion')">Solicitar Crédito</button>
+                <button class="tab active" onclick="abrirPestana('evaluacion')">Evaluar mi caso</button>
                 <button class="tab" onclick="abrirPestana('simulador')">Simular Cuotas</button>
             </div>
-
             <div class="content">
-                <!-- PANEL EVALUACIÓN -->
                 <div id="panelEvaluacion" class="panel active">
-                    <p class="intro-text">Completá el formulario y recibí una <strong>evaluación gratuita</strong> sin compromiso.</p>
+                    <p class="intro-text" style="text-align:center;font-size:12px;color:#5a6070;margin-bottom:14px;">Completá el formulario y recibí una <strong>evaluación gratuita</strong> sin compromiso.</p>
                     <form id="formularioEvaluacion">
                         <div class="row-3">
-                            <div class="form-group">
-                                <label>Nombre Completo</label>
-                                <input type="text" id="nombreClienteEval" placeholder="Nombre" required>
-                            </div>
-                            <div class="form-group">
-                                <label>CI N.°</label>
-                                <input type="text" id="ciClienteEval" placeholder="1234567" required>
-                            </div>
-                            <div class="form-group">
-                                <label>WhatsApp</label>
-                                <input type="tel" id="telefonoClienteEval" placeholder="0971..." required>
-                            </div>
+                            <div class="form-group"><label>Nombre Completo</label><input type="text" id="nombreClienteEval" placeholder="Nombre" required></div>
+                            <div class="form-group"><label>CI N.°</label><input type="text" id="ciClienteEval" placeholder="1234567" required></div>
+                            <div class="form-group"><label>WhatsApp</label><input type="tel" id="telefonoClienteEval" placeholder="0971..." required></div>
+                        </div>
+                        <div class="row-2">
+                            <div class="form-group"><label>Fecha de Nacimiento</label><input type="date" id="fechaNacimiento" required onchange="validarEdad()"></div>
+                            <div class="form-group"><label>Ciudad</label><input type="text" id="ciudadClienteEval" placeholder="Asunción, CDE..." required></div>
                         </div>
                         <div class="form-group">
-                            <label>Ciudad</label>
-                            <input type="text" id="ciudadClienteEval" placeholder="Asunción, CDE, Encarnación..." required>
-                        </div>
-                        <div class="form-group">
-                            <label>Perfil Laboral</label>
+                            <label>Perfil Laboral (Política El Gestor)</label>
                             <select id="perfil" required onchange="actualizarChecklist()">
                                 <option value="">Seleccioná tu perfil...</option>
-                                <option value="formal_ips">Trabajador Formal (con IPS)</option>
-                                <option value="informal">Trabajador Informal (sin IPS)</option>
-                                <option value="publico_permanente">Funcionario Público Permanente</option>
-                                <option value="publico_contratado">Funcionario Público Contratado</option>
-                                <option value="micro_sin_patente">Microempresa con o sin patente</option>
-                                <option value="micro_con_ivas">Microempresa (con IVAs)</option>
-                                <option value="rentista">Rentista (Alquileres)</option>
+                                <option value="asalariado_ips">Asalariado IPS</option>
+                                <option value="informal_sin_ips">Informal Sin IPS</option>
+                                <option value="func_publico_permanente">Func. Público Permanente</option>
+                                <option value="func_publico_contratado">Func. Público Contratado</option>
+                                <option value="jubilado">Jubilado</option>
+                                <option value="asalariado_iva">Asalariado con IVA</option>
+                                <option value="prof_independiente">Prof. Independiente</option>
+                                <option value="independiente">Independiente</option>
+                                <option value="micro_comerciante">Micro / Comerciante</option>
                             </select>
                         </div>
                         <div class="row-2">
-                            <div class="form-group">
-                                <label>Monto Solicitado (Gs)</label>
-                                <input type="text" id="monto" placeholder="1.000.000" required>
-                            </div>
-                            <div class="form-group">
-                                <label>Ingreso Mensual (Gs)</label>
-                                <input type="text" id="ingreso" placeholder="2.500.000" required>
-                            </div>
+                            <div class="form-group"><label>Monto Solicitado (Gs)</label><input type="text" id="monto" placeholder="1.800.000" required></div>
+                            <div class="form-group"><label>Ingreso Mensual (Gs)</label><input type="text" id="ingreso" placeholder="1.800.000" required></div>
                         </div>
                         <div class="form-group">
-                            <label>Estado en Informconf</label>
-                            <select id="informconf" required>
-                                <option value="limpio">Sin Informconf</option>
-                                <option value="manchado">Con Informconf</option>
+                            <label>Categoría en Informconf</label>
+                            <select id="categoriaInformconf" required>
+                                <option value="">Seleccioná tu categoría...</option>
+                                <option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option>
+                                <option value="E">E</option><option value="F">F</option><option value="G">G</option><option value="H">H</option>
+                                <option value="I">I</option><option value="J">J</option><option value="K">K</option><option value="L">L</option>
+                                <option value="M">M</option><option value="N">N</option><option value="X">X</option>
+                                <option value="desconozco">No recuerdo / Desconozco</option>
                             </select>
                         </div>
-
                         <div class="checklist-container" id="checklistContainer" style="display:none;">
-                            <div class="checklist-title">Documentos que tenés disponibles:</div>
+                            <div class="checklist-title">Documentos que TENÉS disponibles (según tu perfil):</div>
                             <div id="checklistItems"></div>
                         </div>
-
                         <div class="form-group">
-                            <label>Observaciones</label>
-                            <textarea id="observaciones" placeholder="Si te falta algo o querés aclarar algún detalle..."></textarea>
+                            <label>Referencias Personales (3, 1 debe ser familiar con mismo apellido)</label>
+                            <textarea id="referencias" placeholder="1. Familiar:&#10;2. Personal:&#10;3. Personal:&#10;(Nombre, Apellido y Celular)" required></textarea>
                         </div>
-
+                        <div class="form-group">
+                            <label>Observaciones / Aclaraciones</label>
+                            <textarea id="observaciones" placeholder="Ej: Soy empleada doméstica, no tengo patente, etc."></textarea>
+                        </div>
                         <button type="submit" class="btn btn-primary">ENVIAR SOLICITUD POR WHATSAPP</button>
                     </form>
                 </div>
-
-                <!-- PANEL SIMULADOR -->
                 <div id="panelSimulador" class="panel">
-                    <p class="intro-text">Completá tus datos y seleccioná un monto para ver las cuotas.</p>
+                    <p class="intro-text" style="text-align:center;font-size:12px;color:#5a6070;">Simulá el valor de tus cuotas mensuales.</p>
                     <form id="formularioSimulador">
-                        <div class="row-3">
-                            <div class="form-group">
-                                <label>Nombre Completo</label>
-                                <input type="text" id="nombreClienteSim" placeholder="Nombre" required>
-                            </div>
-                            <div class="form-group">
-                                <label>CI N.°</label>
-                                <input type="text" id="ciClienteSim" placeholder="1234567" required>
-                            </div>
-                            <div class="form-group">
-                                <label>WhatsApp</label>
-                                <input type="tel" id="telefonoClienteSim" placeholder="0971..." required>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label>Ciudad</label>
-                            <input type="text" id="ciudadClienteSim" placeholder="Asunción, CDE, Encarnación..." required>
-                        </div>
-                        <div class="form-group">
-                            <label>Monto a Simular</label>
-                            <select id="montoSimulador" required>
-                                <option value="">Seleccioná un monto...</option>
-                                <option value="1000000">1.000.000 Gs</option>
-                                <option value="2000000">2.000.000 Gs</option>
-                                <option value="3000000">3.000.000 Gs</option>
-                                <option value="4000000">4.000.000 Gs</option>
-                                <option value="5000000">5.000.000 Gs</option>
-                                <option value="6000000">6.000.000 Gs</option>
-                                <option value="7000000">7.000.000 Gs</option>
-                                <option value="8000000">8.000.000 Gs</option>
-                                <option value="9000000">9.000.000 Gs</option>
-                                <option value="10000000">10.000.000 Gs</option>
-                            </select>
-                        </div>
-
-                        <div class="table-container" id="tablaContainer">
-                            <table>
-                                <thead><tr><th>6 Cuotas</th><th>8 Cuotas</th><th>10 Cuotas</th><th>12 Cuotas</th><th>15 Cuotas</th><th>18 Cuotas</th></tr></thead>
-                                <tbody id="tablaSimulador"></tbody>
-                            </table>
-                        </div>
-
-                        <div id="infoSimulacion" class="sim-info">
-                            <div style="font-size:26px;font-weight:800;color:var(--azul-marino);" id="cuotaMostrada">0 Gs</div>
-                            <p id="detalleMostrado" style="font-size:12px;margin-top:5px;color:var(--texto-claro);"></p>
-                            <button type="button" id="btnWaSim" class="btn btn-whatsapp">ENVIAR CONSULTA POR WHATSAPP</button>
-                        </div>
+                        <div class="form-group"><label>Monto a Simular (hasta 15M)</label><select id="montoSimulador" required><option value="">Seleccioná...</option></select></div>
+                        <div class="table-container" id="tablaContainer"><table><thead><tr><th>6</th><th>8</th><th>10</th><th>12</th><th>15</th><th>18</th></tr></thead><tbody id="tablaSimulador"></tbody></table></div>
+                        <div id="infoSimulacion" class="sim-info"><div style="font-size:24px;font-weight:800;" id="cuotaMostrada">0 Gs</div><p id="detalleMostrado" style="font-size:12px;color:#5a6070;"></p></div>
                     </form>
                 </div>
             </div>
         </div>
-        <p class="footer-note">Isidro Cabrera · Asesoría Profesional de Crédito · TKING</p>
+        <p class="footer-note">Isidro Cabrera · Asesoría de Crédito · TKING</p>
     </div>
 
     <script>
-        // ==================== CONFIGURACIÓN ====================
         const URL_GOOGLE_SHEETS = "https://script.google.com/macros/s/AKfycbwIeKDNSNVEX5PL8yxliqEOrOhdzlNQvx2KgI86cmgkq87Adg-mZbae4xK20U5SfVg/exec";
         const NUMERO_WHATSAPP = "595971992363";
 
-        // ==================== REQUISITOS ====================
-        const REQUISITOS = {
-            formal_ips: [
-                "6 últimas liquidaciones de salario (IPS)",
-                "Salario de Gs. 1.750.000 como mínimo",
-                "2 referencias personales (nombre y teléfono)",
-                "Ciudad y dirección particular"
-            ],
-            informal: [
-                "Certificado de trabajo o RUC laboral",
-                "6 meses de antigüedad como mínimo",
-                "Salario de Gs. 1.750.000 como mínimo",
-                "2 referencias personales (nombre y teléfono)",
-                "Ciudad y dirección particular y laboral"
-            ],
-            publico_permanente: [
-                "Antigüedad: 1 mes (permanente)",
-                "2 referencias personales (nombre y teléfono)",
-                "Ciudad y dirección particular"
-            ],
-            publico_contratado: [
-                "Antigüedad: 15 meses (contratado)",
-                "2 referencias personales (nombre y teléfono)",
-                "Ciudad y dirección particular"
-            ],
-            micro_sin_patente: [
-                "Antigüedad del negocio: 1 año",
-                "Fotos del negocio (fachada e interior)",
-                "Fotos de las mercaderías",
-                "2 referencias personales",
-                "Ubicación GPS",
-                "Patente (opcional)"
-            ],
-            micro_con_ivas: [
-                "Antigüedad del negocio: 1 año",
-                "Fotos del negocio (local y fachada)",
-                "3 últimos IVAs normalizados",
-                "2 referencias personales",
-                "Ubicación GPS"
-            ],
-            rentista: [
-                "Contrato privado entre las partes",
-                "Foto de cédula del inquilino",
-                "Fotos del inquilinato",
-                "Factura de servicio público a nombre del rentista",
-                "2 referencias personales",
-                "Ubicación GPS"
-            ]
+        // Documentos por perfil (Política El Gestor)
+        const DOCUMENTOS = {
+            asalariado_ips: ["Boletas de IPS según tipo de seguro", "Liquidación de salario", "3 referencias personales (1 familiar)"],
+            informal_sin_ips: ["Certificado de trabajo actualizado (no mayor a 60 días)", "3 referencias personales (1 familiar)"],
+            func_publico_permanente: ["Liquidación de salario", "Certificado de trabajo", "3 referencias personales (1 familiar)"],
+            func_publico_contratado: ["Liquidación de salario", "Certificado de trabajo", "3 referencias personales (1 familiar)"],
+            jubilado: ["Boletas de IPS o JUPE", "3 referencias personales (1 familiar)"],
+            asalariado_iva: ["3 últimos IVAs", "6 últimas facturas emitidas a la empresa", "3 referencias personales (1 familiar)"],
+            prof_independiente: ["3 últimos IVAs + título o registro profesional", "Facturas emitidas a clientes (3 meses)", "3 referencias personales (1 familiar)"],
+            independiente: ["3 últimos IVAs", "Facturas emitidas o de compra (3 meses)", "3 referencias personales (1 familiar)"],
+            micro_comerciante: ["3 últimos IVAs + ubicación del local", "Patente actual (si tiene, patente con 2 años hasta 3mm)", "3 referencias personales (1 familiar)"]
         };
 
-        // ==================== CUOTERO OFICIAL ====================
         const CUOTERO = {
-            1000000: [235000, 182000, 150000, 127000, 112000, 101000],
-            2000000: [465000, 358000, 292500, 254000, 223000, 201000],
-            3000000: [685000, 535000, 435000, 380000, 334000, 302000],
-            4000000: [900000, 700000, 571000, 507000, 445000, 402000],
-            5000000: [1150000, 885000, 712000, 633000, 555000, 503000],
-            6000000: [1333000, 1009000, 853000, 758000, 663000, 601000],
-            7000000: [1556000, 1178000, 993000, 885000, 774000, 701000],
-            8000000: [1700000, 1321000, 1092000, 969000, 840000, 756000],
-            9000000: [1912000, 1485000, 1227000, 1090000, 945000, 851000],
-            10000000: [2124000, 1651000, 1365000, 1211000, 1049000, 945000]
+            1000000: [235000,182000,150000,127000,112000,101000], 2000000: [465000,358000,292500,254000,223000,201000],
+            3000000: [685000,535000,435000,380000,334000,302000], 4000000: [900000,700000,571000,507000,445000,402000],
+            5000000: [1150000,885000,712000,633000,555000,503000], 6000000: [1333000,1009000,853000,758000,663000,601000],
+            7000000: [1556000,1178000,993000,885000,774000,701000], 8000000: [1700000,1321000,1092000,969000,840000,756000],
+            9000000: [1912000,1485000,1227000,1090000,945000,851000], 10000000: [2124000,1651000,1365000,1211000,1049000,945000],
+            11000000: [2336000,1816000,1501000,1332000,1154000,1039000], 12000000: [2548000,1981000,1638000,1453000,1259000,1134000],
+            13000000: [2760000,2146000,1774000,1574000,1364000,1228000], 14000000: [2972000,2311000,1911000,1695000,1469000,1323000],
+            15000000: [3185000,2476000,2047000,1816000,1574000,1417000]
         };
-        const PLAZOS = [6, 8, 10, 12, 15, 18];
+        const PLAZOS = [6,8,10,12,15,18];
 
-        // ==================== PRUEBAS SOCIALES ====================
-        const PRUEBAS_SOCIALES = [
-            { inicial: "M", nombre: "María G.", msg: "¡Gracias Isidro! Crédito aprobado en tiempo récord.", tiempo: "Hace 2 min" },
-            { inicial: "J", nombre: "Juan C.", msg: "Excelente asesoría. Ya tengo mi préstamo.", tiempo: "Hace 5 min" },
-            { inicial: "R", nombre: "Ramón D.", msg: "Súper profesional. Me ayudó con todo.", tiempo: "Hace 8 min" },
-            { inicial: "L", nombre: "Lucía P.", msg: "Por fin accedí a mi crédito. Recomendado.", tiempo: "Hace 1 min" },
-            { inicial: "C", nombre: "Carlos A.", msg: "Mi crédito salió en 48 horas. ¡Un genio!", tiempo: "Hace 3 min" },
-            { inicial: "S", nombre: "Sonia R.", msg: "Agradecida con Isidro. Todo perfecto.", tiempo: "Hace 6 min" }
-        ];
+        function formatearNumero(n) { return n ? n.toString().replace(/\B(?=(\d{3})+(?!\d))/g,".") : "0"; }
+        function parsearNumero(s) { return parseInt(s.toString().replace(/\./g,'')) || 0; }
 
-        let indicePrueba = 0, notificacionActiva = false;
-
-        function mostrarPruebaSocial() {
-            if (notificacionActiva || document.hidden) return;
-            const p = PRUEBAS_SOCIALES[indicePrueba];
-            indicePrueba = (indicePrueba + 1) % PRUEBAS_SOCIALES.length;
-            document.getElementById('avatarMini').textContent = p.inicial;
-            document.getElementById('nameMini').textContent = p.nombre;
-            document.getElementById('msgMini').textContent = p.msg;
-            document.getElementById('timeMini').textContent = p.tiempo;
-            document.getElementById('socialProofMini').classList.add('show');
-            notificacionActiva = true;
-            setTimeout(() => {
-                document.getElementById('socialProofMini').classList.remove('show');
-                notificacionActiva = false;
-            }, 4500);
+        // Validación de edad
+        function validarEdad() {
+            const fecha = document.getElementById('fechaNacimiento').value;
+            if (!fecha) return true;
+            const hoy = new Date();
+            const nac = new Date(fecha);
+            let edad = hoy.getFullYear() - nac.getFullYear();
+            const mes = hoy.getMonth() - nac.getMonth();
+            if (mes < 0 || (mes === 0 && hoy.getDate() < nac.getDate())) edad--;
+            if (edad < 20 || edad > 70) { alert("Edad fuera del rango permitido (20-70 años)."); document.getElementById('fechaNacimiento').value = ''; return false; }
+            return edad;
         }
 
-        function programarSiguiente() {
-            const intervalo = Math.floor(Math.random() * (12000 - 7000 + 1)) + 7000;
-            setTimeout(() => { mostrarPruebaSocial(); programarSiguiente(); }, intervalo);
-        }
-        setTimeout(() => { mostrarPruebaSocial(); programarSiguiente(); }, 3000);
-
-        // ==================== FUNCIONES AUXILIARES ====================
-        function formatearNumero(n) {
-            if (!n || isNaN(n)) return "0";
-            return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-        }
-
-        function parsearNumero(s) {
-            if (!s) return 0;
-            return parseInt(s.toString().replace(/\./g, '')) || 0;
-        }
-
-        function configurarInputNumerico(id) {
-            const inp = document.getElementById(id);
-            if (!inp) return;
-            inp.addEventListener('input', function() {
-                let r = this.value.replace(/\./g, '');
-                if (!isNaN(r) && r !== '') {
-                    this.value = formatearNumero(parseInt(r));
-                }
-            });
-            inp.addEventListener('blur', function() {
-                let r = parsearNumero(this.value);
-                if (r > 0) this.value = formatearNumero(r);
-                else this.value = '';
-            });
-        }
-
-        function abrirWhatsAppDirecto() {
-            // Botón de Atención Personalizada (sin datos obligatorios)
-            const msg = "Hola Isidro! Vi tu plataforma de créditos TKING y quisiera recibir atención personalizada. ¿Podrías orientarme?";
-            window.open("https://wa.me/" + NUMERO_WHATSAPP + "?text=" + encodeURIComponent(msg), "_blank");
-        }
-
-        function enviarWhatsApp(mensaje) {
-            window.open("https://wa.me/" + NUMERO_WHATSAPP + "?text=" + encodeURIComponent(mensaje), "_blank");
-        }
-
-        async function guardarEnGoogleSheets(datos) {
-            if (URL_GOOGLE_SHEETS === "TU_URL_DE_GOOGLE_APPS_SCRIPT") {
-                console.warn("Configurá la URL de Google Apps Script.");
-                return false;
-            }
-            try {
-                await fetch(URL_GOOGLE_SHEETS, {
-                    method: "POST",
-                    mode: "no-cors",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify(datos)
-                });
-                console.log("Datos enviados a Sheets.");
-                return true;
-            } catch (error) {
-                console.error("Error al enviar datos:", error);
-                return false;
-            }
-        }
-
-        // ==================== CHECKLIST ====================
         function actualizarChecklist() {
             const perfil = document.getElementById('perfil').value;
             const container = document.getElementById('checklistContainer');
             const items = document.getElementById('checklistItems');
-            
-            if (!perfil) {
-                container.style.display = 'none';
-                return;
-            }
-            
-            const requisitos = REQUISITOS[perfil] || [];
+            if (!perfil) { container.style.display = 'none'; return; }
+            const docs = DOCUMENTOS[perfil] || [];
             let html = '';
-            requisitos.forEach((req, i) => {
-                html += `
-                    <div class="checklist-item" onclick="toggleCheck(this)">
-                        <input type="checkbox" id="check_${i}" name="checklist" value="${req}">
-                        <div class="custom-check"></div>
-                        <label class="checklist-label" for="check_${i}">${req}</label>
-                    </div>`;
+            docs.forEach((req, i) => {
+                html += `<div class="checklist-item" onclick="toggleCheck(this)"><input type="checkbox" id="check_${i}" value="${req}"><div class="custom-check"></div><label class="checklist-label">${req}</label></div>`;
             });
             items.innerHTML = html;
             container.style.display = 'block';
         }
 
-        function toggleCheck(item) {
-            const checkbox = item.querySelector('input[type="checkbox"]');
-            checkbox.checked = !checkbox.checked;
-        }
-
+        function toggleCheck(item) { const cb = item.querySelector('input[type="checkbox"]'); cb.checked = !cb.checked; }
         function obtenerChecklist() {
             const checks = document.querySelectorAll('#checklistItems input[type="checkbox"]');
             let tiene = [], falta = [];
-            checks.forEach(ch => {
-                if (ch.checked) tiene.push(ch.value);
-                else falta.push(ch.value);
-            });
+            checks.forEach(ch => { if (ch.checked) tiene.push(ch.value); else falta.push(ch.value); });
             return { tiene, falta };
         }
 
-        // ==================== ENVÍO DE EVALUACIÓN ====================
+        function abrirWhatsAppDirecto() {
+            window.open("https://wa.me/"+NUMERO_WHATSAPP+"?text="+encodeURIComponent("Hola Isidro! Vi tu plataforma TKING y quisiera atención personalizada. ¿Podrías orientarme?"),"_blank");
+        }
+
         document.getElementById('formularioEvaluacion').addEventListener('submit', async function(e) {
             e.preventDefault();
-            
             const nombre = document.getElementById('nombreClienteEval').value.trim();
             const ci = document.getElementById('ciClienteEval').value.trim();
             const telefono = document.getElementById('telefonoClienteEval').value.trim();
+            const fechaNac = document.getElementById('fechaNacimiento').value;
             const ciudad = document.getElementById('ciudadClienteEval').value.trim();
             const perfil = document.getElementById('perfil').value;
             const monto = parsearNumero(document.getElementById('monto').value);
             const ingreso = parsearNumero(document.getElementById('ingreso').value);
-            const informconf = document.getElementById('informconf').value;
+            const catInf = document.getElementById('categoriaInformconf').value;
+            const referencias = document.getElementById('referencias').value.trim();
             const observaciones = document.getElementById('observaciones').value.trim();
 
-            if (!nombre || !ci || !telefono || !ciudad) {
-                alert("Completá todos tus datos: Nombre, CI, WhatsApp y Ciudad.");
-                return;
+            if (!nombre || !ci || !telefono || !fechaNac || !ciudad || !perfil || !catInf || !referencias) {
+                alert("Completá todos los campos obligatorios."); return;
             }
-            if (!perfil) {
-                alert("Seleccioná tu perfil laboral.");
-                return;
-            }
-            if (monto < 300000) {
-                alert("El monto mínimo es Gs. 300.000.");
-                return;
-            }
-            if (ingreso < 500000) {
-                alert("El ingreso mínimo es Gs. 500.000.");
-                return;
-            }
+            const edad = validarEdad();
+            if (!edad) return;
+            if (monto < 1000000 || monto > 15000000) { alert("Monto fuera de rango (1.000.000 a 15.000.000)."); return; }
+            if (ingreso < 1800000) { alert("Ingreso mínimo: Gs. 1.800.000."); return; }
+            if (catInf === 'M' || catInf === 'N' || catInf === 'X') { alert("Categoría de Informconf no califica (M, N, X)."); return; }
 
             const perfilLabel = document.getElementById('perfil').options[document.getElementById('perfil').selectedIndex].text;
-            const estadoInf = informconf === 'manchado' ? "Con Informconf" : "Sin Informconf";
             const { tiene, falta } = obtenerChecklist();
-
             let checklistMsg = '';
-            if (tiene.length > 0) {
-                checklistMsg += 'TIENE:\n';
-                tiene.forEach(i => { checklistMsg += '  * ' + i + '\n'; });
-            }
-            if (falta.length > 0) {
-                checklistMsg += '\nFALTA:\n';
-                falta.forEach(i => { checklistMsg += '  * ' + i + '\n'; });
-            }
+            if (tiene.length > 0) { checklistMsg += 'TIENE:\n'; tiene.forEach(i => checklistMsg += '  * ' + i + '\n'); }
+            if (falta.length > 0) { checklistMsg += '\nFALTA:\n'; falta.forEach(i => checklistMsg += '  * ' + i + '\n'); }
 
-            let mensajeWa = `Hola Isidro! Soy ${nombre}, completé tu Simulador de Créditos TKING.\n\n` +
-                `CI N.°: ${ci}\n` +
-                `WhatsApp: ${telefono}\n` +
-                `Ciudad: ${ciudad}\n` +
-                `Perfil: ${perfilLabel}\n` +
-                `Monto solicitado: Gs. ${formatearNumero(monto)}\n` +
-                `Ingreso Mensual: Gs. ${formatearNumero(ingreso)}\n` +
-                `Informconf: ${estadoInf}\n\n` +
-                `DOCUMENTACIÓN:\n${checklistMsg}`;
-            
-            if (observaciones) {
-                mensajeWa += `\nOBSERVACIONES:\n${observaciones}\n`;
-            }
-            
-            mensajeWa += `\nQuisiera avanzar con la solicitud. ¿Qué sigue?`;
+            let mensajeWa = `Hola Isidro! Soy ${nombre}, completé tu Simulador TKING (Política El Gestor).\n\n` +
+                `CI: ${ci}\nEdad: ${edad} años\nWhatsApp: ${telefono}\nCiudad: ${ciudad}\n` +
+                `Perfil: ${perfilLabel}\nMonto: Gs. ${formatearNumero(monto)}\nIngreso: Gs. ${formatearNumero(ingreso)}\n` +
+                `Categ. Informconf: ${catInf}\n\nDOCUMENTACIÓN:\n${checklistMsg}\n` +
+                `REFERENCIAS:\n${referencias}\n\nOBSERVACIONES:\n${observaciones || 'Ninguna'}\n` +
+                `Quisiera avanzar con la solicitud. ¿Qué sigue?`;
 
             const datosSheet = {
-                nombre, ci, telefono, ciudad,
-                perfil: perfilLabel,
-                monto, ingreso,
-                informconf: estadoInf,
-                checklist_tiene: tiene.join('; '),
-                checklist_falta: falta.join('; '),
-                observaciones,
-                tipo: "Evaluación",
-                fecha: new Date().toLocaleString()
+                nombre, ci, edad, telefono, ciudad, perfil: perfilLabel, monto, ingreso,
+                informconf: catInf, checklist_tiene: tiene.join('; '), checklist_falta: falta.join('; '),
+                referencias, observaciones, fecha: new Date().toLocaleString()
             };
-
-            await guardarEnGoogleSheets(datosSheet);
-            enviarWhatsApp(mensajeWa);
+            try {
+                await fetch(URL_GOOGLE_SHEETS, { method: "POST", mode: "no-cors", headers: { "Content-Type": "application/json" }, body: JSON.stringify(datosSheet) });
+            } catch (e) {}
+            window.open("https://wa.me/"+NUMERO_WHATSAPP+"?text="+encodeURIComponent(mensajeWa),"_blank");
         });
 
-        // ==================== SIMULADOR ====================
+        // Simulador
         const montoSimSelect = document.getElementById('montoSimulador');
         const tablaContainer = document.getElementById('tablaContainer');
-        const infoSimulacion = document.getElementById('infoSimulacion');
-        const tablaSimulador = document.getElementById('tablaSimulador');
-        const btnWaSim = document.getElementById('btnWaSim');
-
-        let cuotaSeleccionada = null;
-
-        montoSimSelect.addEventListener('change', function() {
-            const monto = parseInt(this.value);
-            if (monto) {
-                actualizarTablaSimulador(monto);
-                tablaContainer.style.display = 'block';
-                infoSimulacion.classList.remove('show');
-                cuotaSeleccionada = null;
-            } else {
-                tablaContainer.style.display = 'none';
-                infoSimulacion.classList.remove('show');
-                cuotaSeleccionada = null;
-            }
-        });
-
-        function actualizarTablaSimulador(monto) {
-            const cuotas = CUOTERO[monto];
-            if (!cuotas) return;
-            
-            let html = "<tr>";
-            for (let i = 0; i < 6; i++) {
-                html += `<td onclick="seleccionarCuota(this, ${monto}, ${PLAZOS[i]}, ${cuotas[i]})">${formatearNumero(cuotas[i])}</td>`;
-            }
-            html += "</tr>";
-            tablaSimulador.innerHTML = html;
+        for (let i = 1; i <= 15; i++) {
+            const val = i * 1000000;
+            const opt = document.createElement('option');
+            opt.value = val; opt.text = formatearNumero(val) + " Gs";
+            if (i === 3) opt.selected = true;
+            montoSimSelect.appendChild(opt);
         }
-
+        montoSimSelect.addEventListener('change', function() {
+            const m = parseInt(this.value);
+            if (!m) return;
+            tablaContainer.style.display = 'block';
+            const cuotas = CUOTERO[m];
+            const tbody = document.getElementById('tablaSimulador');
+            let html = "<tr>";
+            for (let i = 0; i < 6; i++) html += `<td onclick="seleccionarCuota(this,${m},${PLAZOS[i]},${cuotas[i]})">${formatearNumero(cuotas[i])}</td>`;
+            html += "</tr>"; tbody.innerHTML = html;
+            document.getElementById('infoSimulacion').classList.remove('show');
+        });
         window.seleccionarCuota = function(el, monto, plazo, cuota) {
             document.querySelectorAll('#tablaSimulador td').forEach(td => td.classList.remove('selected'));
             el.classList.add('selected');
-            
-            cuotaSeleccionada = { monto, plazo, cuota };
-            
             document.getElementById('cuotaMostrada').textContent = formatearNumero(cuota) + " Gs";
             document.getElementById('detalleMostrado').textContent = `${plazo} cuotas de ${formatearNumero(cuota)} Gs por mes`;
-            infoSimulacion.classList.add('show');
+            document.getElementById('infoSimulacion').classList.add('show');
         };
 
-        btnWaSim.addEventListener('click', function() {
-            const nombre = document.getElementById('nombreClienteSim').value.trim();
-            const ci = document.getElementById('ciClienteSim').value.trim();
-            const telefono = document.getElementById('telefonoClienteSim').value.trim();
-            const ciudad = document.getElementById('ciudadClienteSim').value.trim();
-
-            if (!nombre || !ci || !telefono || !ciudad) {
-                alert("Completá todos tus datos personales (Nombre, CI, WhatsApp y Ciudad) para poder enviar la consulta.");
-                return;
-            }
-
-            if (!cuotaSeleccionada) {
-                alert("Seleccioná una cuota de la tabla antes de enviar la consulta.");
-                return;
-            }
-
-            const { monto, plazo, cuota } = cuotaSeleccionada;
-
-            const mensaje = `Hola Isidro! Soy ${nombre}, usé tu Simulador TKING.\n\n` +
-                `CI N.°: ${ci}\n` +
-                `WhatsApp: ${telefono}\n` +
-                `Ciudad: ${ciudad}\n` +
-                `Monto simulado: Gs. ${formatearNumero(monto)}\n` +
-                `Plazo: ${plazo} meses\n` +
-                `Cuota mensual: Gs. ${formatearNumero(cuota)}\n\n` +
-                `Quisiera saber si califico. ¿Qué documentos necesito?`;
-
-            const datosSheet = {
-                nombre, ci, telefono, ciudad,
-                perfil: "Simulación",
-                monto, ingreso: "",
-                informconf: "",
-                checklist_tiene: "",
-                checklist_falta: "",
-                observaciones: `Simulación: ${plazo} cuotas de Gs. ${formatearNumero(cuota)}`,
-                tipo: "Simulación",
-                fecha: new Date().toLocaleString()
-            };
-
-            guardarEnGoogleSheets(datosSheet);
-            enviarWhatsApp(mensaje);
-        });
-
-        // ==================== CAMBIO DE PESTAÑAS ====================
-        function abrirPestana(nombre) {
-            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-            document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
-            
-            if (nombre === 'evaluacion') {
+        function abrirPestana(n) {
+            document.querySelectorAll('.tab,.panel').forEach(e => e.classList.remove('active'));
+            if (n === 'evaluacion') {
                 document.querySelector('.tab:first-child').classList.add('active');
                 document.getElementById('panelEvaluacion').classList.add('active');
             } else {
                 document.querySelector('.tab:last-child').classList.add('active');
                 document.getElementById('panelSimulador').classList.add('active');
-                // Resetear campos del simulador
-                document.getElementById('formularioSimulador').reset();
-                tablaContainer.style.display = 'none';
-                infoSimulacion.classList.remove('show');
-                cuotaSeleccionada = null;
-                if (montoSimSelect) montoSimSelect.value = "";
+                if (montoSimSelect.value) montoSimSelect.dispatchEvent(new Event('change'));
             }
         }
+        montoSimSelect.dispatchEvent(new Event('change'));
 
-        // ==================== INICIALIZACIÓN ====================
-        window.onload = function() {
-            // Configurar inputs numéricos
-            configurarInputNumerico('monto');
-            configurarInputNumerico('ingreso');
-            
-            // Formatear opciones del simulador
-            const opciones = montoSimSelect.options;
-            for (let i = 1; i < opciones.length; i++) { // Empezar en 1 para saltar el placeholder
-                const valor = parseInt(opciones[i].value);
-                if (valor) {
-                    opciones[i].text = formatearNumero(valor) + " Gs";
-                }
-            }
-            
-            // Asegurar que la tabla de simulación esté oculta al inicio
-            tablaContainer.style.display = 'none';
-            infoSimulacion.classList.remove('show');
-        };
+        // Pruebas sociales
+        const PRUEBAS = [
+            { i:"M", n:"María G.", m:"¡Gracias Isidro! Crédito aprobado en tiempo récord." },
+            { i:"J", n:"Juan C.", m:"Excelente asesoría. Ya tengo mi préstamo." }
+        ];
+        let idx = 0, activa = false;
+        setInterval(() => {
+            if (activa || document.hidden) return;
+            const p = PRUEBAS[idx]; idx = (idx+1)%PRUEBAS.length;
+            document.getElementById('avatarMini').textContent = p.i;
+            document.getElementById('nameMini').textContent = p.n;
+            document.getElementById('msgMini').textContent = p.m;
+            document.getElementById('socialProofMini').classList.add('show');
+            activa = true;
+            setTimeout(() => { document.getElementById('socialProofMini').classList.remove('show'); activa = false; }, 4500);
+        }, 9000);
     </script>
 </body>
 </html>
