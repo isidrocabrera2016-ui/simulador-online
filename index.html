@@ -320,7 +320,9 @@
             }
         }
         montoSimSelect.dispatchEvent(new Event('change'));
-
+            
+            configurarInputNumerico('monto');
+            configurarInputNumerico('ingreso');
         // Pruebas sociales
         const PRUEBAS = [
             { i:"M", n:"María G.", m:"¡Gracias Isidro! Crédito aprobado en tiempo récord." },
