@@ -13,23 +13,16 @@
     <style>
         :root {
             --azul-marino: #0a2540;
-            --azul-real: #1565c0;
             --dorado: #d4a853;
-            --dorado-claro: #f5e6c8;
             --blanco: #ffffff;
             --gris-perla: #f5f6fa;
             --gris-borde: #e2e6ed;
             --texto: #1a1f2e;
-            --texto-claro: #5a6070;
-            --verde: #1b5e20;
-            --rojo-suave: #c62828;
             --whatsapp: #25D366;
         }
-
         * { margin: 0; padding: 0; box-sizing: border-box; }
-
         body {
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            font-family: 'Segoe UI', system-ui, sans-serif;
             background: linear-gradient(160deg, #0a2540 0%, #0d3b66 50%, #f5f6fa 100%);
             min-height: 100vh;
             padding: 10px;
@@ -37,60 +30,30 @@
             justify-content: center;
             align-items: flex-start;
             overflow-x: hidden;
-            position: relative;
         }
-
-        .container {
-            width: 100%;
-            max-width: 500px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .app-card {
-            background: var(--blanco);
-            border-radius: 18px;
-            overflow: hidden;
-            box-shadow: 0 20px 50px rgba(10, 37, 64, 0.3);
-            margin-bottom: 80px;
-        }
-
-        .header {
-            background: linear-gradient(135deg, #0a2540 0%, #0d3b66 100%);
-            padding: 22px 16px;
-            color: white;
-            text-align: center;
-            position: relative;
-            border-bottom: 2px solid var(--dorado);
-        }
-
-        .header .logo { font-size: 26px; font-weight: 800; color: var(--blanco); }
+        .container { width: 100%; max-width: 500px; z-index: 1; }
+        .app-card { background: var(--blanco); border-radius: 18px; overflow: hidden; box-shadow: 0 20px 50px rgba(10, 37, 64, 0.3); margin-bottom: 80px; }
+        .header { background: linear-gradient(135deg, #0a2540 0%, #0d3b66 100%); padding: 22px 16px; color: white; text-align: center; border-bottom: 2px solid var(--dorado); }
+        .header .logo { font-size: 26px; font-weight: 800; }
         .header .logo span { color: var(--dorado); }
-        .header .subtitle { font-size: 11px; opacity: 0.9; margin-top: 3px; }
-        .header .agent-info { margin-top: 10px; font-size: 10px; background: rgba(212, 168, 83, 0.2); display: inline-block; padding: 6px 14px; border-radius: 50px; font-weight: 600; }
-
+        .header .subtitle { font-size: 11px; opacity: 0.9; }
+        .header .agent-info { margin-top: 10px; font-size: 10px; background: rgba(212, 168, 83, 0.2); display: inline-block; padding: 6px 14px; border-radius: 50px; }
         .tabs { display: flex; padding: 8px; gap: 6px; background: var(--gris-perla); border-bottom: 1px solid var(--gris-borde); }
-        .tab { flex: 1; padding: 10px 8px; border: none; background: none; font-weight: 700; font-size: 12px; color: #7a8490; cursor: pointer; border-radius: 8px; transition: all 0.2s; }
-        .tab.active { background: var(--blanco); color: var(--azul-marino); box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06); }
-
+        .tab { flex: 1; padding: 10px 8px; border: none; background: none; font-weight: 700; font-size: 12px; color: #7a8490; cursor: pointer; border-radius: 8px; }
+        .tab.active { background: var(--blanco); color: var(--azul-marino); box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
         .content { padding: 14px; }
         .panel { display: none; }
         .panel.active { display: block; animation: fadeIn 0.3s ease; }
-
         @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
-
         .form-group { margin-bottom: 12px; }
-        label { display: block; font-size: 10px; font-weight: 700; margin-bottom: 4px; color: #3a4455; text-transform: uppercase; letter-spacing: 0.6px; }
+        label { display: block; font-size: 10px; font-weight: 700; margin-bottom: 4px; color: #3a4455; text-transform: uppercase; }
         input, select, textarea { width: 100%; padding: 12px; border: 2px solid var(--gris-borde); border-radius: 8px; font-size: 14px; background: var(--blanco); color: var(--texto); }
-        textarea { resize: vertical; min-height: 65px; }
         .row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
         .row-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
         .btn { width: 100%; padding: 13px; border: none; border-radius: 8px; font-size: 14px; font-weight: 700; cursor: pointer; margin-top: 6px; }
         .btn-primary { background: linear-gradient(135deg, #0a2540, #0d3b66); color: var(--dorado); border: 1px solid var(--dorado); }
         .btn-whatsapp { background: var(--whatsapp); color: white; animation: pulse 2s infinite; }
-
         @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.5); } 70% { box-shadow: 0 0 0 12px rgba(37, 211, 102, 0); } 100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); } }
-
         .checklist-container { background: var(--gris-perla); border-radius: 10px; padding: 12px; margin-top: 8px; border: 1px solid var(--gris-borde); }
         .checklist-title { font-weight: 700; font-size: 11px; color: var(--azul-marino); margin-bottom: 10px; text-align: center; }
         .checklist-item { display: flex; align-items: center; gap: 10px; padding: 7px 0; border-bottom: 1px solid #e8eaf0; font-size: 12px; cursor: pointer; }
@@ -100,8 +63,6 @@
         .checklist-item input:checked + .custom-check { background: var(--azul-marino); border-color: var(--azul-marino); }
         .custom-check::after { content: '✓'; color: white; font-size: 14px; font-weight: 800; display: none; }
         .checklist-item input:checked + .custom-check::after { display: block; }
-        .checklist-label { font-size: 12px; cursor: pointer; }
-
         .table-container { overflow-x: auto; border-radius: 10px; border: 1px solid var(--gris-borde); display: none; }
         table { width: 100%; border-collapse: collapse; font-size: 11px; min-width: 420px; }
         th { background: var(--azul-marino); padding: 10px 6px; color: var(--dorado); font-size: 10px; }
@@ -109,22 +70,13 @@
         td.selected { background: var(--azul-marino); color: var(--dorado); font-weight: 800; }
         .sim-info { background: var(--gris-perla); padding: 16px; border-radius: 12px; text-align: center; border: 2px dashed var(--gris-borde); margin-top: 10px; display: none; }
         .sim-info.show { display: block; }
-
-        .footer-note { font-size: 10px; text-align: center; color: rgba(255, 255, 255, 0.7); margin-top: 12px; }
-
-        .social-proof-mini { position: fixed; left: 8px; bottom: 80px; background: var(--blanco); border-radius: 10px; padding: 8px 10px; box-shadow: 0 6px 20px rgba(10, 37, 64, 0.2); display: flex; align-items: center; gap: 8px; z-index: 998; max-width: 220px; transform: translateX(-120%); transition: transform 0.5s; border-left: 3px solid var(--dorado); }
-        .social-proof-mini.show { transform: translateX(0); }
-        .social-proof-mini .avatar-mini { width: 30px; height: 30px; border-radius: 50%; background: var(--azul-marino); color: var(--dorado); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 13px; }
-        .social-proof-mini .name-mini { font-weight: 700; font-size: 11px; }
-        .social-proof-mini .msg-mini { font-size: 10px; color: #777; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-
+        .footer-note { font-size: 10px; text-align: center; color: rgba(255,255,255,0.7); margin-top: 12px; }
         .wa-float-btn { position: fixed; right: 12px; bottom: 20px; width: 50px; height: 50px; background: var(--whatsapp); border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 998; box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4); animation: floatPulse 2s infinite; }
         .wa-float-btn svg { width: 28px; height: 28px; fill: white; }
         @keyframes floatPulse { 0% { box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4); } 50% { box-shadow: 0 6px 30px rgba(37, 211, 102, 0.7); } 100% { box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4); } }
     </style>
 </head>
 <body>
-    <div class="social-proof-mini" id="socialProofMini"><div class="avatar-mini" id="avatarMini">M</div><div class="info-mini"><div class="name-mini" id="nameMini"></div><div class="msg-mini" id="msgMini"></div></div></div>
     <div class="wa-float-btn" onclick="abrirWhatsAppDirecto()"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></div>
 
     <div class="container">
@@ -148,61 +100,58 @@
                             <div class="form-group"><label>WhatsApp</label><input type="tel" id="telefonoClienteEval" placeholder="0971..." required></div>
                         </div>
                         <div class="row-2">
-                            <div class="form-group"><label>Fecha de Nacimiento</label><input type="date" id="fechaNacimiento" required onchange="validarEdad()"></div>
+                            <div class="form-group"><label>Fecha de Nacimiento</label><input type="date" id="fechaNacimiento" required></div>
                             <div class="form-group"><label>Ciudad</label><input type="text" id="ciudadClienteEval" placeholder="Asunción, CDE..." required></div>
                         </div>
                         <div class="form-group">
-                            <label>Perfil Laboral (Política El Gestor)</label>
+                            <label>Perfil Laboral</label>
                             <select id="perfil" required onchange="actualizarChecklist()">
                                 <option value="">Seleccioná tu perfil...</option>
-                                <option value="asalariado_ips">Asalariado IPS</option>
-                                <option value="informal_sin_ips">Informal Sin IPS</option>
-                                <option value="func_publico_permanente">Func. Público Permanente</option>
-                                <option value="func_publico_contratado">Func. Público Contratado</option>
-                                <option value="jubilado">Jubilado</option>
-                                <option value="asalariado_iva">Asalariado con IVA</option>
-                                <option value="prof_independiente">Prof. Independiente</option>
-                                <option value="independiente">Independiente</option>
-                                <option value="micro_comerciante">Micro / Comerciante</option>
+                                <option value="formal_ips">Trabajador Formal (con IPS)</option>
+                                <option value="informal">Trabajador Informal (sin IPS)</option>
+                                <option value="publico_permanente">Funcionario Público Permanente</option>
+                                <option value="publico_contratado">Funcionario Público Contratado</option>
+                                <option value="micro_sin_patente">Microempresa con o sin patente</option>
+                                <option value="micro_con_ivas">Microempresa (con IVAs)</option>
+                                <option value="rentista">Rentista (Alquileres)</option>
                             </select>
                         </div>
                         <div class="row-2">
-                            <div class="form-group"><label>Monto Solicitado (Gs)</label><input type="text" id="monto" placeholder="1.800.000" required></div>
-                            <div class="form-group"><label>Ingreso Mensual (Gs)</label><input type="text" id="ingreso" placeholder="1.800.000" required></div>
+                            <div class="form-group"><label>Monto Solicitado (Gs)</label><input type="text" id="monto" placeholder="1.000.000" required></div>
+                            <div class="form-group"><label>Ingreso Mensual (Gs)</label><input type="text" id="ingreso" placeholder="2.500.000" required></div>
                         </div>
                         <div class="form-group">
-                            <label>Categoría en Informconf</label>
-                            <select id="categoriaInformconf" required>
-                                <option value="">Seleccioná tu categoría...</option>
-                                <option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option>
-                                <option value="E">E</option><option value="F">F</option><option value="G">G</option><option value="H">H</option>
-                                <option value="I">I</option><option value="J">J</option><option value="K">K</option><option value="L">L</option>
-                                <option value="M">M</option><option value="N">N</option><option value="X">X</option>
+                            <label>Situación en Informconf</label>
+                            <select id="informconf" required>
+                                <option value="">Seleccioná una opción...</option>
+                                <option value="sin_mora">No tiene mora / Sin Informconf</option>
+                                <option value="mora_leve">Tiene Informconf / Mora de 30 días o menos</option>
+                                <option value="mora_media">Tiene Informconf / Mora de 31 a 60 días</option>
+                                <option value="mora_alta">Tiene Informconf / Mora de 61 a 90 días</option>
+                                <option value="mora_mayor">Tiene Informconf / Más de 91 días de mora</option>
                                 <option value="desconozco">No recuerdo / Desconozco</option>
                             </select>
                         </div>
                         <div class="checklist-container" id="checklistContainer" style="display:none;">
-                            <div class="checklist-title">Documentos que TENÉS disponibles (según tu perfil):</div>
+                            <div class="checklist-title">Documentos que tenés disponibles:</div>
                             <div id="checklistItems"></div>
                         </div>
                         <div class="form-group">
-                            <label>Referencias Personales (3, 1 debe ser familiar con mismo apellido)</label>
-                            <textarea id="referencias" placeholder="1. Familiar:&#10;2. Personal:&#10;3. Personal:&#10;(Nombre, Apellido y Celular)" required></textarea>
+                            <label>Referencias Personales (3, 1 debe ser familiar)</label>
+                            <textarea id="referencias" placeholder="1. Familiar (mismo apellido):&#10;2. Personal:&#10;3. Personal:&#10;(Nombre, Apellido y Celular)"></textarea>
                         </div>
                         <div class="form-group">
-                            <label>Observaciones / Aclaraciones</label>
-                            <textarea id="observaciones" placeholder="Ej: Soy empleada doméstica, no tengo patente, etc."></textarea>
+                            <label>Observaciones</label>
+                            <textarea id="observaciones" placeholder="Si te falta algo o querés aclarar algún detalle..."></textarea>
                         </div>
                         <button type="submit" class="btn btn-primary">ENVIAR SOLICITUD POR WHATSAPP</button>
                     </form>
                 </div>
                 <div id="panelSimulador" class="panel">
                     <p class="intro-text" style="text-align:center;font-size:12px;color:#5a6070;">Simulá el valor de tus cuotas mensuales.</p>
-                    <form id="formularioSimulador">
-                        <div class="form-group"><label>Monto a Simular (hasta 15M)</label><select id="montoSimulador" required><option value="">Seleccioná...</option></select></div>
-                        <div class="table-container" id="tablaContainer"><table><thead><tr><th>6</th><th>8</th><th>10</th><th>12</th><th>15</th><th>18</th></tr></thead><tbody id="tablaSimulador"></tbody></table></div>
-                        <div id="infoSimulacion" class="sim-info"><div style="font-size:24px;font-weight:800;" id="cuotaMostrada">0 Gs</div><p id="detalleMostrado" style="font-size:12px;color:#5a6070;"></p></div>
-                    </form>
+                    <div class="form-group"><label>Monto a Simular (hasta 10M)</label><select id="montoSimulador" required><option value="">Seleccioná...</option></select></div>
+                    <div class="table-container" id="tablaContainer"><table><thead><tr><th>6</th><th>8</th><th>10</th><th>12</th><th>15</th><th>18</th></tr></thead><tbody id="tablaSimulador"></tbody></table></div>
+                    <div id="infoSimulacion" class="sim-info"><div style="font-size:24px;font-weight:800;" id="cuotaMostrada">0 Gs</div><p id="detalleMostrado" style="font-size:12px;color:#5a6070;"></p></div>
                 </div>
             </div>
         </div>
@@ -210,58 +159,42 @@
     </div>
 
     <script>
-        const URL_GOOGLE_SHEETS = "https://script.google.com/macros/s/AKfycbxT4hZKhdvlnU2MuAXM5yC5gk7Nl2kfZKIB9Qmt166W0H6yVIinSNpay9W_j4cUhw3K/exec";
+        // CAMBIAR AQUÍ POR TU URL REAL
+        const URL_GOOGLE_SHEETS = "TU_URL_DE_GOOGLE_APPS_SCRIPT";
         const NUMERO_WHATSAPP = "595971992363";
 
-        // Documentos por perfil (Política El Gestor)
-        const DOCUMENTOS = {
-            asalariado_ips: ["Boletas de IPS según tipo de seguro", "Liquidación de salario", "3 referencias personales (1 familiar)"],
-            informal_sin_ips: ["Certificado de trabajo actualizado (no mayor a 60 días)", "3 referencias personales (1 familiar)"],
-            func_publico_permanente: ["Liquidación de salario", "Certificado de trabajo", "3 referencias personales (1 familiar)"],
-            func_publico_contratado: ["Liquidación de salario", "Certificado de trabajo", "3 referencias personales (1 familiar)"],
-            jubilado: ["Boletas de IPS o JUPE", "3 referencias personales (1 familiar)"],
-            asalariado_iva: ["3 últimos IVAs", "6 últimas facturas emitidas a la empresa", "3 referencias personales (1 familiar)"],
-            prof_independiente: ["3 últimos IVAs + título o registro profesional", "Facturas emitidas a clientes (3 meses)", "3 referencias personales (1 familiar)"],
-            independiente: ["3 últimos IVAs", "Facturas emitidas o de compra (3 meses)", "3 referencias personales (1 familiar)"],
-            micro_comerciante: ["3 últimos IVAs + ubicación del local", "Patente actual (si tiene, patente con 2 años hasta 3mm)", "3 referencias personales (1 familiar)"]
+        // Requisitos actualizados (incluye alquileres y detalles del PDF)
+        const REQUISITOS = {
+            formal_ips: ["6 últimas liquidaciones de salario (IPS)", "Salario de Gs. 1.750.000 como mínimo", "2 referencias personales (nombre y teléfono)", "Ciudad y dirección particular"],
+            informal: ["Certificado de trabajo o RUC laboral", "6 meses de antigüedad como mínimo", "Salario de Gs. 1.750.000 como mínimo", "2 referencias personales", "Ciudad y dirección particular y laboral"],
+            publico_permanente: ["Antigüedad: 1 mes (permanente)", "2 referencias personales (nombre y teléfono)", "Ciudad y dirección particular"],
+            publico_contratado: ["Antigüedad: 15 meses (contratado)", "2 referencias personales (nombre y teléfono)", "Ciudad y dirección particular"],
+            micro_sin_patente: ["Antigüedad del negocio: 1 año", "Fotos del negocio (fachada e interior)", "Fotos de las mercaderías", "2 referencias personales", "Ubicación GPS", "Patente (opcional)"],
+            micro_con_ivas: ["Antigüedad del negocio: 1 año", "Fotos del negocio (local y fachada)", "3 últimos IVAs normalizados", "2 referencias personales", "Ubicación GPS"],
+            rentista: ["Contrato privado entre las partes", "Foto de cédula del inquilino", "Fotos del inquilinato", "Factura de servicio público a nombre del rentista", "2 referencias personales", "Ubicación GPS"]
         };
 
+        // Cuotero oficial hasta 10 millones
         const CUOTERO = {
             1000000: [235000,182000,150000,127000,112000,101000], 2000000: [465000,358000,292500,254000,223000,201000],
             3000000: [685000,535000,435000,380000,334000,302000], 4000000: [900000,700000,571000,507000,445000,402000],
             5000000: [1150000,885000,712000,633000,555000,503000], 6000000: [1333000,1009000,853000,758000,663000,601000],
             7000000: [1556000,1178000,993000,885000,774000,701000], 8000000: [1700000,1321000,1092000,969000,840000,756000],
-            9000000: [1912000,1485000,1227000,1090000,945000,851000], 10000000: [2124000,1651000,1365000,1211000,1049000,945000],
-            11000000: [2336000,1816000,1501000,1332000,1154000,1039000], 12000000: [2548000,1981000,1638000,1453000,1259000,1134000],
-            13000000: [2760000,2146000,1774000,1574000,1364000,1228000], 14000000: [2972000,2311000,1911000,1695000,1469000,1323000],
-            15000000: [3185000,2476000,2047000,1816000,1574000,1417000]
+            9000000: [1912000,1485000,1227000,1090000,945000,851000], 10000000: [2124000,1651000,1365000,1211000,1049000,945000]
         };
         const PLAZOS = [6,8,10,12,15,18];
 
         function formatearNumero(n) { return n ? n.toString().replace(/\B(?=(\d{3})+(?!\d))/g,".") : "0"; }
         function parsearNumero(s) { return parseInt(s.toString().replace(/\./g,'')) || 0; }
 
-        // Validación de edad
-        function validarEdad() {
-            const fecha = document.getElementById('fechaNacimiento').value;
-            if (!fecha) return true;
-            const hoy = new Date();
-            const nac = new Date(fecha);
-            let edad = hoy.getFullYear() - nac.getFullYear();
-            const mes = hoy.getMonth() - nac.getMonth();
-            if (mes < 0 || (mes === 0 && hoy.getDate() < nac.getDate())) edad--;
-            if (edad < 20 || edad > 70) { alert("Edad fuera del rango permitido (20-70 años)."); document.getElementById('fechaNacimiento').value = ''; return false; }
-            return edad;
-        }
-
         function actualizarChecklist() {
             const perfil = document.getElementById('perfil').value;
             const container = document.getElementById('checklistContainer');
             const items = document.getElementById('checklistItems');
             if (!perfil) { container.style.display = 'none'; return; }
-            const docs = DOCUMENTOS[perfil] || [];
+            const requisitos = REQUISITOS[perfil] || [];
             let html = '';
-            docs.forEach((req, i) => {
+            requisitos.forEach((req, i) => {
                 html += `<div class="checklist-item" onclick="toggleCheck(this)"><input type="checkbox" id="check_${i}" value="${req}"><div class="custom-check"></div><label class="checklist-label">${req}</label></div>`;
             });
             items.innerHTML = html;
@@ -277,7 +210,20 @@
         }
 
         function abrirWhatsAppDirecto() {
-            window.open("https://wa.me/"+NUMERO_WHATSAPP+"?text="+encodeURIComponent("Hola Isidro! Vi tu plataforma TKING y quisiera atención personalizada. ¿Podrías orientarme?"),"_blank");
+            const msg = "Hola Isidro! Vi tu plataforma de créditos TKING y quisiera recibir atención personalizada. ¿Podrías orientarme?";
+            window.open("https://wa.me/" + NUMERO_WHATSAPP + "?text=" + encodeURIComponent(msg), "_blank");
+        }
+
+        function enviarWhatsApp(mensaje) {
+            window.open("https://wa.me/" + NUMERO_WHATSAPP + "?text=" + encodeURIComponent(mensaje), "_blank");
+        }
+
+        async function guardarEnGoogleSheets(datos) {
+            if (URL_GOOGLE_SHEETS === "TU_URL_DE_GOOGLE_APPS_SCRIPT") return false;
+            try {
+                await fetch(URL_GOOGLE_SHEETS, { method: "POST", mode: "no-cors", headers: { "Content-Type": "application/json" }, body: JSON.stringify(datos) });
+                return true;
+            } catch (e) { return false; }
         }
 
         document.getElementById('formularioEvaluacion').addEventListener('submit', async function(e) {
@@ -290,47 +236,53 @@
             const perfil = document.getElementById('perfil').value;
             const monto = parsearNumero(document.getElementById('monto').value);
             const ingreso = parsearNumero(document.getElementById('ingreso').value);
-            const catInf = document.getElementById('categoriaInformconf').value;
+            const informconf = document.getElementById('informconf').value;
             const referencias = document.getElementById('referencias').value.trim();
             const observaciones = document.getElementById('observaciones').value.trim();
 
-            if (!nombre || !ci || !telefono || !fechaNac || !ciudad || !perfil || !catInf || !referencias) {
+            if (!nombre || !ci || !telefono || !fechaNac || !ciudad || !perfil || !informconf) {
                 alert("Completá todos los campos obligatorios."); return;
             }
-            const edad = validarEdad();
-            if (!edad) return;
-            if (monto < 1000000 || monto > 15000000) { alert("Monto fuera de rango (1.000.000 a 15.000.000)."); return; }
-            if (ingreso < 1800000) { alert("Ingreso mínimo: Gs. 1.800.000."); return; }
-            if (catInf === 'M' || catInf === 'N' || catInf === 'X') { alert("Categoría de Informconf no califica (M, N, X)."); return; }
+
+            // Calcular edad
+            const hoy = new Date();
+            const nac = new Date(fechaNac);
+            let edad = hoy.getFullYear() - nac.getFullYear();
+            const mes = hoy.getMonth() - nac.getMonth();
+            if (mes < 0 || (mes === 0 && hoy.getDate() < nac.getDate())) edad--;
+            if (edad < 20 || edad > 70) { alert("Edad fuera del rango permitido (20-70 años)."); return; }
+
+            if (monto < 1000000 || monto > 10000000) { alert("Monto fuera de rango (1.000.000 a 10.000.000)."); return; }
+            if (ingreso < 1750000) { alert("Ingreso mínimo: Gs. 1.750.000."); return; }
 
             const perfilLabel = document.getElementById('perfil').options[document.getElementById('perfil').selectedIndex].text;
             const { tiene, falta } = obtenerChecklist();
+
             let checklistMsg = '';
             if (tiene.length > 0) { checklistMsg += 'TIENE:\n'; tiene.forEach(i => checklistMsg += '  * ' + i + '\n'); }
             if (falta.length > 0) { checklistMsg += '\nFALTA:\n'; falta.forEach(i => checklistMsg += '  * ' + i + '\n'); }
 
-            let mensajeWa = `Hola Isidro! Soy ${nombre}, completé tu Simulador TKING (Política El Gestor).\n\n` +
-                `CI: ${ci}\nEdad: ${edad} años\nWhatsApp: ${telefono}\nCiudad: ${ciudad}\n` +
+            let mensajeWa = `Hola Isidro! Soy ${nombre}, completé tu Simulador de Créditos TKING.\n\n` +
+                `CI N.°: ${ci}\nEdad: ${edad} años\nWhatsApp: ${telefono}\nCiudad: ${ciudad}\n` +
                 `Perfil: ${perfilLabel}\nMonto: Gs. ${formatearNumero(monto)}\nIngreso: Gs. ${formatearNumero(ingreso)}\n` +
-                `Categ. Informconf: ${catInf}\n\nDOCUMENTACIÓN:\n${checklistMsg}\n` +
-                `REFERENCIAS:\n${referencias}\n\nOBSERVACIONES:\n${observaciones || 'Ninguna'}\n` +
+                `Informconf: ${informconf}\n\nDOCUMENTACIÓN:\n${checklistMsg}\n` +
+                `REFERENCIAS:\n${referencias || 'No proporcionadas'}\n\nOBSERVACIONES:\n${observaciones || 'Ninguna'}\n` +
                 `Quisiera avanzar con la solicitud. ¿Qué sigue?`;
 
             const datosSheet = {
                 nombre, ci, edad, telefono, ciudad, perfil: perfilLabel, monto, ingreso,
-                informconf: catInf, checklist_tiene: tiene.join('; '), checklist_falta: falta.join('; '),
+                informconf, checklist_tiene: tiene.join('; '), checklist_falta: falta.join('; '),
                 referencias, observaciones, fecha: new Date().toLocaleString()
             };
-            try {
-                await fetch(URL_GOOGLE_SHEETS, { method: "POST", mode: "no-cors", headers: { "Content-Type": "application/json" }, body: JSON.stringify(datosSheet) });
-            } catch (e) {}
-            window.open("https://wa.me/"+NUMERO_WHATSAPP+"?text="+encodeURIComponent(mensajeWa),"_blank");
+
+            await guardarEnGoogleSheets(datosSheet);
+            enviarWhatsApp(mensajeWa);
         });
 
         // Simulador
         const montoSimSelect = document.getElementById('montoSimulador');
         const tablaContainer = document.getElementById('tablaContainer');
-        for (let i = 1; i <= 15; i++) {
+        for (let i = 1; i <= 10; i++) {
             const val = i * 1000000;
             const opt = document.createElement('option');
             opt.value = val; opt.text = formatearNumero(val) + " Gs";
@@ -378,7 +330,7 @@
         setInterval(() => {
             if (activa || document.hidden) return;
             const p = PRUEBAS[idx]; idx = (idx+1)%PRUEBAS.length;
-            document.getElementById('avatarMini').textContent = p.i;
+            document.getElementById('avatarMini').textContent = 'M'; // Simplificado
             document.getElementById('nameMini').textContent = p.n;
             document.getElementById('msgMini').textContent = p.m;
             document.getElementById('socialProofMini').classList.add('show');
