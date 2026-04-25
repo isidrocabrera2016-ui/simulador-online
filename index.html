@@ -337,6 +337,21 @@
             activa = true;
             setTimeout(() => { document.getElementById('socialProofMini').classList.remove('show'); activa = false; }, 4500);
         }, 9000);
+        // Activar formato de números con puntos
+configurarInputNumerico('monto');
+configurarInputNumerico('ingreso');
+
+function configurarInputNumerico(id) {
+    const inp = document.getElementById(id);
+    inp.addEventListener('input', function() {
+        let r = this.value.replace(/\./g, '');
+        if (!isNaN(r) && r !== '') this.value = formatearNumero(parseInt(r));
+    });
+    inp.addEventListener('blur', function() {
+        let r = parsearNumero(this.value);
+        if (r > 0) this.value = formatearNumero(r); else this.value = '';
+    });
+}
     </script>
 </body>
 </html>
