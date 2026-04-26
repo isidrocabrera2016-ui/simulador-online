@@ -104,7 +104,7 @@
                     <form id="formularioEvaluacion">
                         <div class="row-3">
                             <div class="form-group"><label>Nombre Completo <span class="required">*</span></label><input type="text" id="nombreClienteEval" placeholder="Nombre" required></div>
-                            <div class="form-group"><label>CI N.° <span class="required">*</span></label><input type="text" id="ciClienteEval" placeholder="1234567" required></div>
+                            <div class="form-group"><label>CI N.° <span class="required">*</span></label><input type="text" id="ciClienteEval" placeholder="1.234.567" required></div>
                             <div class="form-group"><label>WhatsApp <span class="required">*</span></label><input type="tel" id="telefonoClienteEval" placeholder="0971..." required></div>
                         </div>
                         <div class="row-2">
@@ -119,8 +119,9 @@
                                 <option value="informal">Trabajador Informal (sin IPS)</option>
                                 <option value="publico_permanente">Funcionario Público Permanente</option>
                                 <option value="publico_contratado">Funcionario Público Contratado</option>
-                                <option value="micro_sin_patente">Microempresa con o sin patente</option>
-                                <option value="micro_con_ivas">Microempresa (con IVAs)</option>
+                                <option value="asalariado_iva">Asalariado con IVA</option>
+                                <option value="prof_independiente">Prof. Independiente</option>
+                                <option value="micro_comerciante">Micro / Comerciante</option>
                                 <option value="rentista">Rentista (Alquileres)</option>
                             </select>
                         </div>
@@ -177,13 +178,15 @@
         const URL_GOOGLE_SHEETS = "https://script.google.com/macros/s/AKfycbwIeKDNSNVEX5PL8yxliqEOrOhdzlNQvx2KgI86cmgkq87Adg-mZbae4xK20U5SfVg/exec";
         const NUMERO_WHATSAPP = "595971992363";
 
+        // 8 perfiles oficiales TKING
         const REQUISITOS = {
-            formal_ips: ["6 últimas liquidaciones de salario (IPS)"],
+            formal_ips: ["Liquidación de salario", "Ubicación del domicilio (enviar por WhatsApp)"],
             informal: ["Certificado de trabajo o RUC laboral", "Ubicación del domicilio particular (enviar por WhatsApp)", "Ubicación del domicilio laboral (enviar por WhatsApp)"],
-            publico_permanente: ["Liquidación de salario", "Certificado de trabajo"],
-            publico_contratado: ["Liquidación de salario", "Certificado de trabajo"],
-            micro_sin_patente: ["Fotos del negocio (fachada e interior)", "Fotos de las mercaderías", "Ubicación GPS del negocio (enviar por WhatsApp)", "Patente (opcional)"],
-            micro_con_ivas: ["3 últimos IVAs normalizados", "Fotos del negocio (local y fachada)", "Ubicación GPS del negocio (enviar por WhatsApp)"],
+            publico_permanente: ["Ubicación del domicilio (enviar por WhatsApp)"],
+            publico_contratado: ["Ubicación del domicilio (enviar por WhatsApp)"],
+            asalariado_iva: ["6 últimos IVAs", "6 facturas emitidas a la empresa", "Ubicación del domicilio (enviar por WhatsApp)"],
+            prof_independiente: ["6 últimos IVAs", "Título o Registro profesional", "Facturas (últimos 6 meses)", "Ubicación del domicilio (enviar por WhatsApp)"],
+            micro_comerciante: ["6 últimos IVAs", "Patente", "Fotos del negocio", "Fotos de mercaderías", "Ubicación GPS del local (enviar por WhatsApp)"],
             rentista: ["Contrato privado de alquiler", "Foto de cédula del inquilino", "Fotos del inquilinato", "Factura de servicio público a nombre del rentista", "Ubicación GPS del inquilinato (enviar por WhatsApp)"]
         };
 
@@ -280,15 +283,26 @@
 
             let referenciasMsg = 'Ref1 (Familiar): ' + ref1 + '\nRef2 (Personal): ' + ref2 + '\nRef3 (Personal): ' + ref3;
 
+            const antiguedad = {
+                formal_ips: '6 meses de aportes IPS',
+                informal: '6 meses como mínimo',
+                publico_permanente: '1 mes (permanente)',
+                publico_contratado: '15 meses (contratado)',
+                asalariado_iva: '6 meses con IVAs',
+                prof_independiente: '12 meses con RUC y Registro o título universitario',
+                micro_comerciante: '18 meses (con RUC/Patente) o 24 meses (sin)',
+                rentista: 'No especificada'
+            }[perfil] || '';
+
             let mensajeWa = `Hola Isidro! Soy ${nombre}, completé tu Simulador de Créditos TKING.\n\n` +
                 `CI: ${ci}\nEdad: ${edad} años\nWhatsApp: ${telefono}\nCiudad: ${ciudad}\n` +
-                `Perfil: ${perfilLabel}\nMonto: Gs. ${formatearNumero(monto)}\nIngreso: Gs. ${formatearNumero(ingreso)}\n` +
+                `Perfil: ${perfilLabel}\nAntigüedad requerida: ${antiguedad}\nMonto: Gs. ${formatearNumero(monto)}\nIngreso: Gs. ${formatearNumero(ingreso)}\n` +
                 `Informconf: ${informconf}\n\nDOCUMENTACIÓN:\n${checklistMsg}\n` +
                 `REFERENCIAS:\n${referenciasMsg}\nOBSERVACIONES:\n${observaciones}\n` +
                 `Quisiera avanzar con la solicitud. ¿Qué sigue?`;
 
             const datosSheet = {
-                nombre, ci, edad, telefono, ciudad, perfil: perfilLabel, monto, ingreso,
+                nombre, ci, edad, telefono, ciudad, perfil: perfilLabel, antiguedad, monto, ingreso,
                 informconf, checklist_tiene: tiene.join('; '), checklist_falta: falta.join('; '),
                 referencias: referenciasMsg, observaciones, fecha: new Date().toLocaleString()
             };
@@ -341,6 +355,7 @@
 
         configurarInputNumerico('monto');
         configurarInputNumerico('ingreso');
+        configurarInputNumerico('ciClienteEval');
         function configurarInputNumerico(id) {
             const inp = document.getElementById(id);
             inp.addEventListener('input', function() {
