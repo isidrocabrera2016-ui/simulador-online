@@ -103,7 +103,24 @@
                             <div class="form-group"><label>Ciudad <span class="required">*</span></label><input type="text" id="ciudadClienteEval" placeholder="Asunción, CDE..." required></div>
                         </div>
 
-                        <!-- 2. Perfil Laboral -->
+                        <!-- 2. Monto, Ingreso e Informconf -->
+                        <div class="row-2">
+                            <div class="form-group"><label>Monto Solicitado (Gs) <span class="required">*</span></label><input type="text" id="monto" placeholder="1.000.000" required></div>
+                            <div class="form-group"><label>Ingreso Mensual (Gs) <span class="required">*</span></label><input type="text" id="ingreso" placeholder="2.500.000" required></div>
+                        </div>
+                        <div class="form-group">
+                            <label>Situación en Informconf <span class="required">*</span></label>
+                            <select id="informconf" required>
+                                <option value="">Seleccioná una opción...</option>
+                                <option value="Sin Informconf">Sin Informconf</option>
+                                <option value="Mora de 30 dias o menos">Mora de 30 días o menos</option>
+                                <option value="Mora de 31 a 60 dias">Mora de 31 a 60 días</option>
+                                <option value="Mora de 61 a 90 dias">Mora de 61 a 90 días</option>
+                                <option value="Con Informconf (mas de 91 dias)">Con Informconf (más de 91 días)</option>
+                            </select>
+                        </div>
+
+                        <!-- 3. Perfil Laboral -->
                         <div class="form-group">
                             <label>Perfil Laboral <span class="required">*</span></label>
                             <select id="perfil" required onchange="actualizarSecciones()">
@@ -119,48 +136,31 @@
                             </select>
                         </div>
 
-                        <!-- 3. Requisitos del perfil -->
+                        <!-- 4. Requisitos del perfil -->
                         <div class="requisitos-info" id="requisitosInfo" style="display:none;"></div>
 
-                        <!-- 4. Checklist de documentos -->
+                        <!-- 5. Checklist de documentos -->
                         <div class="checklist-container" id="checklistContainer" style="display:none;">
                             <div class="checklist-title">Documentos que tenés disponibles:</div>
                             <div id="checklistItems"></div>
                             <div class="doc-reminder">📄 <strong>Importante:</strong> Para proceder a su solicitud debe enviar los documentos y comprobantes por WhatsApp. Ante cualquier duda, escríbame.</div>
                         </div>
 
-                        <div class="row-2">
-                            <div class="form-group"><label>Monto Solicitado (Gs) <span class="required">*</span></label><input type="text" id="monto" placeholder="1.000.000" required></div>
-                            <div class="form-group"><label>Ingreso Mensual (Gs) <span class="required">*</span></label><input type="text" id="ingreso" placeholder="2.500.000" required></div>
-                        </div>
-
-                        <div class="form-group">
-                            <label>Situación en Informconf <span class="required">*</span></label>
-                            <select id="informconf" required>
-                                <option value="">Seleccioná una opción...</option>
-                                <option value="Sin Informconf">Sin Informconf</option>
-                                <option value="Mora de 30 dias o menos">Mora de 30 días o menos</option>
-                                <option value="Mora de 31 a 60 dias">Mora de 31 a 60 días</option>
-                                <option value="Mora de 61 a 90 dias">Mora de 61 a 90 días</option>
-                                <option value="Con Informconf (mas de 91 dias)">Con Informconf (más de 91 días)</option>
-                            </select>
-                        </div>
-
-                        <!-- 5. Ubicación -->
+                        <!-- 6. Ubicación -->
                         <div class="ubicacion-container" id="ubicacionContainer" style="display:none;">
                             <div class="ubicacion-title">📍 Enviar ubicación por WhatsApp (pegá el enlace de Google Maps)</div>
                             <div id="ubicacionFields"></div>
                         </div>
 
-                        <!-- 6. Referencias -->
+                        <!-- 7. Referencias -->
                         <div class="form-group"><label>Referencia 1 (Familiar - mismo apellido) <span class="required">*</span></label><input type="text" id="ref1" placeholder="Nombre, Apellido y Celular" required></div>
                         <div class="form-group"><label>Referencia 2 (Personal) <span class="required">*</span></label><input type="text" id="ref2" placeholder="Nombre, Apellido y Celular" required></div>
                         <div class="form-group"><label>Referencia 3 (Personal) <span class="required">*</span></label><input type="text" id="ref3" placeholder="Nombre, Apellido y Celular" required></div>
 
-                        <!-- 7. Observaciones -->
+                        <!-- 8. Observaciones -->
                         <div class="form-group"><label>Observaciones <span class="required">*</span></label><textarea id="observaciones" placeholder="Si te falta algo o querés aclarar algún detalle..." required></textarea></div>
 
-                        <!-- 8. Botón -->
+                        <!-- 9. Botón -->
                         <button type="submit" class="btn btn-primary">ENVIAR SOLICITUD POR WHATSAPP</button>
                     </form>
                 </div>
@@ -186,7 +186,7 @@
             publico_contratado: { antiguedad: '15 meses (contratado)', requisitos: [], ubicaciones: ["Ubicación del domicilio"] },
             asalariado_iva: { antiguedad: '6 meses con IVAs', requisitos: ["6 últimos IVAs", "6 facturas emitidas a la empresa"], ubicaciones: ["Ubicación del domicilio"] },
             prof_independiente: { antiguedad: '12 meses con RUC y Registro o título universitario', requisitos: ["6 últimos IVAs", "Título o Registro profesional", "Facturas (últimos 6 meses)"], ubicaciones: ["Ubicación del domicilio"] },
-            micro_comerciante: { antiguedad: '18 meses (con RUC/Patente) o 24 meses (sin)', requisitos: ["6 últimos IVAs", "Patente", "Fotos del negocio", "Fotos de mercaderías"], ubicaciones: ["Ubicación GPS del local"] },
+            micro_comerciante: { antiguedad: '18 meses (con RUC/Patente) o 24 meses (sin)', requisitos: ["6 últimos IVAs", "Patente (si tiene)", "Fotos del negocio", "Fotos de mercaderías"], ubicaciones: ["Ubicación GPS del local"] },
             rentista: { antiguedad: 'No especificada', requisitos: ["Contrato privado de alquiler", "Foto de cédula del inquilino", "Fotos del inquilinato", "Factura de servicio público a nombre del rentista"], ubicaciones: ["Ubicación GPS del inquilinato"] }
         };
 
