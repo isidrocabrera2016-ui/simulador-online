@@ -78,6 +78,7 @@
         .wa-float-text { font-size: 8px; color: white; font-weight: 700; margin-top: -2px; }
         @keyframes floatPulse { 0% { box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4); } 50% { box-shadow: 0 6px 30px rgba(37, 211, 102, 0.7); } 100% { box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4); } }
         .confirm-toast { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); background: #2e7d32; color: white; padding: 14px 28px; border-radius: 50px; font-weight: 700; font-size: 15px; z-index: 1001; box-shadow: 0 8px 20px rgba(0,0,0,0.3); display: none; }
+        .doc-reminder { background: #fff8e1; border: 1px solid var(--dorado); border-radius: 10px; padding: 10px; margin-top: 8px; font-size: 11px; color: #5d4037; text-align: center; }
     </style>
 </head>
 <body>
@@ -141,8 +142,11 @@
                             </select>
                         </div>
                         <div class="checklist-container" id="checklistContainer" style="display:none;">
-                            <div class="checklist-title">Documentos que tenés disponibles: <span class="required">*</span></div>
+                            <div class="checklist-title">Documentos que tenés disponibles:</div>
                             <div id="checklistItems"></div>
+                            <div class="doc-reminder">
+                                📄 <strong>Importante:</strong> Tené a mano fotos o escaneos de tus documentos. Al enviar la solicitud, podés adjuntarlos directamente en WhatsApp.
+                            </div>
                         </div>
                         <div class="form-group">
                             <label>Referencia 1 (Familiar - mismo apellido) <span class="required">*</span></label>
@@ -178,16 +182,15 @@
         const URL_GOOGLE_SHEETS = "https://script.google.com/macros/s/AKfycbwIeKDNSNVEX5PL8yxliqEOrOhdzlNQvx2KgI86cmgkq87Adg-mZbae4xK20U5SfVg/exec";
         const NUMERO_WHATSAPP = "595971992363";
 
-        // 8 perfiles oficiales TKING
         const REQUISITOS = {
-            formal_ips: ["Liquidación de salario", "Ubicación del domicilio (enviar por WhatsApp)"],
-            informal: ["Certificado de trabajo o RUC laboral", "Ubicación del domicilio particular (enviar por WhatsApp)", "Ubicación del domicilio laboral (enviar por WhatsApp)"],
-            publico_permanente: ["Ubicación del domicilio (enviar por WhatsApp)"],
-            publico_contratado: ["Ubicación del domicilio (enviar por WhatsApp)"],
-            asalariado_iva: ["6 últimos IVAs", "6 facturas emitidas a la empresa", "Ubicación del domicilio (enviar por WhatsApp)"],
-            prof_independiente: ["6 últimos IVAs", "Título o Registro profesional", "Facturas (últimos 6 meses)", "Ubicación del domicilio (enviar por WhatsApp)"],
-            micro_comerciante: ["6 últimos IVAs", "Patente", "Fotos del negocio", "Fotos de mercaderías", "Ubicación GPS del local (enviar por WhatsApp)"],
-            rentista: ["Contrato privado de alquiler", "Foto de cédula del inquilino", "Fotos del inquilinato", "Factura de servicio público a nombre del rentista", "Ubicación GPS del inquilinato (enviar por WhatsApp)"]
+            formal_ips: ["Liquidación de salario", "Ubicación del domicilio (pegar enlace de Google Maps)"],
+            informal: ["Certificado de trabajo o RUC laboral", "Ubicación del domicilio particular (pegar enlace de Google Maps)", "Ubicación del domicilio laboral (pegar enlace de Google Maps)"],
+            publico_permanente: ["Ubicación del domicilio (pegar enlace de Google Maps)"],
+            publico_contratado: ["Ubicación del domicilio (pegar enlace de Google Maps)"],
+            asalariado_iva: ["6 últimos IVAs", "6 facturas emitidas a la empresa", "Ubicación del domicilio (pegar enlace de Google Maps)"],
+            prof_independiente: ["6 últimos IVAs", "Título o Registro profesional", "Facturas (últimos 6 meses)", "Ubicación del domicilio (pegar enlace de Google Maps)"],
+            micro_comerciante: ["6 últimos IVAs", "Patente", "Fotos del negocio", "Fotos de mercaderías", "Ubicación GPS del local (pegar enlace de Google Maps)"],
+            rentista: ["Contrato privado de alquiler", "Foto de cédula del inquilino", "Fotos del inquilinato", "Factura de servicio público a nombre del rentista", "Ubicación GPS del inquilinato (pegar enlace de Google Maps)"]
         };
 
         const CUOTERO = {
@@ -298,7 +301,8 @@
                 `CI: ${ci}\nEdad: ${edad} años\nWhatsApp: ${telefono}\nCiudad: ${ciudad}\n` +
                 `Perfil: ${perfilLabel}\nAntigüedad requerida: ${antiguedad}\nMonto: Gs. ${formatearNumero(monto)}\nIngreso: Gs. ${formatearNumero(ingreso)}\n` +
                 `Informconf: ${informconf}\n\nDOCUMENTACIÓN:\n${checklistMsg}\n` +
-                `REFERENCIAS:\n${referenciasMsg}\nOBSERVACIONES:\n${observaciones}\n` +
+                `REFERENCIAS:\n${referenciasMsg}\nOBSERVACIONES:\n${observaciones}\n\n` +
+                `📎 Tengo los documentos listos para enviarte por WhatsApp.\n` +
                 `Quisiera avanzar con la solicitud. ¿Qué sigue?`;
 
             const datosSheet = {
