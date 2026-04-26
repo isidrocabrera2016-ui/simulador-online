@@ -188,7 +188,6 @@
         const URL_GOOGLE_SHEETS = "https://script.google.com/macros/s/AKfycbwIeKDNSNVEX5PL8yxliqEOrOhdzlNQvx2KgI86cmgkq87Adg-mZbae4xK20U5SfVg/exec";
         const NUMERO_WHATSAPP = "595971992363";
 
-        // Checklist sin ubicaciones (solo documentos)
         const REQUISITOS = {
             formal_ips: ["Liquidación de salario"],
             informal: ["Certificado de trabajo o RUC laboral"],
@@ -200,7 +199,6 @@
             rentista: ["Contrato privado de alquiler", "Foto de cédula del inquilino", "Fotos del inquilinato", "Factura de servicio público a nombre del rentista"]
         };
 
-        // Ubicaciones por perfil
         const UBICACIONES = {
             formal_ips: ["Ubicación del domicilio"],
             informal: ["Ubicación del domicilio particular", "Ubicación del domicilio laboral"],
@@ -231,7 +229,6 @@
             const ubicacionContainer = document.getElementById('ubicacionContainer');
             const ubicacionFields = document.getElementById('ubicacionFields');
 
-            // Checklist
             if (!perfil) {
                 checklistContainer.style.display = 'none';
                 ubicacionContainer.style.display = 'none';
@@ -250,7 +247,6 @@
                 checklistContainer.style.display = 'none';
             }
 
-            // Ubicaciones
             const ubicaciones = UBICACIONES[perfil] || [];
             if (ubicaciones.length > 0) {
                 let html = '';
@@ -333,6 +329,7 @@
             const perfilLabel = document.getElementById('perfil').options[document.getElementById('perfil').selectedIndex].text;
             const { tiene, falta } = obtenerChecklist();
             const ubicaciones = obtenerUbicaciones();
+            const nombresUbicaciones = UBICACIONES[perfil] || [];
 
             let checklistMsg = '';
             if (tiene.length > 0) { checklistMsg += 'TIENE:\n'; tiene.forEach(i => checklistMsg += '  * ' + i + '\n'); }
@@ -341,7 +338,10 @@
             let ubicacionesMsg = '';
             if (ubicaciones.length > 0) {
                 ubicacionesMsg += 'UBICACIONES:\n';
-                ubicaciones.forEach((u, i) => { ubicacionesMsg += '  * ' + u + '\n'; });
+                ubicaciones.forEach((u, i) => {
+                    const nombreUbi = nombresUbicaciones[i] || 'Ubicación';
+                    ubicacionesMsg += '  * ' + nombreUbi + ': ' + u + '\n';
+                });
             }
 
             let referenciasMsg = 'Ref1 (Familiar): ' + ref1 + '\nRef2 (Personal): ' + ref2 + '\nRef3 (Personal): ' + ref3;
