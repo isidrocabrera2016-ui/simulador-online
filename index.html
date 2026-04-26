@@ -47,7 +47,9 @@
         @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
         .form-group { margin-bottom: 12px; }
         label { display: block; font-size: 10px; font-weight: 700; margin-bottom: 4px; color: #3a4455; text-transform: uppercase; }
+        label .required { color: #e53935; }
         input, select, textarea { width: 100%; padding: 12px; border: 2px solid var(--gris-borde); border-radius: 8px; font-size: 14px; background: var(--blanco); color: var(--texto); }
+        input:focus, select:focus, textarea:focus { outline: none; border-color: var(--azul-marino); box-shadow: 0 0 0 3px rgba(10, 37, 64, 0.1); }
         .row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
         .row-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
         .btn { width: 100%; padding: 13px; border: none; border-radius: 8px; font-size: 14px; font-weight: 700; cursor: pointer; margin-top: 6px; }
@@ -101,16 +103,16 @@
                     <p class="intro-text" style="text-align:center;font-size:12px;color:#5a6070;margin-bottom:14px;">Completá el formulario y recibí una <strong>evaluación gratuita</strong> sin compromiso.</p>
                     <form id="formularioEvaluacion">
                         <div class="row-3">
-                            <div class="form-group"><label>Nombre Completo</label><input type="text" id="nombreClienteEval" placeholder="Nombre" required></div>
-                            <div class="form-group"><label>CI N.°</label><input type="text" id="ciClienteEval" placeholder="1234567" required></div>
-                            <div class="form-group"><label>WhatsApp</label><input type="tel" id="telefonoClienteEval" placeholder="0971..." required></div>
+                            <div class="form-group"><label>Nombre Completo <span class="required">*</span></label><input type="text" id="nombreClienteEval" placeholder="Nombre" required></div>
+                            <div class="form-group"><label>CI N.° <span class="required">*</span></label><input type="text" id="ciClienteEval" placeholder="1234567" required></div>
+                            <div class="form-group"><label>WhatsApp <span class="required">*</span></label><input type="tel" id="telefonoClienteEval" placeholder="0971..." required></div>
                         </div>
                         <div class="row-2">
-                            <div class="form-group"><label>Fecha de Nacimiento</label><input type="date" id="fechaNacimiento" required></div>
-                            <div class="form-group"><label>Ciudad</label><input type="text" id="ciudadClienteEval" placeholder="Asunción, CDE..." required></div>
+                            <div class="form-group"><label>Fecha de Nacimiento <span class="required">*</span></label><input type="date" id="fechaNacimiento" required></div>
+                            <div class="form-group"><label>Ciudad <span class="required">*</span></label><input type="text" id="ciudadClienteEval" placeholder="Asunción, CDE..." required></div>
                         </div>
                         <div class="form-group">
-                            <label>Perfil Laboral</label>
+                            <label>Perfil Laboral <span class="required">*</span></label>
                             <select id="perfil" required onchange="actualizarChecklist()">
                                 <option value="">Seleccioná tu perfil...</option>
                                 <option value="formal_ips">Trabajador Formal (con IPS)</option>
@@ -123,39 +125,39 @@
                             </select>
                         </div>
                         <div class="row-2">
-                            <div class="form-group"><label>Monto Solicitado (Gs)</label><input type="text" id="monto" placeholder="1.000.000" required></div>
-                            <div class="form-group"><label>Ingreso Mensual (Gs)</label><input type="text" id="ingreso" placeholder="2.500.000" required></div>
+                            <div class="form-group"><label>Monto Solicitado (Gs) <span class="required">*</span></label><input type="text" id="monto" placeholder="1.000.000" required></div>
+                            <div class="form-group"><label>Ingreso Mensual (Gs) <span class="required">*</span></label><input type="text" id="ingreso" placeholder="2.500.000" required></div>
                         </div>
                         <div class="form-group">
-                            <label>Situación en Informconf</label>
+                            <label>Situación en Informconf <span class="required">*</span></label>
                             <select id="informconf" required>
                                 <option value="">Seleccioná una opción...</option>
-                                <option value="sin_mora">Sin Informconf</option>
-                                <option value="mora_leve">Mora de 30 días o menos</option>
-                                <option value="mora_media">Mora de 31 a 60 días</option>
-                                <option value="mora_alta">Mora de 61 a 90 días</option>
-                                <option value="mora_mayor">Con Informconf (más de 91 días)</option>
+                                <option value="Sin Informconf">Sin Informconf</option>
+                                <option value="Mora de 30 dias o menos">Mora de 30 días o menos</option>
+                                <option value="Mora de 31 a 60 dias">Mora de 31 a 60 días</option>
+                                <option value="Mora de 61 a 90 dias">Mora de 61 a 90 días</option>
+                                <option value="Con Informconf (mas de 91 dias)">Con Informconf (más de 91 días)</option>
                             </select>
                         </div>
                         <div class="checklist-container" id="checklistContainer" style="display:none;">
-                            <div class="checklist-title">Documentos que tenés disponibles:</div>
+                            <div class="checklist-title">Documentos que tenés disponibles: <span class="required">*</span></div>
                             <div id="checklistItems"></div>
                         </div>
                         <div class="form-group">
-                            <label>Referencia 1 (Familiar - mismo apellido)</label>
-                            <input type="text" id="ref1" placeholder="Nombre, Apellido y Celular">
+                            <label>Referencia 1 (Familiar - mismo apellido) <span class="required">*</span></label>
+                            <input type="text" id="ref1" placeholder="Nombre, Apellido y Celular" required>
                         </div>
                         <div class="form-group">
-                            <label>Referencia 2 (Personal)</label>
-                            <input type="text" id="ref2" placeholder="Nombre, Apellido y Celular">
+                            <label>Referencia 2 (Personal) <span class="required">*</span></label>
+                            <input type="text" id="ref2" placeholder="Nombre, Apellido y Celular" required>
                         </div>
                         <div class="form-group">
-                            <label>Referencia 3 (Personal)</label>
-                            <input type="text" id="ref3" placeholder="Nombre, Apellido y Celular">
+                            <label>Referencia 3 (Personal) <span class="required">*</span></label>
+                            <input type="text" id="ref3" placeholder="Nombre, Apellido y Celular" required>
                         </div>
                         <div class="form-group">
-                            <label>Observaciones</label>
-                            <textarea id="observaciones" placeholder="Si te falta algo o querés aclarar algún detalle..."></textarea>
+                            <label>Observaciones <span class="required">*</span></label>
+                            <textarea id="observaciones" placeholder="Si te falta algo o querés aclarar algún detalle..." required></textarea>
                         </div>
                         <button type="submit" class="btn btn-primary">ENVIAR SOLICITUD POR WHATSAPP</button>
                     </form>
@@ -175,7 +177,6 @@
         const URL_GOOGLE_SHEETS = "https://script.google.com/macros/s/AKfycbwIeKDNSNVEX5PL8yxliqEOrOhdzlNQvx2KgI86cmgkq87Adg-mZbae4xK20U5SfVg/exec";
         const NUMERO_WHATSAPP = "595971992363";
 
-        // Checklist corregido: solo documentos reales
         const REQUISITOS = {
             formal_ips: ["6 últimas liquidaciones de salario (IPS)"],
             informal: ["Certificado de trabajo o RUC laboral", "Ubicación del domicilio particular (enviar por WhatsApp)", "Ubicación del domicilio laboral (enviar por WhatsApp)"],
@@ -257,8 +258,8 @@
             const ref3 = document.getElementById('ref3').value.trim();
             const observaciones = document.getElementById('observaciones').value.trim();
 
-            if (!nombre || !ci || !telefono || !fechaNac || !ciudad || !perfil || !informconf) {
-                alert("Completá todos los campos obligatorios."); return;
+            if (!nombre || !ci || !telefono || !fechaNac || !ciudad || !perfil || !informconf || !ref1 || !ref2 || !ref3 || !observaciones) {
+                alert("Completá todos los campos obligatorios (marcados con *)."); return;
             }
 
             const hoy = new Date();
@@ -277,17 +278,13 @@
             if (tiene.length > 0) { checklistMsg += 'TIENE:\n'; tiene.forEach(i => checklistMsg += '  * ' + i + '\n'); }
             if (falta.length > 0) { checklistMsg += '\nFALTA:\n'; falta.forEach(i => checklistMsg += '  * ' + i + '\n'); }
 
-            let referenciasMsg = '';
-            if (ref1) referenciasMsg += 'Ref1 (Familiar): ' + ref1 + '\n';
-            if (ref2) referenciasMsg += 'Ref2 (Personal): ' + ref2 + '\n';
-            if (ref3) referenciasMsg += 'Ref3 (Personal): ' + ref3 + '\n';
-            if (!referenciasMsg) referenciasMsg = 'No proporcionadas';
+            let referenciasMsg = 'Ref1 (Familiar): ' + ref1 + '\nRef2 (Personal): ' + ref2 + '\nRef3 (Personal): ' + ref3;
 
             let mensajeWa = `Hola Isidro! Soy ${nombre}, completé tu Simulador de Créditos TKING.\n\n` +
                 `CI: ${ci}\nEdad: ${edad} años\nWhatsApp: ${telefono}\nCiudad: ${ciudad}\n` +
                 `Perfil: ${perfilLabel}\nMonto: Gs. ${formatearNumero(monto)}\nIngreso: Gs. ${formatearNumero(ingreso)}\n` +
                 `Informconf: ${informconf}\n\nDOCUMENTACIÓN:\n${checklistMsg}\n` +
-                `REFERENCIAS:\n${referenciasMsg}\nOBSERVACIONES:\n${observaciones || 'Ninguna'}\n` +
+                `REFERENCIAS:\n${referenciasMsg}\nOBSERVACIONES:\n${observaciones}\n` +
                 `Quisiera avanzar con la solicitud. ¿Qué sigue?`;
 
             const datosSheet = {
