@@ -6,7 +6,7 @@
     <title>TKING - Créditos Rápidos y Seguros</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230a2540'/><text x='50' y='68' font-size='55' text-anchor='middle' fill='%23d4a853' font-family='Arial' font-weight='bold'>TK</text></svg>">
     <meta property="og:title" content="TKING - Solicitá tu Crédito Rápido y Fácil">
-    <meta property="og:description" content="Evaluá tu crédito en 2 minutos, sin compromiso. Completá el formulario y recibí orientación personalizada.">
+    <meta property="og:description" content="Evaluá tu crédito en 2 minutos, sin compromiso.">
     <meta property="og:image" content="https://isidrocabrera2016-ui.github.io/simulador-online/1000318336.png">
     <meta property="og:url" content="https://isidrocabrera2016-ui.github.io/simulador-online/">
     <meta property="og:type" content="website">
@@ -24,43 +24,34 @@
         body {
             font-family: 'Segoe UI', system-ui, sans-serif;
             background: linear-gradient(160deg, #0a2540 0%, #0d3b66 50%, #f5f6fa 100%);
-            min-height: 100vh;
-            padding: 10px;
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            overflow-x: hidden;
+            min-height: 100vh; padding: 10px; display: flex; justify-content: center; align-items: flex-start; overflow-x: hidden;
         }
         .container { width: 100%; max-width: 500px; z-index: 1; }
         .app-card { background: var(--blanco); border-radius: 18px; overflow: hidden; box-shadow: 0 20px 50px rgba(10, 37, 64, 0.3); margin-bottom: 80px; }
         .header { background: linear-gradient(135deg, #0a2540 0%, #0d3b66 100%); padding: 22px 16px; color: white; text-align: center; border-bottom: 2px solid var(--dorado); }
-        .header .logo { font-size: 26px; font-weight: 800; }
-        .header .logo span { color: var(--dorado); }
-        .header .subtitle { font-size: 11px; opacity: 0.9; }
-        .header .agent-info { margin-top: 10px; font-size: 10px; background: rgba(212, 168, 83, 0.2); display: inline-block; padding: 6px 14px; border-radius: 50px; }
+        .header .logo { font-size: 26px; font-weight: 800; } .header .logo span { color: var(--dorado); }
+        .header .subtitle { font-size: 11px; opacity: 0.9; } .header .agent-info { margin-top: 10px; font-size: 10px; background: rgba(212, 168, 83, 0.2); display: inline-block; padding: 6px 14px; border-radius: 50px; }
         .tabs { display: flex; padding: 8px; gap: 6px; background: var(--gris-perla); border-bottom: 1px solid var(--gris-borde); }
         .tab { flex: 1; padding: 10px 8px; border: none; background: none; font-weight: 700; font-size: 12px; color: #7a8490; cursor: pointer; border-radius: 8px; }
         .tab.active { background: var(--blanco); color: var(--azul-marino); box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
-        .content { padding: 14px; }
-        .panel { display: none; }
-        .panel.active { display: block; animation: fadeIn 0.3s ease; }
+        .content { padding: 14px; } .panel { display: none; } .panel.active { display: block; animation: fadeIn 0.3s ease; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
         .form-group { margin-bottom: 12px; }
         label { display: block; font-size: 10px; font-weight: 700; margin-bottom: 4px; color: #3a4455; text-transform: uppercase; }
         label .required { color: #e53935; }
         input, select, textarea { width: 100%; padding: 12px; border: 2px solid var(--gris-borde); border-radius: 8px; font-size: 14px; background: var(--blanco); color: var(--texto); }
         input:focus, select:focus, textarea:focus { outline: none; border-color: var(--azul-marino); box-shadow: 0 0 0 3px rgba(10, 37, 64, 0.1); }
-        .row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-        .row-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+        .row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; } .row-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
         .btn { width: 100%; padding: 13px; border: none; border-radius: 8px; font-size: 14px; font-weight: 700; cursor: pointer; margin-top: 6px; }
         .btn-primary { background: linear-gradient(135deg, #0a2540, #0d3b66); color: var(--dorado); border: 1px solid var(--dorado); }
         .btn-whatsapp { background: var(--whatsapp); color: white; animation: pulse 2s infinite; }
         @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.5); } 70% { box-shadow: 0 0 0 12px rgba(37, 211, 102, 0); } 100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); } }
-        .checklist-container { background: var(--gris-perla); border-radius: 10px; padding: 12px; margin-top: 8px; border: 1px solid var(--gris-borde); }
+        .requisitos-info { background: #e3f2fd; border: 1px solid #90caf9; border-radius: 10px; padding: 12px; margin-top: 10px; font-size: 11px; color: #0d47a1; line-height: 1.5; }
+        .requisitos-info strong { display: block; margin-bottom: 4px; }
+        .checklist-container { background: var(--gris-perla); border-radius: 10px; padding: 12px; margin-top: 10px; border: 1px solid var(--gris-borde); }
         .checklist-title { font-weight: 700; font-size: 11px; color: var(--azul-marino); margin-bottom: 10px; text-align: center; }
         .checklist-item { display: flex; align-items: center; gap: 10px; padding: 7px 0; border-bottom: 1px solid #e8eaf0; font-size: 12px; cursor: pointer; }
-        .checklist-item:last-child { border-bottom: none; }
-        .checklist-item input[type="checkbox"] { display: none; }
+        .checklist-item:last-child { border-bottom: none; } .checklist-item input[type="checkbox"] { display: none; }
         .custom-check { width: 22px; height: 22px; border: 2px solid #b0b8c4; border-radius: 4px; display: flex; align-items: center; justify-content: center; background: white; }
         .checklist-item input:checked + .custom-check { background: var(--azul-marino); border-color: var(--azul-marino); }
         .custom-check::after { content: '✓'; color: white; font-size: 14px; font-weight: 800; display: none; }
@@ -73,21 +64,16 @@
         td { padding: 10px 6px; text-align: center; border-bottom: 1px solid #e8eaf0; cursor: pointer; }
         td.selected { background: var(--azul-marino); color: var(--dorado); font-weight: 800; }
         .sim-info { background: var(--gris-perla); padding: 16px; border-radius: 12px; text-align: center; border: 2px dashed var(--gris-borde); margin-top: 10px; display: none; }
-        .sim-info.show { display: block; }
-        .footer-note { font-size: 10px; text-align: center; color: rgba(255,255,255,0.7); margin-top: 12px; }
-        .wa-float-btn { position: fixed; right: 12px; bottom: 20px; width: 55px; height: 55px; background: var(--whatsapp); border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 998; box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4); animation: floatPulse 2s infinite; cursor: pointer; text-decoration: none; }
-        .wa-float-btn svg { width: 28px; height: 28px; fill: white; }
-        .wa-float-text { font-size: 8px; color: white; font-weight: 700; margin-top: -2px; }
+        .sim-info.show { display: block; } .footer-note { font-size: 10px; text-align: center; color: rgba(255,255,255,0.7); margin-top: 12px; }
+        .wa-float-btn { position: fixed; right: 12px; bottom: 20px; width: 55px; height: 55px; background: var(--whatsapp); border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 998; box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4); animation: floatPulse 2s infinite; cursor: pointer; }
+        .wa-float-btn svg { width: 28px; height: 28px; fill: white; } .wa-float-text { font-size: 8px; color: white; font-weight: 700; margin-top: -2px; }
         @keyframes floatPulse { 0% { box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4); } 50% { box-shadow: 0 6px 30px rgba(37, 211, 102, 0.7); } 100% { box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4); } }
         .confirm-toast { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); background: #2e7d32; color: white; padding: 14px 28px; border-radius: 50px; font-weight: 700; font-size: 15px; z-index: 1001; box-shadow: 0 8px 20px rgba(0,0,0,0.3); display: none; }
         .doc-reminder { background: #fff8e1; border: 1px solid var(--dorado); border-radius: 10px; padding: 10px; margin-top: 8px; font-size: 11px; color: #5d4037; text-align: center; }
     </style>
 </head>
 <body>
-    <div class="wa-float-btn" onclick="abrirWhatsAppDirecto()">
-        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-        <span class="wa-float-text">Consultar</span>
-    </div>
+    <div class="wa-float-btn" onclick="abrirWhatsAppDirecto()"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg><span class="wa-float-text">Consultar</span></div>
     <div class="confirm-toast" id="confirmToast">✅ ¡Solicitud enviada!</div>
 
     <div class="container">
@@ -105,6 +91,8 @@
                 <div id="panelEvaluacion" class="panel active">
                     <p class="intro-text" style="text-align:center;font-size:12px;color:#5a6070;margin-bottom:14px;">Completá el formulario y recibí una <strong>evaluación gratuita</strong> sin compromiso.</p>
                     <form id="formularioEvaluacion">
+
+                        <!-- 1. Datos personales -->
                         <div class="row-3">
                             <div class="form-group"><label>Nombre Completo <span class="required">*</span></label><input type="text" id="nombreClienteEval" placeholder="Nombre" required></div>
                             <div class="form-group"><label>CI N.° <span class="required">*</span></label><input type="text" id="ciClienteEval" placeholder="1.234.567" required></div>
@@ -114,9 +102,11 @@
                             <div class="form-group"><label>Fecha de Nacimiento <span class="required">*</span></label><input type="date" id="fechaNacimiento" required></div>
                             <div class="form-group"><label>Ciudad <span class="required">*</span></label><input type="text" id="ciudadClienteEval" placeholder="Asunción, CDE..." required></div>
                         </div>
+
+                        <!-- 2. Perfil Laboral -->
                         <div class="form-group">
                             <label>Perfil Laboral <span class="required">*</span></label>
-                            <select id="perfil" required onchange="actualizarChecklist()">
+                            <select id="perfil" required onchange="actualizarSecciones()">
                                 <option value="">Seleccioná tu perfil...</option>
                                 <option value="formal_ips">Trabajador Formal (con IPS)</option>
                                 <option value="informal">Trabajador Informal (sin IPS)</option>
@@ -128,10 +118,22 @@
                                 <option value="rentista">Rentista (Alquileres)</option>
                             </select>
                         </div>
+
+                        <!-- 3. Requisitos del perfil -->
+                        <div class="requisitos-info" id="requisitosInfo" style="display:none;"></div>
+
+                        <!-- 4. Checklist de documentos -->
+                        <div class="checklist-container" id="checklistContainer" style="display:none;">
+                            <div class="checklist-title">Documentos que tenés disponibles:</div>
+                            <div id="checklistItems"></div>
+                            <div class="doc-reminder">📄 <strong>Importante:</strong> Para proceder a su solicitud debe enviar los documentos y comprobantes por WhatsApp. Ante cualquier duda, escríbame.</div>
+                        </div>
+
                         <div class="row-2">
                             <div class="form-group"><label>Monto Solicitado (Gs) <span class="required">*</span></label><input type="text" id="monto" placeholder="1.000.000" required></div>
                             <div class="form-group"><label>Ingreso Mensual (Gs) <span class="required">*</span></label><input type="text" id="ingreso" placeholder="2.500.000" required></div>
                         </div>
+
                         <div class="form-group">
                             <label>Situación en Informconf <span class="required">*</span></label>
                             <select id="informconf" required>
@@ -143,33 +145,22 @@
                                 <option value="Con Informconf (mas de 91 dias)">Con Informconf (más de 91 días)</option>
                             </select>
                         </div>
-                        <div class="checklist-container" id="checklistContainer" style="display:none;">
-                            <div class="checklist-title">Documentos que tenés disponibles:</div>
-                            <div id="checklistItems"></div>
-                            <div class="doc-reminder">
-                                📄 <strong>Importante:</strong> Para proceder a su solicitud debe enviar los documentos y comprobantes por WhatsApp. Ante cualquier duda, escríbame.
-                            </div>
-                        </div>
+
+                        <!-- 5. Ubicación -->
                         <div class="ubicacion-container" id="ubicacionContainer" style="display:none;">
                             <div class="ubicacion-title">📍 Enviar ubicación por WhatsApp (pegá el enlace de Google Maps)</div>
                             <div id="ubicacionFields"></div>
                         </div>
-                        <div class="form-group">
-                            <label>Referencia 1 (Familiar - mismo apellido) <span class="required">*</span></label>
-                            <input type="text" id="ref1" placeholder="Nombre, Apellido y Celular" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Referencia 2 (Personal) <span class="required">*</span></label>
-                            <input type="text" id="ref2" placeholder="Nombre, Apellido y Celular" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Referencia 3 (Personal) <span class="required">*</span></label>
-                            <input type="text" id="ref3" placeholder="Nombre, Apellido y Celular" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Observaciones <span class="required">*</span></label>
-                            <textarea id="observaciones" placeholder="Si te falta algo o querés aclarar algún detalle..." required></textarea>
-                        </div>
+
+                        <!-- 6. Referencias -->
+                        <div class="form-group"><label>Referencia 1 (Familiar - mismo apellido) <span class="required">*</span></label><input type="text" id="ref1" placeholder="Nombre, Apellido y Celular" required></div>
+                        <div class="form-group"><label>Referencia 2 (Personal) <span class="required">*</span></label><input type="text" id="ref2" placeholder="Nombre, Apellido y Celular" required></div>
+                        <div class="form-group"><label>Referencia 3 (Personal) <span class="required">*</span></label><input type="text" id="ref3" placeholder="Nombre, Apellido y Celular" required></div>
+
+                        <!-- 7. Observaciones -->
+                        <div class="form-group"><label>Observaciones <span class="required">*</span></label><textarea id="observaciones" placeholder="Si te falta algo o querés aclarar algún detalle..." required></textarea></div>
+
+                        <!-- 8. Botón -->
                         <button type="submit" class="btn btn-primary">ENVIAR SOLICITUD POR WHATSAPP</button>
                     </form>
                 </div>
@@ -188,26 +179,15 @@
         const URL_GOOGLE_SHEETS = "https://script.google.com/macros/s/AKfycbwIeKDNSNVEX5PL8yxliqEOrOhdzlNQvx2KgI86cmgkq87Adg-mZbae4xK20U5SfVg/exec";
         const NUMERO_WHATSAPP = "595971992363";
 
-        const REQUISITOS = {
-            formal_ips: ["Liquidación de salario"],
-            informal: ["Certificado de trabajo o RUC laboral"],
-            publico_permanente: [],
-            publico_contratado: [],
-            asalariado_iva: ["6 últimos IVAs", "6 facturas emitidas a la empresa"],
-            prof_independiente: ["6 últimos IVAs", "Título o Registro profesional", "Facturas (últimos 6 meses)"],
-            micro_comerciante: ["6 últimos IVAs", "Patente", "Fotos del negocio", "Fotos de mercaderías"],
-            rentista: ["Contrato privado de alquiler", "Foto de cédula del inquilino", "Fotos del inquilinato", "Factura de servicio público a nombre del rentista"]
-        };
-
-        const UBICACIONES = {
-            formal_ips: ["Ubicación del domicilio"],
-            informal: ["Ubicación del domicilio particular", "Ubicación del domicilio laboral"],
-            publico_permanente: ["Ubicación del domicilio"],
-            publico_contratado: ["Ubicación del domicilio"],
-            asalariado_iva: ["Ubicación del domicilio"],
-            prof_independiente: ["Ubicación del domicilio"],
-            micro_comerciante: ["Ubicación GPS del local"],
-            rentista: ["Ubicación GPS del inquilinato"]
+        const PERFILES = {
+            formal_ips: { antiguedad: '6 meses de aportes IPS', requisitos: ["Liquidación de salario"], ubicaciones: ["Ubicación del domicilio"] },
+            informal: { antiguedad: '6 meses como mínimo', requisitos: ["Certificado de trabajo o RUC laboral"], ubicaciones: ["Ubicación del domicilio particular", "Ubicación del domicilio laboral"] },
+            publico_permanente: { antiguedad: '1 mes (permanente)', requisitos: [], ubicaciones: ["Ubicación del domicilio"] },
+            publico_contratado: { antiguedad: '15 meses (contratado)', requisitos: [], ubicaciones: ["Ubicación del domicilio"] },
+            asalariado_iva: { antiguedad: '6 meses con IVAs', requisitos: ["6 últimos IVAs", "6 facturas emitidas a la empresa"], ubicaciones: ["Ubicación del domicilio"] },
+            prof_independiente: { antiguedad: '12 meses con RUC y Registro o título universitario', requisitos: ["6 últimos IVAs", "Título o Registro profesional", "Facturas (últimos 6 meses)"], ubicaciones: ["Ubicación del domicilio"] },
+            micro_comerciante: { antiguedad: '18 meses (con RUC/Patente) o 24 meses (sin)', requisitos: ["6 últimos IVAs", "Patente", "Fotos del negocio", "Fotos de mercaderías"], ubicaciones: ["Ubicación GPS del local"] },
+            rentista: { antiguedad: 'No especificada', requisitos: ["Contrato privado de alquiler", "Foto de cédula del inquilino", "Fotos del inquilinato", "Factura de servicio público a nombre del rentista"], ubicaciones: ["Ubicación GPS del inquilinato"] }
         };
 
         const CUOTERO = {
@@ -222,23 +202,38 @@
         function formatearNumero(n) { return n ? n.toString().replace(/\B(?=(\d{3})+(?!\d))/g,".") : "0"; }
         function parsearNumero(s) { return parseInt(s.toString().replace(/\./g,'')) || 0; }
 
-        function actualizarChecklist() {
+        function actualizarSecciones() {
             const perfil = document.getElementById('perfil').value;
+            const requisitosInfo = document.getElementById('requisitosInfo');
             const checklistContainer = document.getElementById('checklistContainer');
             const checklistItems = document.getElementById('checklistItems');
             const ubicacionContainer = document.getElementById('ubicacionContainer');
             const ubicacionFields = document.getElementById('ubicacionFields');
 
             if (!perfil) {
+                requisitosInfo.style.display = 'none';
                 checklistContainer.style.display = 'none';
                 ubicacionContainer.style.display = 'none';
                 return;
             }
 
-            const requisitos = REQUISITOS[perfil] || [];
-            if (requisitos.length > 0) {
+            const datos = PERFILES[perfil];
+
+            // Requisitos informativos
+            let infoHtml = '<strong>Requisitos del perfil:</strong>';
+            infoHtml += '<br>• Antigüedad: ' + datos.antiguedad;
+            infoHtml += '<br>• Ingreso mínimo: Gs. 1.750.000';
+            infoHtml += '<br>• Referencias: 3 (1 familiar mismo apellido)';
+            if (datos.requisitos.length > 0) {
+                infoHtml += '<br>• Documentos: ' + datos.requisitos.join(', ');
+            }
+            requisitosInfo.innerHTML = infoHtml;
+            requisitosInfo.style.display = 'block';
+
+            // Checklist
+            if (datos.requisitos.length > 0) {
                 let html = '';
-                requisitos.forEach((req, i) => {
+                datos.requisitos.forEach((req, i) => {
                     html += `<div class="checklist-item" onclick="toggleCheck(this)"><input type="checkbox" id="check_${i}" value="${req}"><div class="custom-check"></div><label class="checklist-label">${req}</label></div>`;
                 });
                 checklistItems.innerHTML = html;
@@ -247,10 +242,10 @@
                 checklistContainer.style.display = 'none';
             }
 
-            const ubicaciones = UBICACIONES[perfil] || [];
-            if (ubicaciones.length > 0) {
+            // Ubicaciones
+            if (datos.ubicaciones.length > 0) {
                 let html = '';
-                ubicaciones.forEach((ubi, i) => {
+                datos.ubicaciones.forEach((ubi, i) => {
                     html += `<div class="form-group" style="margin-bottom:8px;"><label>${ubi} <span class="required">*</span></label><input type="text" id="ubicacion_${i}" class="ubicacion-input" placeholder="Pegá el enlace de Google Maps o enviá por WhatsApp" required></div>`;
                 });
                 ubicacionFields.innerHTML = html;
@@ -286,15 +281,10 @@
             setTimeout(() => { toast.style.display = 'none'; }, 3000);
         }
 
-        function enviarWhatsApp(mensaje) {
-            window.open("https://wa.me/" + NUMERO_WHATSAPP + "?text=" + encodeURIComponent(mensaje), "_blank");
-        }
+        function enviarWhatsApp(mensaje) { window.open("https://wa.me/" + NUMERO_WHATSAPP + "?text=" + encodeURIComponent(mensaje), "_blank"); }
 
         async function guardarEnGoogleSheets(datos) {
-            try {
-                await fetch(URL_GOOGLE_SHEETS, { method: "POST", mode: "no-cors", headers: { "Content-Type": "application/json" }, body: JSON.stringify(datos) });
-                return true;
-            } catch (e) { return false; }
+            try { await fetch(URL_GOOGLE_SHEETS, { method: "POST", mode: "no-cors", headers: { "Content-Type": "application/json" }, body: JSON.stringify(datos) }); return true; } catch (e) { return false; }
         }
 
         document.getElementById('formularioEvaluacion').addEventListener('submit', async function(e) {
@@ -317,8 +307,7 @@
                 alert("Completá todos los campos obligatorios (marcados con *)."); return;
             }
 
-            const hoy = new Date();
-            const nac = new Date(fechaNac);
+            const hoy = new Date(); const nac = new Date(fechaNac);
             let edad = hoy.getFullYear() - nac.getFullYear();
             const mes = hoy.getMonth() - nac.getMonth();
             if (mes < 0 || (mes === 0 && hoy.getDate() < nac.getDate())) edad--;
@@ -327,9 +316,10 @@
             if (ingreso < 1750000) { alert("Ingreso mínimo: Gs. 1.750.000."); return; }
 
             const perfilLabel = document.getElementById('perfil').options[document.getElementById('perfil').selectedIndex].text;
+            const datos = PERFILES[perfil];
             const { tiene, falta } = obtenerChecklist();
             const ubicaciones = obtenerUbicaciones();
-            const nombresUbicaciones = UBICACIONES[perfil] || [];
+            const nombresUbicaciones = datos.ubicaciones;
 
             let checklistMsg = '';
             if (tiene.length > 0) { checklistMsg += 'TIENE:\n'; tiene.forEach(i => checklistMsg += '  * ' + i + '\n'); }
@@ -338,38 +328,22 @@
             let ubicacionesMsg = '';
             if (ubicaciones.length > 0) {
                 ubicacionesMsg += 'UBICACIONES:\n';
-                ubicaciones.forEach((u, i) => {
-                    const nombreUbi = nombresUbicaciones[i] || 'Ubicación';
-                    ubicacionesMsg += '  * ' + nombreUbi + ': ' + u + '\n';
-                });
+                ubicaciones.forEach((u, i) => { ubicacionesMsg += '  * ' + nombresUbicaciones[i] + ': ' + u + '\n'; });
             }
 
             let referenciasMsg = 'Ref1 (Familiar): ' + ref1 + '\nRef2 (Personal): ' + ref2 + '\nRef3 (Personal): ' + ref3;
 
-            const antiguedad = {
-                formal_ips: '6 meses de aportes IPS',
-                informal: '6 meses como mínimo',
-                publico_permanente: '1 mes (permanente)',
-                publico_contratado: '15 meses (contratado)',
-                asalariado_iva: '6 meses con IVAs',
-                prof_independiente: '12 meses con RUC y Registro o título universitario',
-                micro_comerciante: '18 meses (con RUC/Patente) o 24 meses (sin)',
-                rentista: 'No especificada'
-            }[perfil] || '';
-
             let mensajeWa = `Hola Isidro! Soy ${nombre}, completé tu Simulador de Créditos TKING.\n\n` +
                 `CI: ${ci}\nEdad: ${edad} años\nWhatsApp: ${telefono}\nCiudad: ${ciudad}\n` +
-                `Perfil: ${perfilLabel}\nAntigüedad requerida: ${antiguedad}\nMonto: Gs. ${formatearNumero(monto)}\nIngreso: Gs. ${formatearNumero(ingreso)}\n` +
+                `Perfil: ${perfilLabel}\nAntigüedad requerida: ${datos.antiguedad}\nMonto: Gs. ${formatearNumero(monto)}\nIngreso: Gs. ${formatearNumero(ingreso)}\n` +
                 `Informconf: ${informconf}\n\nDOCUMENTACIÓN:\n${checklistMsg}\n${ubicacionesMsg}\n` +
                 `REFERENCIAS:\n${referenciasMsg}\nOBSERVACIONES:\n${observaciones}\n\n` +
-                `📎 Tengo los documentos listos para enviarte por WhatsApp.\n` +
-                `Quisiera avanzar con la solicitud. ¿Qué sigue?`;
+                `📎 Tengo los documentos listos para enviarte por WhatsApp.\nQuisiera avanzar con la solicitud. ¿Qué sigue?`;
 
             const datosSheet = {
-                nombre, ci, edad, telefono, ciudad, perfil: perfilLabel, antiguedad, monto, ingreso,
+                nombre, ci, edad, telefono, ciudad, perfil: perfilLabel, antiguedad: datos.antiguedad, monto, ingreso,
                 informconf, checklist_tiene: tiene.join('; '), checklist_falta: falta.join('; '),
-                ubicaciones: ubicaciones.join('; '),
-                referencias: referenciasMsg, observaciones, fecha: new Date().toLocaleString()
+                ubicaciones: ubicaciones.join('; '), referencias: referenciasMsg, observaciones, fecha: new Date().toLocaleString()
             };
 
             await guardarEnGoogleSheets(datosSheet);
@@ -379,58 +353,33 @@
 
         const montoSimSelect = document.getElementById('montoSimulador');
         const tablaContainer = document.getElementById('tablaContainer');
-        for (let i = 1; i <= 10; i++) {
-            const val = i * 1000000;
-            const opt = document.createElement('option');
-            opt.value = val; opt.text = formatearNumero(val) + " Gs";
-            if (i === 3) opt.selected = true;
-            montoSimSelect.appendChild(opt);
-        }
+        for (let i = 1; i <= 10; i++) { const val = i * 1000000; const opt = document.createElement('option'); opt.value = val; opt.text = formatearNumero(val) + " Gs"; if (i === 3) opt.selected = true; montoSimSelect.appendChild(opt); }
         montoSimSelect.addEventListener('change', function() {
-            const m = parseInt(this.value);
-            if (!m) return;
+            const m = parseInt(this.value); if (!m) return;
             tablaContainer.style.display = 'block';
-            const cuotas = CUOTERO[m];
-            const tbody = document.getElementById('tablaSimulador');
-            let html = "<tr>";
+            const cuotas = CUOTERO[m]; const tbody = document.getElementById('tablaSimulador'); let html = "<tr>";
             for (let i = 0; i < 6; i++) html += `<td onclick="seleccionarCuota(this,${m},${PLAZOS[i]},${cuotas[i]})">${formatearNumero(cuotas[i])}</td>`;
-            html += "</tr>"; tbody.innerHTML = html;
-            document.getElementById('infoSimulacion').classList.remove('show');
+            html += "</tr>"; tbody.innerHTML = html; document.getElementById('infoSimulacion').classList.remove('show');
         });
         window.seleccionarCuota = function(el, monto, plazo, cuota) {
             document.querySelectorAll('#tablaSimulador td').forEach(td => td.classList.remove('selected'));
-            el.classList.add('selected');
-            document.getElementById('cuotaMostrada').textContent = formatearNumero(cuota) + " Gs";
+            el.classList.add('selected'); document.getElementById('cuotaMostrada').textContent = formatearNumero(cuota) + " Gs";
             document.getElementById('detalleMostrado').textContent = `${plazo} cuotas de ${formatearNumero(cuota)} Gs por mes`;
             document.getElementById('infoSimulacion').classList.add('show');
         };
 
         function abrirPestana(n) {
             document.querySelectorAll('.tab,.panel').forEach(e => e.classList.remove('active'));
-            if (n === 'evaluacion') {
-                document.querySelector('.tab:first-child').classList.add('active');
-                document.getElementById('panelEvaluacion').classList.add('active');
-            } else {
-                document.querySelector('.tab:last-child').classList.add('active');
-                document.getElementById('panelSimulador').classList.add('active');
-                if (montoSimSelect.value) montoSimSelect.dispatchEvent(new Event('change'));
-            }
+            if (n === 'evaluacion') { document.querySelector('.tab:first-child').classList.add('active'); document.getElementById('panelEvaluacion').classList.add('active'); }
+            else { document.querySelector('.tab:last-child').classList.add('active'); document.getElementById('panelSimulador').classList.add('active'); if (montoSimSelect.value) montoSimSelect.dispatchEvent(new Event('change')); }
         }
         montoSimSelect.dispatchEvent(new Event('change'));
 
-        configurarInputNumerico('monto');
-        configurarInputNumerico('ingreso');
-        configurarInputNumerico('ciClienteEval');
+        configurarInputNumerico('monto'); configurarInputNumerico('ingreso'); configurarInputNumerico('ciClienteEval');
         function configurarInputNumerico(id) {
             const inp = document.getElementById(id);
-            inp.addEventListener('input', function() {
-                let r = this.value.replace(/\./g, '');
-                if (!isNaN(r) && r !== '') this.value = formatearNumero(parseInt(r));
-            });
-            inp.addEventListener('blur', function() {
-                let r = parsearNumero(this.value);
-                if (r > 0) this.value = formatearNumero(r); else this.value = '';
-            });
+            inp.addEventListener('input', function() { let r = this.value.replace(/\./g, ''); if (!isNaN(r) && r !== '') this.value = formatearNumero(parseInt(r)); });
+            inp.addEventListener('blur', function() { let r = parsearNumero(this.value); if (r > 0) this.value = formatearNumero(r); else this.value = ''; });
         }
     </script>
 </body>
