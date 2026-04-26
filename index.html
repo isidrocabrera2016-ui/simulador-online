@@ -134,7 +134,7 @@
                             </select>
                         </div>
 
-                        <!-- 4. Checklist unificado (antigüedad + documentos + referencias) -->
+                        <!-- 4. Checklist unificado (antigüedad + documentos) -->
                         <div class="checklist-container" id="checklistContainer" style="display:none;">
                             <div class="checklist-title">Requisitos del perfil - Marcá lo que TENÉS:</div>
                             <div id="checklistItems"></div>
@@ -147,10 +147,15 @@
                             <div id="ubicacionFields"></div>
                         </div>
 
-                        <!-- 6. Observaciones -->
+                        <!-- 6. Referencias (campos separados) -->
+                        <div class="form-group"><label>Referencia 1 (Familiar - mismo apellido) <span class="required">*</span></label><input type="text" id="ref1" placeholder="Nombre, Apellido y Celular" required></div>
+                        <div class="form-group"><label>Referencia 2 (Personal) <span class="required">*</span></label><input type="text" id="ref2" placeholder="Nombre, Apellido y Celular" required></div>
+                        <div class="form-group"><label>Referencia 3 (Personal) <span class="required">*</span></label><input type="text" id="ref3" placeholder="Nombre, Apellido y Celular" required></div>
+
+                        <!-- 7. Observaciones -->
                         <div class="form-group"><label>Observaciones <span class="required">*</span></label><textarea id="observaciones" placeholder="Si te falta algo o querés aclarar algún detalle..." required></textarea></div>
 
-                        <!-- 7. Botón -->
+                        <!-- 8. Botón -->
                         <button type="submit" class="btn btn-primary">ENVIAR SOLICITUD POR WHATSAPP</button>
                     </form>
                 </div>
@@ -172,42 +177,42 @@
         const PERFILES = {
             formal_ips: {
                 antiguedad: '6 meses de aportes IPS',
-                requisitos: ["Antigüedad: 6 meses de aportes IPS", "Liquidación de salario", "3 referencias (1 familiar mismo apellido)"],
+                requisitos: ["Antigüedad: 6 meses de aportes IPS", "Liquidación de salario"],
                 ubicaciones: ["Ubicación del domicilio"]
             },
             informal: {
                 antiguedad: '6 meses como mínimo',
-                requisitos: ["Antigüedad: 6 meses como mínimo", "Certificado de trabajo o RUC laboral", "3 referencias (1 familiar mismo apellido)"],
+                requisitos: ["Antigüedad: 6 meses como mínimo", "Certificado de trabajo o RUC laboral"],
                 ubicaciones: ["Ubicación del domicilio particular", "Ubicación del domicilio laboral"]
             },
             publico_permanente: {
                 antiguedad: '1 mes (permanente)',
-                requisitos: ["Antigüedad: 1 mes (permanente)", "3 referencias (1 familiar mismo apellido)"],
+                requisitos: ["Antigüedad: 1 mes (permanente)"],
                 ubicaciones: ["Ubicación del domicilio"]
             },
             publico_contratado: {
                 antiguedad: '15 meses (contratado)',
-                requisitos: ["Antigüedad: 15 meses (contratado)", "3 referencias (1 familiar mismo apellido)"],
+                requisitos: ["Antigüedad: 15 meses (contratado)"],
                 ubicaciones: ["Ubicación del domicilio"]
             },
             asalariado_iva: {
                 antiguedad: '6 meses con IVAs',
-                requisitos: ["Antigüedad: 6 meses con IVAs", "6 últimos IVAs", "6 facturas emitidas a la empresa", "3 referencias (1 familiar mismo apellido)"],
+                requisitos: ["Antigüedad: 6 meses con IVAs", "6 últimos IVAs", "6 facturas emitidas a la empresa"],
                 ubicaciones: ["Ubicación del domicilio"]
             },
             prof_independiente: {
                 antiguedad: '12 meses con RUC y Registro o título universitario',
-                requisitos: ["Antigüedad: 12 meses con RUC y Registro o título universitario", "6 últimos IVAs", "Título o Registro profesional", "Facturas (últimos 6 meses)", "3 referencias (1 familiar mismo apellido)"],
+                requisitos: ["Antigüedad: 12 meses con RUC y Registro o título universitario", "6 últimos IVAs", "Título o Registro profesional", "Facturas (últimos 6 meses)"],
                 ubicaciones: ["Ubicación del domicilio"]
             },
             micro_comerciante: {
                 antiguedad: '18 meses (con RUC/Patente) o 24 meses (sin)',
-                requisitos: ["Antigüedad: 18 meses (con RUC/Patente) o 24 meses (sin)", "6 últimos IVAs", "Patente (si tiene)", "Fotos del negocio", "Fotos de mercaderías", "3 referencias (1 familiar mismo apellido)"],
+                requisitos: ["Antigüedad: 18 meses (con RUC/Patente) o 24 meses (sin)", "6 últimos IVAs", "Patente (si tiene)", "Fotos del negocio", "Fotos de mercaderías"],
                 ubicaciones: ["Ubicación GPS del local"]
             },
             rentista: {
                 antiguedad: 'No especificada',
-                requisitos: ["Contrato privado de alquiler", "Foto de cédula del inquilino", "Fotos del inquilinato", "Factura de servicio público a nombre del rentista", "3 referencias (1 familiar mismo apellido)"],
+                requisitos: ["Contrato privado de alquiler", "Foto de cédula del inquilino", "Fotos del inquilinato", "Factura de servicio público a nombre del rentista"],
                 ubicaciones: ["Ubicación GPS del inquilinato"]
             }
         };
@@ -239,7 +244,7 @@
 
             const datos = PERFILES[perfil];
 
-            // Checklist unificado (antigüedad + documentos + referencias)
+            // Checklist unificado (antigüedad + documentos, sin referencias)
             if (datos.requisitos.length > 0) {
                 let html = '';
                 datos.requisitos.forEach((req, i) => {
@@ -307,9 +312,12 @@
             const monto = parsearNumero(document.getElementById('monto').value);
             const ingreso = parsearNumero(document.getElementById('ingreso').value);
             const informconf = document.getElementById('informconf').value;
+            const ref1 = document.getElementById('ref1').value.trim();
+            const ref2 = document.getElementById('ref2').value.trim();
+            const ref3 = document.getElementById('ref3').value.trim();
             const observaciones = document.getElementById('observaciones').value.trim();
 
-            if (!nombre || !ci || !telefono || !fechaNac || !ciudad || !perfil || !informconf || !observaciones) {
+            if (!nombre || !ci || !telefono || !fechaNac || !ciudad || !perfil || !informconf || !ref1 || !ref2 || !ref3 || !observaciones) {
                 alert("Completá todos los campos obligatorios (marcados con *)."); return;
             }
 
@@ -337,17 +345,19 @@
                 ubicaciones.forEach((u, i) => { ubicacionesMsg += '  * ' + nombresUbicaciones[i] + ': ' + u + '\n'; });
             }
 
+            let referenciasMsg = 'Ref1 (Familiar): ' + ref1 + '\nRef2 (Personal): ' + ref2 + '\nRef3 (Personal): ' + ref3;
+
             let mensajeWa = `Hola Isidro! Soy ${nombre}, completé tu Simulador de Créditos TKING.\n\n` +
                 `CI: ${ci}\nEdad: ${edad} años\nWhatsApp: ${telefono}\nCiudad: ${ciudad}\n` +
                 `Perfil: ${perfilLabel}\nMonto: Gs. ${formatearNumero(monto)}\nIngreso: Gs. ${formatearNumero(ingreso)}\n` +
                 `Informconf: ${informconf}\n\nDOCUMENTACIÓN:\n${checklistMsg}\n${ubicacionesMsg}\n` +
-                `OBSERVACIONES:\n${observaciones}\n\n` +
+                `REFERENCIAS:\n${referenciasMsg}\nOBSERVACIONES:\n${observaciones}\n\n` +
                 `📎 Tengo los documentos listos para enviarte por WhatsApp.\nQuisiera avanzar con la solicitud. ¿Qué sigue?`;
 
             const datosSheet = {
                 nombre, ci, edad, telefono, ciudad, perfil: perfilLabel, monto, ingreso,
                 informconf, checklist_tiene: tiene.join('; '), checklist_falta: falta.join('; '),
-                ubicaciones: ubicaciones.join('; '), observaciones, fecha: new Date().toLocaleString()
+                ubicaciones: ubicaciones.join('; '), referencias: referenciasMsg, observaciones, fecha: new Date().toLocaleString()
             };
 
             await guardarEnGoogleSheets(datosSheet);
