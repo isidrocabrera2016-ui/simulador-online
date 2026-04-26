@@ -130,19 +130,17 @@
                             <label>Situación en Informconf</label>
                             <select id="informconf" required>
                                 <option value="">Seleccioná una opción...</option>
-                                <option value="sin_mora">No tiene mora / Sin Informconf</option>
-                                <option value="mora_leve">Tiene Informconf / Mora de 30 días o menos</option>
-                                <option value="mora_media">Tiene Informconf / Mora de 31 a 60 días</option>
-                                <option value="mora_alta">Tiene Informconf / Mora de 61 a 90 días</option>
-                                <option value="mora_mayor">Tiene Informconf / Más de 91 días de mora</option>
-                                <option value="desconozco">No recuerdo / Desconozco</option>
+                                <option value="sin_mora">Sin Informconf</option>
+                                <option value="mora_leve">Mora de 30 días o menos</option>
+                                <option value="mora_media">Mora de 31 a 60 días</option>
+                                <option value="mora_alta">Mora de 61 a 90 días</option>
+                                <option value="mora_mayor">Con Informconf (más de 91 días)</option>
                             </select>
                         </div>
                         <div class="checklist-container" id="checklistContainer" style="display:none;">
                             <div class="checklist-title">Documentos que tenés disponibles:</div>
                             <div id="checklistItems"></div>
                         </div>
-                        <!-- Referencias en 3 campos separados -->
                         <div class="form-group">
                             <label>Referencia 1 (Familiar - mismo apellido)</label>
                             <input type="text" id="ref1" placeholder="Nombre, Apellido y Celular">
@@ -177,14 +175,15 @@
         const URL_GOOGLE_SHEETS = "https://script.google.com/macros/s/AKfycbwIeKDNSNVEX5PL8yxliqEOrOhdzlNQvx2KgI86cmgkq87Adg-mZbae4xK20U5SfVg/exec";
         const NUMERO_WHATSAPP = "595971992363";
 
+        // Checklist corregido: solo documentos reales
         const REQUISITOS = {
-            formal_ips: ["6 últimas liquidaciones de salario (IPS)", "Salario de Gs. 1.750.000 como mínimo", "2 referencias personales (nombre y teléfono)", "Ciudad y dirección particular"],
-            informal: ["Certificado de trabajo o RUC laboral", "6 meses de antigüedad como mínimo", "Salario de Gs. 1.750.000 como mínimo", "2 referencias personales", "Ciudad y dirección particular y laboral"],
-            publico_permanente: ["Antigüedad: 1 mes (permanente)", "2 referencias personales (nombre y teléfono)", "Ciudad y dirección particular"],
-            publico_contratado: ["Antigüedad: 15 meses (contratado)", "2 referencias personales (nombre y teléfono)", "Ciudad y dirección particular"],
-            micro_sin_patente: ["Antigüedad del negocio: 1 año", "Fotos del negocio (fachada e interior)", "Fotos de las mercaderías", "2 referencias personales", "Ubicación GPS", "Patente (opcional)"],
-            micro_con_ivas: ["Antigüedad del negocio: 1 año", "Fotos del negocio (local y fachada)", "3 últimos IVAs normalizados", "2 referencias personales", "Ubicación GPS"],
-            rentista: ["Contrato privado entre las partes", "Foto de cédula del inquilino", "Fotos del inquilinato", "Factura de servicio público a nombre del rentista", "2 referencias personales", "Ubicación GPS"]
+            formal_ips: ["6 últimas liquidaciones de salario (IPS)"],
+            informal: ["Certificado de trabajo o RUC laboral", "Ubicación del domicilio particular (enviar por WhatsApp)", "Ubicación del domicilio laboral (enviar por WhatsApp)"],
+            publico_permanente: ["Liquidación de salario", "Certificado de trabajo"],
+            publico_contratado: ["Liquidación de salario", "Certificado de trabajo"],
+            micro_sin_patente: ["Fotos del negocio (fachada e interior)", "Fotos de las mercaderías", "Ubicación GPS del negocio (enviar por WhatsApp)", "Patente (opcional)"],
+            micro_con_ivas: ["3 últimos IVAs normalizados", "Fotos del negocio (local y fachada)", "Ubicación GPS del negocio (enviar por WhatsApp)"],
+            rentista: ["Contrato privado de alquiler", "Foto de cédula del inquilino", "Fotos del inquilinato", "Factura de servicio público a nombre del rentista", "Ubicación GPS del inquilinato (enviar por WhatsApp)"]
         };
 
         const CUOTERO = {
@@ -236,7 +235,6 @@
         }
 
         async function guardarEnGoogleSheets(datos) {
-            if (URL_GOOGLE_SHEETS === "TU_URL_DE_GOOGLE_APPS_SCRIPT") return false;
             try {
                 await fetch(URL_GOOGLE_SHEETS, { method: "POST", mode: "no-cors", headers: { "Content-Type": "application/json" }, body: JSON.stringify(datos) });
                 return true;
@@ -268,7 +266,6 @@
             let edad = hoy.getFullYear() - nac.getFullYear();
             const mes = hoy.getMonth() - nac.getMonth();
             if (mes < 0 || (mes === 0 && hoy.getDate() < nac.getDate())) edad--;
-            if (edad < 20 || edad > 70) { alert("Edad fuera del rango permitido (20-70 años)."); return; }
 
             if (monto < 1000000 || monto > 10000000) { alert("Monto fuera de rango (1.000.000 a 10.000.000)."); return; }
             if (ingreso < 1750000) { alert("Ingreso mínimo: Gs. 1.750.000."); return; }
