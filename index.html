@@ -65,6 +65,8 @@
         .checklist-item input:checked + .custom-check { background: var(--azul-marino); border-color: var(--azul-marino); }
         .custom-check::after { content: '✓'; color: white; font-size: 14px; font-weight: 800; display: none; }
         .checklist-item input:checked + .custom-check::after { display: block; }
+        .ubicacion-container { background: #e8f5e9; border-radius: 10px; padding: 12px; margin-top: 10px; border: 1px solid #a5d6a7; }
+        .ubicacion-title { font-weight: 700; font-size: 11px; color: #2e7d32; margin-bottom: 8px; text-align: center; }
         .table-container { overflow-x: auto; border-radius: 10px; border: 1px solid var(--gris-borde); display: none; }
         table { width: 100%; border-collapse: collapse; font-size: 11px; min-width: 420px; }
         th { background: var(--azul-marino); padding: 10px 6px; color: var(--dorado); font-size: 10px; }
@@ -148,6 +150,10 @@
                                 📄 <strong>Importante:</strong> Para proceder a su solicitud debe enviar los documentos y comprobantes por WhatsApp. Ante cualquier duda, escríbame.
                             </div>
                         </div>
+                        <div class="ubicacion-container" id="ubicacionContainer" style="display:none;">
+                            <div class="ubicacion-title">📍 Enviar ubicación por WhatsApp (pegá el enlace de Google Maps)</div>
+                            <div id="ubicacionFields"></div>
+                        </div>
                         <div class="form-group">
                             <label>Referencia 1 (Familiar - mismo apellido) <span class="required">*</span></label>
                             <input type="text" id="ref1" placeholder="Nombre, Apellido y Celular" required>
@@ -182,15 +188,28 @@
         const URL_GOOGLE_SHEETS = "https://script.google.com/macros/s/AKfycbwIeKDNSNVEX5PL8yxliqEOrOhdzlNQvx2KgI86cmgkq87Adg-mZbae4xK20U5SfVg/exec";
         const NUMERO_WHATSAPP = "595971992363";
 
+        // Checklist sin ubicaciones (solo documentos)
         const REQUISITOS = {
-            formal_ips: ["Liquidación de salario", "Ubicación del domicilio (enviar ubicación por WhatsApp)"],
-            informal: ["Certificado de trabajo o RUC laboral", "Ubicación del domicilio particular (enviar ubicación por WhatsApp)", "Ubicación del domicilio laboral (enviar ubicación por WhatsApp)"],
-            publico_permanente: ["Ubicación del domicilio (enviar ubicación por WhatsApp)"],
-            publico_contratado: ["Ubicación del domicilio (enviar ubicación por WhatsApp)"],
-            asalariado_iva: ["6 últimos IVAs", "6 facturas emitidas a la empresa", "Ubicación del domicilio (enviar ubicación por WhatsApp)"],
-            prof_independiente: ["6 últimos IVAs", "Título o Registro profesional", "Facturas (últimos 6 meses)", "Ubicación del domicilio (enviar ubicación por WhatsApp)"],
-            micro_comerciante: ["6 últimos IVAs", "Patente", "Fotos del negocio", "Fotos de mercaderías", "Ubicación GPS del local (enviar ubicación por WhatsApp)"],
-            rentista: ["Contrato privado de alquiler", "Foto de cédula del inquilino", "Fotos del inquilinato", "Factura de servicio público a nombre del rentista", "Ubicación GPS del inquilinato (enviar ubicación por WhatsApp)"]
+            formal_ips: ["Liquidación de salario"],
+            informal: ["Certificado de trabajo o RUC laboral"],
+            publico_permanente: [],
+            publico_contratado: [],
+            asalariado_iva: ["6 últimos IVAs", "6 facturas emitidas a la empresa"],
+            prof_independiente: ["6 últimos IVAs", "Título o Registro profesional", "Facturas (últimos 6 meses)"],
+            micro_comerciante: ["6 últimos IVAs", "Patente", "Fotos del negocio", "Fotos de mercaderías"],
+            rentista: ["Contrato privado de alquiler", "Foto de cédula del inquilino", "Fotos del inquilinato", "Factura de servicio público a nombre del rentista"]
+        };
+
+        // Ubicaciones por perfil
+        const UBICACIONES = {
+            formal_ips: ["Ubicación del domicilio"],
+            informal: ["Ubicación del domicilio particular", "Ubicación del domicilio laboral"],
+            publico_permanente: ["Ubicación del domicilio"],
+            publico_contratado: ["Ubicación del domicilio"],
+            asalariado_iva: ["Ubicación del domicilio"],
+            prof_independiente: ["Ubicación del domicilio"],
+            micro_comerciante: ["Ubicación GPS del local"],
+            rentista: ["Ubicación GPS del inquilinato"]
         };
 
         const CUOTERO = {
@@ -207,24 +226,58 @@
 
         function actualizarChecklist() {
             const perfil = document.getElementById('perfil').value;
-            const container = document.getElementById('checklistContainer');
-            const items = document.getElementById('checklistItems');
-            if (!perfil) { container.style.display = 'none'; return; }
+            const checklistContainer = document.getElementById('checklistContainer');
+            const checklistItems = document.getElementById('checklistItems');
+            const ubicacionContainer = document.getElementById('ubicacionContainer');
+            const ubicacionFields = document.getElementById('ubicacionFields');
+
+            // Checklist
+            if (!perfil) {
+                checklistContainer.style.display = 'none';
+                ubicacionContainer.style.display = 'none';
+                return;
+            }
+
             const requisitos = REQUISITOS[perfil] || [];
-            let html = '';
-            requisitos.forEach((req, i) => {
-                html += `<div class="checklist-item" onclick="toggleCheck(this)"><input type="checkbox" id="check_${i}" value="${req}"><div class="custom-check"></div><label class="checklist-label">${req}</label></div>`;
-            });
-            items.innerHTML = html;
-            container.style.display = 'block';
+            if (requisitos.length > 0) {
+                let html = '';
+                requisitos.forEach((req, i) => {
+                    html += `<div class="checklist-item" onclick="toggleCheck(this)"><input type="checkbox" id="check_${i}" value="${req}"><div class="custom-check"></div><label class="checklist-label">${req}</label></div>`;
+                });
+                checklistItems.innerHTML = html;
+                checklistContainer.style.display = 'block';
+            } else {
+                checklistContainer.style.display = 'none';
+            }
+
+            // Ubicaciones
+            const ubicaciones = UBICACIONES[perfil] || [];
+            if (ubicaciones.length > 0) {
+                let html = '';
+                ubicaciones.forEach((ubi, i) => {
+                    html += `<div class="form-group" style="margin-bottom:8px;"><label>${ubi} <span class="required">*</span></label><input type="text" id="ubicacion_${i}" class="ubicacion-input" placeholder="Pegá el enlace de Google Maps o enviá por WhatsApp" required></div>`;
+                });
+                ubicacionFields.innerHTML = html;
+                ubicacionContainer.style.display = 'block';
+            } else {
+                ubicacionContainer.style.display = 'none';
+            }
         }
 
         function toggleCheck(item) { const cb = item.querySelector('input[type="checkbox"]'); cb.checked = !cb.checked; }
+
         function obtenerChecklist() {
             const checks = document.querySelectorAll('#checklistItems input[type="checkbox"]');
             let tiene = [], falta = [];
             checks.forEach(ch => { if (ch.checked) tiene.push(ch.value); else falta.push(ch.value); });
             return { tiene, falta };
+        }
+
+        function obtenerUbicaciones() {
+            const inputs = document.querySelectorAll('.ubicacion-input');
+            let ubicaciones = [];
+            inputs.forEach(inp => { if (inp.value.trim()) ubicaciones.push(inp.value.trim()); });
+            return ubicaciones;
         }
 
         function abrirWhatsAppDirecto() {
@@ -279,10 +332,17 @@
 
             const perfilLabel = document.getElementById('perfil').options[document.getElementById('perfil').selectedIndex].text;
             const { tiene, falta } = obtenerChecklist();
+            const ubicaciones = obtenerUbicaciones();
 
             let checklistMsg = '';
             if (tiene.length > 0) { checklistMsg += 'TIENE:\n'; tiene.forEach(i => checklistMsg += '  * ' + i + '\n'); }
             if (falta.length > 0) { checklistMsg += '\nFALTA:\n'; falta.forEach(i => checklistMsg += '  * ' + i + '\n'); }
+
+            let ubicacionesMsg = '';
+            if (ubicaciones.length > 0) {
+                ubicacionesMsg += 'UBICACIONES:\n';
+                ubicaciones.forEach((u, i) => { ubicacionesMsg += '  * ' + u + '\n'; });
+            }
 
             let referenciasMsg = 'Ref1 (Familiar): ' + ref1 + '\nRef2 (Personal): ' + ref2 + '\nRef3 (Personal): ' + ref3;
 
@@ -300,7 +360,7 @@
             let mensajeWa = `Hola Isidro! Soy ${nombre}, completé tu Simulador de Créditos TKING.\n\n` +
                 `CI: ${ci}\nEdad: ${edad} años\nWhatsApp: ${telefono}\nCiudad: ${ciudad}\n` +
                 `Perfil: ${perfilLabel}\nAntigüedad requerida: ${antiguedad}\nMonto: Gs. ${formatearNumero(monto)}\nIngreso: Gs. ${formatearNumero(ingreso)}\n` +
-                `Informconf: ${informconf}\n\nDOCUMENTACIÓN:\n${checklistMsg}\n` +
+                `Informconf: ${informconf}\n\nDOCUMENTACIÓN:\n${checklistMsg}\n${ubicacionesMsg}\n` +
                 `REFERENCIAS:\n${referenciasMsg}\nOBSERVACIONES:\n${observaciones}\n\n` +
                 `📎 Tengo los documentos listos para enviarte por WhatsApp.\n` +
                 `Quisiera avanzar con la solicitud. ¿Qué sigue?`;
@@ -308,6 +368,7 @@
             const datosSheet = {
                 nombre, ci, edad, telefono, ciudad, perfil: perfilLabel, antiguedad, monto, ingreso,
                 informconf, checklist_tiene: tiene.join('; '), checklist_falta: falta.join('; '),
+                ubicaciones: ubicaciones.join('; '),
                 referencias: referenciasMsg, observaciones, fecha: new Date().toLocaleString()
             };
 
