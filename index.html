@@ -96,18 +96,18 @@
                     <button class="btn btn-whatsapp" id="btnQuieroCalificar" onclick="mostrarAutorizacion()">💰 QUIERO SABER SI CALIFICO</button>
                 </div>
 
-                <!-- AUTORIZACIÓN DEL CLIENTE (oculta hasta hacer clic en botón) -->
+                <!-- AUTORIZACIÓN DEL CLIENTE -->
                 <div id="autorizacionContainer" style="display:none;">
                     <div class="auth-container">
                         <label style="display:flex; align-items:flex-start; gap:8px; cursor:pointer;">
                             <input type="checkbox" id="autorizacionCheck" required>
-                            <span>Autorizo a TKING a verificar mis datos en centrales de riesgo crediticio. Declaro que la información proporcionada es verídica, que voluntariamente estoy brindando mis datos personales y me hago responsable de su veracidad.</span>
+                            <span>Declaro que voluntariamente estoy brindando mis datos personales. De ser necesaria, autorizo la verificación de mis datos en centrales de riesgo crediticio. Soy responsable de la veracidad de la información proporcionada.</span>
                         </label>
                         <button type="button" class="btn btn-primary" onclick="confirmarAutorizacion()" style="margin-top:12px;">CONTINUAR CON LA SOLICITUD</button>
                     </div>
                 </div>
 
-                <!-- SECCIÓN 2: FORMULARIO POR PASOS (oculto hasta autorización) -->
+                <!-- SECCIÓN 2: FORMULARIO POR PASOS -->
                 <div id="formularioContainer" style="display:none;">
                     <div class="progress-bar">
                         <div class="progress-step active" id="paso1Bar">Paso 1: Datos</div>
@@ -115,7 +115,6 @@
                         <div class="progress-step" id="paso3Bar">Paso 3: Enviar</div>
                     </div>
                     <form id="formularioEvaluacion">
-                        <!-- Paso 1: Datos personales + Ingreso + Informconf -->
                         <div class="step-content active" id="paso1">
                             <div class="row-3">
                                 <div class="form-group"><label>Nombre <span class="required">*</span></label><input type="text" id="nombreCliente" placeholder="Nombre" required></div>
@@ -126,10 +125,7 @@
                                 <div class="form-group"><label>Fecha de Nac. <span class="required">*</span></label><input type="date" id="fechaNacimiento" required></div>
                                 <div class="form-group"><label>Ciudad <span class="required">*</span></label><input type="text" id="ciudadCliente" placeholder="Asunción, CDE..." required></div>
                             </div>
-                            <div class="form-group">
-                                <label>Ingreso Mensual (Gs) <span class="required">*</span></label>
-                                <input type="text" id="ingresoMensual" placeholder="2.500.000" required>
-                            </div>
+                            <div class="form-group"><label>Ingreso Mensual (Gs) <span class="required">*</span></label><input type="text" id="ingresoMensual" placeholder="2.500.000" required></div>
                             <div class="form-group">
                                 <label>Situación en Informconf <span class="required">*</span></label>
                                 <select id="informconf" required>
@@ -143,8 +139,6 @@
                             </div>
                             <button type="button" class="btn btn-primary" id="btnPaso1Siguiente" onclick="siguientePaso(2)">SIGUIENTE</button>
                         </div>
-
-                        <!-- Paso 2: Perfil + Checklist + Ubicación -->
                         <div class="step-content" id="paso2">
                             <div class="form-group"><label>Perfil Laboral <span class="required">*</span></label><select id="perfil" required onchange="actualizarSecciones()"><option value="">Seleccioná...</option><option value="formal_ips">Trabajador Formal (con IPS)</option><option value="informal">Trabajador Informal (sin IPS)</option><option value="publico_permanente">Funcionario Público Permanente</option><option value="publico_contratado">Funcionario Público Contratado</option><option value="jubilado">Jubilado</option><option value="asalariado_iva">Asalariado con IVA</option><option value="prof_independiente">Prof. Independiente</option><option value="micro_comerciante">Micro / Comerciante</option><option value="rentista">Rentista (Alquileres)</option></select></div>
                             <div class="checklist-container" id="checklistContainer" style="display:none;"><div class="checklist-title">Requisitos - Marcá lo que TENÉS:</div><div id="checklistItems"></div><div class="doc-reminder">📄 Para proceder con su solicitud de crédito, debe enviar los documentos mencionados vía WhatsApp.</div></div>
@@ -154,8 +148,6 @@
                                 <button type="button" class="btn btn-primary" onclick="siguientePaso(3)">SIGUIENTE</button>
                             </div>
                         </div>
-
-                        <!-- Paso 3: Referencias + Observaciones + Envío -->
                         <div class="step-content" id="paso3">
                             <div class="form-group"><label>Ref. 1 (Familiar) <span class="required">*</span></label><input type="text" id="ref1" placeholder="Nombre, Apellido y Celular" required></div>
                             <div class="form-group"><label>Ref. 2 (Personal) <span class="required">*</span></label><input type="text" id="ref2" placeholder="Nombre, Apellido y Celular" required></div>
@@ -172,13 +164,13 @@
                                 <button type="button" class="btn btn-back" onclick="pasoAtras(2)">ATRÁS</button>
                                 <button type="submit" class="btn btn-whatsapp" id="btnEnviar">ENVIAR SOLICITUD POR WHATSAPP</button>
                             </div>
-                            <div class="social-proof">Más de 500 personas ya confiaron en la asesoría de Isidro Cabrera</div>
+                            <div class="social-proof">Más de 500 personas ya confiaron en mi asesoría personalizada</div>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
-        <p class="footer-note">Isidro Cabrera · Asesoría de Crédito · TKING · tking.asesor@gmail.com</p>
+        <p class="footer-note">Isidro Cabrera · Asesoría Profesional de Crédito · tking.asesor@gmail.com</p>
     </div>
 
     <script>
@@ -235,9 +227,7 @@
             const cuotas = CUOTERO[m];
             const tbody = document.getElementById('tablaSimulador');
             let html = "<tr>";
-            for (let i = 0; i < 8; i++) {
-                html += `<td onclick="seleccionarCuota(this,${m},${PLAZOS[i]},${cuotas[i]})" style="cursor:pointer;">${cuotas[i] > 0 ? formatearNumero(cuotas[i]) : '-'}</td>`;
-            }
+            for (let i = 0; i < 8; i++) html += `<td onclick="seleccionarCuota(this,${m},${PLAZOS[i]},${cuotas[i]})" style="cursor:pointer;">${cuotas[i] > 0 ? formatearNumero(cuotas[i]) : '-'}</td>`;
             html += "</tr>"; tbody.innerHTML = html;
             document.getElementById('simResultado').style.display = 'none';
             cuotaSeleccionada = null;
@@ -255,41 +245,28 @@
 
         // Autorización
         function mostrarAutorizacion() {
-            if (sessionStorage.getItem('bloqueado')) {
-                alert("Acceso denegado. Comuníquese a tking.asesor@gmail.com para más información.");
-                return;
-            }
-            // Ocultar botón de "Quiero calificar"
+            if (sessionStorage.getItem('bloqueado')) { alert("Acceso denegado."); return; }
             document.getElementById('btnQuieroCalificar').style.display = 'none';
             document.getElementById('btnQuieroCalificar').disabled = true;
-            // Mostrar autorización
             document.getElementById('autorizacionContainer').style.display = 'block';
             document.getElementById('autorizacionContainer').scrollIntoView({behavior:'smooth'});
         }
-
         function confirmarAutorizacion() {
-            if (!document.getElementById('autorizacionCheck').checked) {
-                alert("Debe autorizar el uso de sus datos para continuar.");
-                return;
-            }
-            // Ocultar autorización
+            if (!document.getElementById('autorizacionCheck').checked) { alert("Debe autorizar el uso de sus datos para continuar."); return; }
             document.getElementById('autorizacionContainer').style.display = 'none';
-            // Mostrar formulario
             document.getElementById('formularioContainer').style.display = 'block';
             document.getElementById('formularioContainer').scrollIntoView({behavior:'smooth'});
             irPaso(1);
         }
 
-        // Formulario por pasos
         function irPaso(n) {
-            document.querySelectorAll('.step-content').forEach(s => s.classList.remove('active'));
-            document.querySelectorAll('.progress-step').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.step-content,.progress-step').forEach(s => s.classList.remove('active'));
             document.getElementById('paso'+n).classList.add('active');
             document.getElementById('paso'+n+'Bar').classList.add('active');
         }
-
         function pasoAtras(n) { irPaso(n); }
 
+        // Validaciones
         function validarPaso1() {
             const fecha = document.getElementById('fechaNacimiento').value;
             if (!fecha) { alert("Ingrese su fecha de nacimiento."); return false; }
@@ -298,7 +275,6 @@
             const mes = hoy.getMonth() - nac.getMonth();
             if (mes < 0 || (mes === 0 && hoy.getDate() < nac.getDate())) edad--;
             if (edad < 18 || edad > 70) { alert("La edad debe estar entre 18 y 70 años."); return false; }
-
             const inf = document.getElementById('informconf').value;
             if (!inf) { alert("Seleccioná tu situación en Informconf."); return false; }
             if (inf === 'con') {
@@ -311,35 +287,22 @@
             if (!document.getElementById('nombreCliente').value.trim() || !document.getElementById('ciCliente').value.trim() || !document.getElementById('telefonoCliente').value.trim() || !document.getElementById('ciudadCliente').value.trim() || !document.getElementById('ingresoMensual').value.trim()) {
                 alert("Completá todos los datos del Paso 1."); return false;
             }
-            document.getElementById('infoconfBloqueo').style.display = 'none';
             return true;
         }
-
         function validarPaso2() {
-            const perfil = document.getElementById('perfil').value;
-            if (!perfil) { alert("Seleccioná tu perfil laboral."); return false; }
+            if (!document.getElementById('perfil').value) { alert("Seleccioná tu perfil laboral."); return false; }
             const ubicaciones = document.querySelectorAll('.ubicacion-input');
-            for (let i = 0; i < ubicaciones.length; i++) {
-                if (!ubicaciones[i].value.trim()) {
-                    alert("Completá todas las direcciones."); return false;
-                }
-            }
+            for (let inp of ubicaciones) if (!inp.value.trim()) { alert("Completá todas las direcciones."); return false; }
             return true;
         }
-
         function validarPaso3() {
-            const ref1 = document.getElementById('ref1').value.trim();
-            const ref2 = document.getElementById('ref2').value.trim();
-            const ref3 = document.getElementById('ref3').value.trim();
-            const obs = document.getElementById('observaciones').value.trim();
-            if (!ref1 || !ref2 || !ref3 || !obs) {
+            if (!document.getElementById('ref1').value.trim() || !document.getElementById('ref2').value.trim() || !document.getElementById('ref3').value.trim() || !document.getElementById('observaciones').value.trim()) {
                 alert("Completá todos los campos del Paso 3."); return false;
             }
             return true;
         }
-
         function siguientePaso(n) {
-            if (sessionStorage.getItem('bloqueado')) { alert("Acceso denegado."); return; }
+            if (sessionStorage.getItem('bloqueado')) return;
             if (n === 2 && !validarPaso1()) return;
             if (n === 3 && !validarPaso2()) return;
             irPaso(n);
@@ -351,8 +314,10 @@
             document.getElementById('ubicacionContainer').style.display = perfil ? 'block' : 'none';
             if (!perfil) return;
             const datos = PERFILES[perfil];
-            let html = ''; datos.requisitos.forEach((req, i) => html += `<div class="checklist-item" onclick="toggleCheck(this)"><input type="checkbox" id="check_${i}" value="${req}"><div class="custom-check"></div><label class="checklist-label">${req}</label></div>`); document.getElementById('checklistItems').innerHTML = html;
-            html = ''; datos.ubicaciones.forEach((ubi, i) => html += `<div class="form-group"><label>${ubi} <span class="required">*</span></label><textarea class="ubicacion-input" placeholder="Escribí tu dirección: calle, número, barrio, referencia" required style="min-height:60px;"></textarea></div>`); document.getElementById('ubicacionFields').innerHTML = html;
+            let html = ''; datos.requisitos.forEach((req, i) => html += `<div class="checklist-item" onclick="toggleCheck(this)"><input type="checkbox" id="check_${i}" value="${req}"><div class="custom-check"></div><label class="checklist-label">${req}</label></div>`);
+            document.getElementById('checklistItems').innerHTML = html;
+            html = ''; datos.ubicaciones.forEach((ubi, i) => html += `<div class="form-group"><label>${ubi} <span class="required">*</span></label><textarea class="ubicacion-input" placeholder="Escribí tu dirección: calle, número, barrio, referencia" required style="min-height:60px;"></textarea></div>`);
+            document.getElementById('ubicacionFields').innerHTML = html;
         }
         function toggleCheck(item) { const cb = item.querySelector('input[type="checkbox"]'); cb.checked = !cb.checked; }
 
@@ -363,9 +328,7 @@
 
         document.getElementById('formularioEvaluacion').addEventListener('submit', async function(e) {
             e.preventDefault();
-            if (sessionStorage.getItem('bloqueado')) return;
-            if (!validarPaso3()) return;
-
+            if (sessionStorage.getItem('bloqueado') || !validarPaso3()) return;
             const nombre = document.getElementById('nombreCliente').value.trim();
             const ci = document.getElementById('ciCliente').value.trim();
             const telefono = document.getElementById('telefonoCliente').value.trim();
@@ -378,7 +341,6 @@
             const ref1 = document.getElementById('ref1').value.trim();
             const ref2 = document.getElementById('ref2').value.trim();
             const ref3 = document.getElementById('ref3').value.trim();
-
             if (!cuotaSeleccionada) { alert("Seleccioná una cuota en el simulador."); return; }
 
             const hoy = new Date(); const nac = new Date(fechaNac);
@@ -396,8 +358,7 @@
             let ubicacionesMsg = ubicaciones.length > 0 ? 'DIRECCIONES:\n' + ubicaciones.map((u, i) => '  * ' + (PERFILES[perfil].ubicaciones[i] || 'Ubicación') + ': ' + u).join('\n') : '';
 
             const cuotaMsg = `Cuota de interés: ${cuotaSeleccionada.plazo} cuotas de Gs. ${formatearNumero(cuotaSeleccionada.cuota)}`;
-            const isUrgent = (document.getElementById('informconf').value === 'con' || monto >= 10000000);
-            const prefijo = isUrgent ? '🚨 URGENTE - V.I.P. 🚨\n' : '';
+            const prefijo = (monto >= 10000000) ? '🚨 URGENTE - V.I.P. 🚨\n' : '';
 
             let mensajeWa = `${prefijo}Hola Isidro! Soy ${nombre}, completé tu Simulador TKING.\n\n` +
                 `CI: ${ci}\nEdad: ${edad} años\nWhatsApp: ${telefono}\nCiudad: ${ciudad}\n` +
@@ -409,57 +370,36 @@
                 informconf: document.getElementById('informconf').value === 'sin' ? 'Sin Informconf' : 'Con Informconf',
                 checklist_tiene: tiene.join('; '), checklist_falta: falta.join('; '),
                 ubicaciones: ubicaciones.join('; '), referencias: `Ref1: ${ref1}, Ref2: ${ref2}, Ref3: ${ref3}`,
-                observaciones, cuota: cuotaMsg, autorizacion: "Sí",
-                fecha: new Date().toLocaleString()
+                observaciones, cuota: cuotaMsg, autorizacion: "Sí", fecha: new Date().toLocaleString()
             };
 
-            // Efecto de envío
             const btnEnviar = document.getElementById('btnEnviar');
-            btnEnviar.textContent = '⏳ Analizando tu perfil...';
-            btnEnviar.disabled = true;
+            btnEnviar.textContent = '⏳ Analizando tu perfil...'; btnEnviar.disabled = true;
             setTimeout(async () => {
                 btnEnviar.textContent = '✅ ¡Solicitud prioritaria encontrada!';
                 await fetch(URL_GOOGLE_SHEETS, { method: "POST", mode: "no-cors", headers: { "Content-Type": "application/json" }, body: JSON.stringify(datosSheet) });
                 setTimeout(() => {
                     window.open("https://wa.me/"+NUMERO_WHATSAPP+"?text="+encodeURIComponent(mensajeWa),"_blank");
                     document.getElementById('confirmToast').style.display = 'block';
-                    setTimeout(() => {
-                        document.getElementById('confirmToast').style.display = 'none';
-                        window.location.reload();
-                    }, 3000);
+                    setTimeout(() => { document.getElementById('confirmToast').style.display = 'none'; window.location.reload(); }, 3000);
                 }, 2000);
             }, 2000);
         });
 
-        configurarInputNumerico('ciCliente');
-        configurarInputNumerico('ingresoMensual');
+        configurarInputNumerico('ciCliente'); configurarInputNumerico('ingresoMensual');
         function configurarInputNumerico(id) {
-            const inp = document.getElementById(id);
-            if (!inp) return;
+            const inp = document.getElementById(id); if (!inp) return;
             inp.addEventListener('input', function() { let r = this.value.replace(/\./g, ''); if (!isNaN(r) && r !== '') this.value = formatearNumero(parseInt(r)); });
             inp.addEventListener('blur', function() { let r = parsearNumero(this.value); if (r > 0) this.value = formatearNumero(r); else this.value = ''; });
         }
 
         const urlParams = new URLSearchParams(window.location.search);
         const perfilParam = urlParams.get('perfil');
-        if (perfilParam && PERFILES[perfilParam]) {
-            document.addEventListener('DOMContentLoaded', () => {
-                const perfilSelect = document.getElementById('perfil');
-                if (perfilSelect) {
-                    perfilSelect.value = perfilParam;
-                    actualizarSecciones();
-                }
-            });
-        }
+        if (perfilParam && PERFILES[perfilParam]) document.addEventListener('DOMContentLoaded', () => { const ps = document.getElementById('perfil'); if (ps) { ps.value = perfilParam; actualizarSecciones(); } });
 
         const hoyFecha = new Date();
-        const maxYear = hoyFecha.getFullYear() - 18;
-        const minYear = hoyFecha.getFullYear() - 70;
-        const fechaInput = document.getElementById('fechaNacimiento');
-        if (fechaInput) {
-            fechaInput.setAttribute('max', `${maxYear}-12-31`);
-            fechaInput.setAttribute('min', `${minYear}-01-01`);
-        }
+        document.getElementById('fechaNacimiento').setAttribute('max', `${hoyFecha.getFullYear()-18}-12-31`);
+        document.getElementById('fechaNacimiento').setAttribute('min', `${hoyFecha.getFullYear()-70}-01-01`);
 
         if (sessionStorage.getItem('bloqueado')) {
             document.getElementById('infoconfBloqueo').style.display = 'block';
