@@ -68,6 +68,9 @@
         .security-badge { display: flex; align-items: center; gap: 8px; background: #e8f5e9; border: 1px solid #a5d6a7; border-radius: 8px; padding: 8px 12px; margin: 10px 0; font-size: 11px; color: #2e7d32; font-weight: 600; }
         .social-proof { text-align: center; font-size: 10px; color: #888; margin-top: 8px; }
         .bloqueo-msg { background: #e3f2fd; border: 1px solid #90caf9; border-radius: 10px; padding: 15px; text-align: center; color: #0d47a1; font-weight: 600; }
+        .auth-container { background: #e8f5e9; border: 2px solid var(--dorado); border-radius: 12px; padding: 16px; margin-top: 20px; }
+        .auth-container label { font-size: 12px; text-transform: none; letter-spacing: 0; display: flex; align-items: flex-start; gap: 8px; }
+        .auth-container input[type="checkbox"] { width: 20px; height: 20px; accent-color: var(--azul-marino); flex-shrink: 0; margin-top: 2px; }
     </style>
 </head>
 <body>
@@ -90,10 +93,21 @@
                 <div id="simResultado" style="display:none; text-align:center; margin-top:15px;">
                     <div style="font-size:24px;font-weight:800;color:var(--azul-marino);" id="cuotaMostrada">0 Gs</div>
                     <p style="font-size:12px;color:#5a6070;" id="detalleMostrado"></p>
-                    <button class="btn btn-whatsapp" id="btnQuieroCalificar" onclick="activarFormulario()">💰 QUIERO SABER SI CALIFICO</button>
+                    <button class="btn btn-whatsapp" id="btnQuieroCalificar" onclick="mostrarAutorizacion()">💰 QUIERO SABER SI CALIFICO</button>
                 </div>
 
-                <!-- SECCIÓN 2: FORMULARIO POR PASOS (oculto hasta simular) -->
+                <!-- AUTORIZACIÓN DEL CLIENTE (oculta hasta hacer clic en botón) -->
+                <div id="autorizacionContainer" style="display:none;">
+                    <div class="auth-container">
+                        <label style="display:flex; align-items:flex-start; gap:8px; cursor:pointer;">
+                            <input type="checkbox" id="autorizacionCheck" required>
+                            <span>Autorizo a TKING a verificar mis datos en centrales de riesgo crediticio. Declaro que la información proporcionada es verídica, que voluntariamente estoy brindando mis datos personales y me hago responsable de su veracidad.</span>
+                        </label>
+                        <button type="button" class="btn btn-primary" onclick="confirmarAutorizacion()" style="margin-top:12px;">CONTINUAR CON LA SOLICITUD</button>
+                    </div>
+                </div>
+
+                <!-- SECCIÓN 2: FORMULARIO POR PASOS (oculto hasta autorización) -->
                 <div id="formularioContainer" style="display:none;">
                     <div class="progress-bar">
                         <div class="progress-step active" id="paso1Bar">Paso 1: Datos</div>
@@ -150,6 +164,9 @@
                             <div class="security-badge">
                                 <svg width="20" height="20" viewBox="0 0 24 24" fill="#2e7d32"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/></svg>
                                 Evaluación 100% Segura y Confidencial
+                            </div>
+                            <div class="doc-reminder" style="margin-bottom:12px;">
+                                📎 <strong>Recordatorio:</strong> Para proceder con su solicitud de crédito, debe enviar los documentos faltantes y su ubicación por WhatsApp.
                             </div>
                             <div style="display: flex; gap: 8px;">
                                 <button type="button" class="btn btn-back" onclick="pasoAtras(2)">ATRÁS</button>
@@ -236,20 +253,34 @@
             cuotaSeleccionada = { monto, plazo, cuota };
         };
 
-        // Formulario por pasos
-        function activarFormulario() {
+        // Autorización
+        function mostrarAutorizacion() {
             if (sessionStorage.getItem('bloqueado')) {
                 alert("Acceso denegado. Comuníquese a tking.asesor@gmail.com para más información.");
                 return;
             }
+            // Ocultar botón de "Quiero calificar"
+            document.getElementById('btnQuieroCalificar').style.display = 'none';
+            document.getElementById('btnQuieroCalificar').disabled = true;
+            // Mostrar autorización
+            document.getElementById('autorizacionContainer').style.display = 'block';
+            document.getElementById('autorizacionContainer').scrollIntoView({behavior:'smooth'});
+        }
+
+        function confirmarAutorizacion() {
+            if (!document.getElementById('autorizacionCheck').checked) {
+                alert("Debe autorizar el uso de sus datos para continuar.");
+                return;
+            }
+            // Ocultar autorización
+            document.getElementById('autorizacionContainer').style.display = 'none';
+            // Mostrar formulario
             document.getElementById('formularioContainer').style.display = 'block';
             document.getElementById('formularioContainer').scrollIntoView({behavior:'smooth'});
             irPaso(1);
-            // Ocultar para siempre el botón "Quiero Calificar"
-            document.getElementById('btnQuieroCalificar').style.display = 'none';
-            document.getElementById('btnQuieroCalificar').disabled = true;
         }
 
+        // Formulario por pasos
         function irPaso(n) {
             document.querySelectorAll('.step-content').forEach(s => s.classList.remove('active'));
             document.querySelectorAll('.progress-step').forEach(s => s.classList.remove('active'));
@@ -257,11 +288,17 @@
             document.getElementById('paso'+n+'Bar').classList.add('active');
         }
 
-        function pasoAtras(n) {
-            irPaso(n);
-        }
+        function pasoAtras(n) { irPaso(n); }
 
         function validarPaso1() {
+            const fecha = document.getElementById('fechaNacimiento').value;
+            if (!fecha) { alert("Ingrese su fecha de nacimiento."); return false; }
+            const hoy = new Date(); const nac = new Date(fecha);
+            let edad = hoy.getFullYear() - nac.getFullYear();
+            const mes = hoy.getMonth() - nac.getMonth();
+            if (mes < 0 || (mes === 0 && hoy.getDate() < nac.getDate())) edad--;
+            if (edad < 18 || edad > 70) { alert("La edad debe estar entre 18 y 70 años."); return false; }
+
             const inf = document.getElementById('informconf').value;
             if (!inf) { alert("Seleccioná tu situación en Informconf."); return false; }
             if (inf === 'con') {
@@ -271,7 +308,7 @@
                 sessionStorage.setItem('bloqueado', '1');
                 return false;
             }
-            if (!document.getElementById('nombreCliente').value.trim() || !document.getElementById('ciCliente').value.trim() || !document.getElementById('telefonoCliente').value.trim() || !document.getElementById('fechaNacimiento').value || !document.getElementById('ciudadCliente').value.trim() || !document.getElementById('ingresoMensual').value.trim()) {
+            if (!document.getElementById('nombreCliente').value.trim() || !document.getElementById('ciCliente').value.trim() || !document.getElementById('telefonoCliente').value.trim() || !document.getElementById('ciudadCliente').value.trim() || !document.getElementById('ingresoMensual').value.trim()) {
                 alert("Completá todos los datos del Paso 1."); return false;
             }
             document.getElementById('infoconfBloqueo').style.display = 'none';
@@ -302,10 +339,7 @@
         }
 
         function siguientePaso(n) {
-            if (sessionStorage.getItem('bloqueado')) {
-                alert("Acceso denegado.");
-                return;
-            }
+            if (sessionStorage.getItem('bloqueado')) { alert("Acceso denegado."); return; }
             if (n === 2 && !validarPaso1()) return;
             if (n === 3 && !validarPaso2()) return;
             irPaso(n);
@@ -375,10 +409,11 @@
                 informconf: document.getElementById('informconf').value === 'sin' ? 'Sin Informconf' : 'Con Informconf',
                 checklist_tiene: tiene.join('; '), checklist_falta: falta.join('; '),
                 ubicaciones: ubicaciones.join('; '), referencias: `Ref1: ${ref1}, Ref2: ${ref2}, Ref3: ${ref3}`,
-                observaciones, cuota: cuotaMsg,
+                observaciones, cuota: cuotaMsg, autorizacion: "Sí",
                 fecha: new Date().toLocaleString()
             };
 
+            // Efecto de envío
             const btnEnviar = document.getElementById('btnEnviar');
             btnEnviar.textContent = '⏳ Analizando tu perfil...';
             btnEnviar.disabled = true;
