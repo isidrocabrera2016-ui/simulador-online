@@ -36,6 +36,7 @@
         .row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; } .row-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
         .btn { width: 100%; padding: 13px; border: none; border-radius: 8px; font-size: 14px; font-weight: 700; cursor: pointer; margin-top: 6px; }
         .btn-primary { background: linear-gradient(135deg, #0a2540, #0d3b66); color: var(--dorado); border: 1px solid var(--dorado); }
+        .btn-back { background: #e0e0e0; color: var(--texto); }
         .btn-whatsapp { background: var(--whatsapp); color: white; animation: pulse 2s infinite; }
         @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.5); } 70% { box-shadow: 0 0 0 12px rgba(37, 211, 102, 0); } 100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); } }
         .checklist-container, .ubicacion-container { background: var(--gris-perla); border-radius: 10px; padding: 12px; margin-top: 10px; border: 1px solid var(--gris-borde); }
@@ -65,7 +66,6 @@
         .step-content.active { display: block; animation: fadeIn 0.3s ease; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
         .security-badge { display: flex; align-items: center; gap: 8px; background: #e8f5e9; border: 1px solid #a5d6a7; border-radius: 8px; padding: 8px 12px; margin: 10px 0; font-size: 11px; color: #2e7d32; font-weight: 600; }
-        .security-badge img { width: 20px; height: 20px; }
         .social-proof { text-align: center; font-size: 10px; color: #888; margin-top: 8px; }
     </style>
 </head>
@@ -108,7 +108,7 @@
                                 <div class="form-group"><label>WhatsApp <span class="required">*</span></label><input type="tel" id="telefonoCliente" placeholder="0971..." required></div>
                             </div>
                             <div class="row-2">
-                                <div class="form-group"><label>Fecha de Nac. <span class="required">*</span></label><input type="date" id="fechaNacimiento" required min="1954-01-01" max="2006-12-31"></div>
+                                <div class="form-group"><label>Fecha de Nac. <span class="required">*</span></label><input type="date" id="fechaNacimiento" required></div>
                                 <div class="form-group"><label>Ciudad <span class="required">*</span></label><input type="text" id="ciudadCliente" placeholder="Asunción, CDE..." required></div>
                             </div>
                             <div class="form-group">
@@ -124,7 +124,7 @@
                                 </select>
                             </div>
                             <div id="infoconfBloqueo" style="display:none; background:#ffebee; border:1px solid #c62828; border-radius:10px; padding:15px; text-align:center; color:#b71c1c; font-weight:700;">
-                                ❌ Agradecemos tu interés. Actualmente nuestra política solo permite operar con clientes sin Informconf. Si tu situación cambia, estaremos encantados de ayudarte.
+                                ❌ Agradecemos tu interés. Actualmente solo operamos con clientes sin Informconf. Si tu situación cambia, escribinos a tking.asesor@gmail.com
                             </div>
                             <button type="button" class="btn btn-primary" id="btnPaso1Siguiente" onclick="siguientePaso(2)">SIGUIENTE</button>
                         </div>
@@ -134,7 +134,10 @@
                             <div class="form-group"><label>Perfil Laboral <span class="required">*</span></label><select id="perfil" required onchange="actualizarSecciones()"><option value="">Seleccioná...</option><option value="formal_ips">Trabajador Formal (con IPS)</option><option value="informal">Trabajador Informal (sin IPS)</option><option value="publico_permanente">Funcionario Público Permanente</option><option value="publico_contratado">Funcionario Público Contratado</option><option value="jubilado">Jubilado</option><option value="asalariado_iva">Asalariado con IVA</option><option value="prof_independiente">Prof. Independiente</option><option value="micro_comerciante">Micro / Comerciante</option><option value="rentista">Rentista (Alquileres)</option></select></div>
                             <div class="checklist-container" id="checklistContainer" style="display:none;"><div class="checklist-title">Requisitos - Marcá lo que TENÉS:</div><div id="checklistItems"></div><div class="doc-reminder">📄 Para proceder con su solicitud de crédito, debe enviar los documentos mencionados vía WhatsApp.</div></div>
                             <div class="ubicacion-container" id="ubicacionContainer" style="display:none;"><div class="ubicacion-title">📍 Describí tu dirección</div><div id="ubicacionFields"></div><div class="doc-reminder" style="margin-top:8px;">⚠️ Importante: Para proceder con su solicitud de crédito, debe enviar nuevamente su ubicación vía WhatsApp.</div></div>
-                            <button type="button" class="btn btn-primary" onclick="siguientePaso(3)">SIGUIENTE</button>
+                            <div style="display: flex; gap: 8px;">
+                                <button type="button" class="btn btn-back" onclick="pasoAtras(1)">ATRÁS</button>
+                                <button type="button" class="btn btn-primary" onclick="siguientePaso(3)">SIGUIENTE</button>
+                            </div>
                         </div>
 
                         <!-- Paso 3: Referencias + Observaciones + Envío -->
@@ -147,14 +150,17 @@
                                 <svg width="20" height="20" viewBox="0 0 24 24" fill="#2e7d32"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/></svg>
                                 Evaluación 100% Segura y Confidencial
                             </div>
-                            <button type="submit" class="btn btn-whatsapp" id="btnEnviar">ENVIAR SOLICITUD POR WHATSAPP</button>
-                            <div class="social-proof">Más de 100 paraguayos ya confiaron en TKING este mes</div>
+                            <div style="display: flex; gap: 8px;">
+                                <button type="button" class="btn btn-back" onclick="pasoAtras(2)">ATRÁS</button>
+                                <button type="submit" class="btn btn-whatsapp" id="btnEnviar">ENVIAR SOLICITUD POR WHATSAPP</button>
+                            </div>
+                            <div class="social-proof">Más de 500 personas ya confiaron en la asesoría de Isidro Cabrera</div>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
-        <p class="footer-note">Isidro Cabrera · Asesoría de Crédito · TKING</p>
+        <p class="footer-note">Isidro Cabrera · Asesoría de Crédito · TKING · tking.asesor@gmail.com</p>
     </div>
 
     <script>
@@ -193,7 +199,7 @@
         };
         const PLAZOS = [6,8,10,12,15,18,20,24];
 
-        let cuotaSeleccionada = null; // {monto, plazo, cuota}
+        let cuotaSeleccionada = null;
 
         function formatearNumero(n) { return n ? n.toString().replace(/\B(?=(\d{3})+(?!\d))/g,".") : "0"; }
         function parsearNumero(s) { return parseInt(s.toString().replace(/\./g,'')) || 0; }
@@ -232,11 +238,65 @@
         // Formulario por pasos
         function activarFormulario() {
             if (sessionStorage.getItem('bloqueado')) {
-                alert("Ya no es posible continuar con la solicitud.");
+                alert("Acceso denegado. Comuníquese a tking.asesor@gmail.com para más información.");
                 return;
             }
             document.getElementById('formularioContainer').style.display = 'block';
             document.getElementById('formularioContainer').scrollIntoView({behavior:'smooth'});
+            irPaso(1);
+        }
+
+        function irPaso(n) {
+            document.querySelectorAll('.step-content').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.progress-step').forEach(s => s.classList.remove('active'));
+            document.getElementById('paso'+n).classList.add('active');
+            document.getElementById('paso'+n+'Bar').classList.add('active');
+        }
+
+        function pasoAtras(n) {
+            irPaso(n);
+        }
+
+        function validarPaso1() {
+            const inf = document.getElementById('informconf').value;
+            if (!inf) { alert("Seleccioná tu situación en Informconf."); return false; }
+            if (inf === 'con') {
+                document.getElementById('infoconfBloqueo').style.display = 'block';
+                document.getElementById('btnPaso1Siguiente').style.display = 'none';
+                document.getElementById('waBtnFlotante').style.display = 'none';
+                sessionStorage.setItem('bloqueado', '1');
+                return false;
+            }
+            if (!document.getElementById('nombreCliente').value.trim() || !document.getElementById('ciCliente').value.trim() || !document.getElementById('telefonoCliente').value.trim() || !document.getElementById('fechaNacimiento').value || !document.getElementById('ciudadCliente').value.trim() || !document.getElementById('ingresoMensual').value.trim()) {
+                alert("Completá todos los datos del Paso 1."); return false;
+            }
+            document.getElementById('infoconfBloqueo').style.display = 'none';
+            return true;
+        }
+
+        function validarPaso2() {
+            const perfil = document.getElementById('perfil').value;
+            if (!perfil) { alert("Seleccioná tu perfil laboral."); return false; }
+            // Verificar que las ubicaciones estén completas
+            const ubicaciones = document.querySelectorAll('.ubicacion-input');
+            for (let i = 0; i < ubicaciones.length; i++) {
+                if (!ubicaciones[i].value.trim()) {
+                    alert("Completá todas las direcciones."); return false;
+                }
+            }
+            // No es obligatorio marcar ningún checkbox del checklist, pero sí completar ubicaciones
+            return true;
+        }
+
+        function validarPaso3() {
+            const ref1 = document.getElementById('ref1').value.trim();
+            const ref2 = document.getElementById('ref2').value.trim();
+            const ref3 = document.getElementById('ref3').value.trim();
+            const obs = document.getElementById('observaciones').value.trim();
+            if (!ref1 || !ref2 || !ref3 || !obs) {
+                alert("Completá todos los campos del Paso 3."); return false;
+            }
+            return true;
         }
 
         function siguientePaso(n) {
@@ -244,27 +304,9 @@
                 alert("Acceso denegado.");
                 return;
             }
-
-            if (n === 2) {
-                const inf = document.getElementById('informconf').value;
-                if (!inf) { alert("Seleccioná tu situación en Informconf."); return; }
-                if (inf === 'con') {
-                    document.getElementById('infoconfBloqueo').style.display = 'block';
-                    document.getElementById('btnPaso1Siguiente').style.display = 'none';
-                    document.getElementById('waBtnFlotante').style.display = 'none'; // oculta botón flotante
-                    sessionStorage.setItem('bloqueado', '1');
-                    return;
-                }
-                if (!document.getElementById('nombreCliente').value.trim() || !document.getElementById('ciCliente').value.trim() || !document.getElementById('telefonoCliente').value.trim() || !document.getElementById('fechaNacimiento').value || !document.getElementById('ciudadCliente').value.trim() || !document.getElementById('ingresoMensual').value.trim()) {
-                    alert("Completá todos los datos del Paso 1."); return;
-                }
-                document.getElementById('infoconfBloqueo').style.display = 'none';
-            }
-
-            document.querySelectorAll('.step-content').forEach(s => s.classList.remove('active'));
-            document.querySelectorAll('.progress-step').forEach(s => s.classList.remove('active'));
-            document.getElementById('paso'+n).classList.add('active');
-            document.getElementById('paso'+n+'Bar').classList.add('active');
+            if (n === 2 && !validarPaso1()) return;
+            if (n === 3 && !validarPaso2()) return;
+            irPaso(n);
         }
 
         function actualizarSecciones() {
@@ -286,6 +328,7 @@
         document.getElementById('formularioEvaluacion').addEventListener('submit', async function(e) {
             e.preventDefault();
             if (sessionStorage.getItem('bloqueado')) return;
+            if (!validarPaso3()) return;
 
             const nombre = document.getElementById('nombreCliente').value.trim();
             const ci = document.getElementById('ciCliente').value.trim();
@@ -300,9 +343,6 @@
             const ref2 = document.getElementById('ref2').value.trim();
             const ref3 = document.getElementById('ref3').value.trim();
 
-            if (!nombre || !ci || !telefono || !fechaNac || !ciudad || !ingreso || !perfil || !ref1 || !ref2 || !ref3 || !observaciones) {
-                alert("Completá todos los campos obligatorios."); return;
-            }
             if (!cuotaSeleccionada) { alert("Seleccioná una cuota en el simulador."); return; }
 
             const hoy = new Date(); const nac = new Date(fechaNac);
@@ -337,7 +377,6 @@
                 fecha: new Date().toLocaleString()
             };
 
-            // Efecto de envío VIP
             const btnEnviar = document.getElementById('btnEnviar');
             btnEnviar.textContent = '⏳ Analizando tu perfil...';
             btnEnviar.disabled = true;
@@ -354,7 +393,6 @@
             }, 2000);
         });
 
-        // Máscara para CI e Ingreso
         configurarInputNumerico('ciCliente');
         configurarInputNumerico('ingresoMensual');
         function configurarInputNumerico(id) {
@@ -364,7 +402,6 @@
             inp.addEventListener('blur', function() { let r = parsearNumero(this.value); if (r > 0) this.value = formatearNumero(r); else this.value = ''; });
         }
 
-        // Pre-carga de perfil desde parámetro ?perfil=...
         const urlParams = new URLSearchParams(window.location.search);
         const perfilParam = urlParams.get('perfil');
         if (perfilParam && PERFILES[perfilParam]) {
@@ -377,17 +414,15 @@
             });
         }
 
-        // Ajustar fecha de nacimiento dinámicamente
-        const hoy = new Date();
-        const maxYear = hoy.getFullYear() - 18;
-        const minYear = hoy.getFullYear() - 70;
+        const hoyFecha = new Date();
+        const maxYear = hoyFecha.getFullYear() - 18;
+        const minYear = hoyFecha.getFullYear() - 70;
         const fechaInput = document.getElementById('fechaNacimiento');
         if (fechaInput) {
             fechaInput.setAttribute('max', `${maxYear}-12-31`);
             fechaInput.setAttribute('min', `${minYear}-01-01`);
         }
 
-        // Bloqueo inicial si ya fue bloqueado antes
         if (sessionStorage.getItem('bloqueado')) {
             document.getElementById('infoconfBloqueo').style.display = 'block';
             document.getElementById('btnPaso1Siguiente').style.display = 'none';
