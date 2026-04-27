@@ -81,7 +81,7 @@
                 <!-- SECCIÓN 1: SIMULADOR DE CUOTAS (siempre visible) -->
                 <p style="text-align:center;font-size:12px;color:#5a6070;margin-bottom:10px;">Simulá el valor de tus cuotas mensuales.</p>
                 <div class="form-group"><label>Monto a Simular</label><select id="montoSimulador"><option value="">Seleccioná...</option></select></div>
-                <div class="table-container" id="tablaContainer"><table><thead><tr><th>6 cuotas</th><th>8 cuotas</th><th>10 cuotas</th><th>12 cuotas</th><th>15 cuotas</th><th>18 cuotas</th><th>20 cuotas</th><th>24 cuotas</th></tr></thead><tbody id="tablaSimulador"></tbody></table></div>
+                <div class="table-container" id="tablaContainer" style="display:none;"><table><thead><tr><th>6 cuotas</th><th>8 cuotas</th><th>10 cuotas</th><th>12 cuotas</th><th>15 cuotas</th><th>18 cuotas</th><th>20 cuotas</th><th>24 cuotas</th></tr></thead><tbody id="tablaSimulador"></tbody></table></div>
                 <p style="font-size:9px;color:#888;text-align:center;margin-top:4px;">Cuotas de referencia. Sujeto a evaluación crediticia.</p>
                 <div id="simResultado" style="display:none; text-align:center; margin-top:15px;">
                     <div style="font-size:24px;font-weight:800;color:var(--azul-marino);" id="cuotaMostrada">0 Gs</div>
@@ -186,16 +186,17 @@
 
         // Simulador
         const montoSimSelect = document.getElementById('montoSimulador');
+        const tablaContainer = document.getElementById('tablaContainer');
         const montos = [500000,1000000,2000000,3000000,4000000,5000000,6000000,7000000,8000000,9000000,10000000,11000000,12000000,13000000,14000000,15000000];
         montos.forEach(val => { const opt = document.createElement('option'); opt.value = val; opt.text = formatearNumero(val) + " Gs"; montoSimSelect.appendChild(opt); });
         montoSimSelect.addEventListener('change', function() {
             const m = parseInt(this.value);
-            if (!m) { document.getElementById('tablaContainer').style.display = 'none'; return; }
-            document.getElementById('tablaContainer').style.display = 'block';
+            if (!m) { tablaContainer.style.display = 'none'; document.getElementById('simResultado').style.display = 'none'; return; }
+            tablaContainer.style.display = 'block';
             const cuotas = CUOTERO[m];
             const tbody = document.getElementById('tablaSimulador');
             let html = "<tr>";
-            for (let i = 0; i < 8; i++) html += `<td onclick="seleccionarCuota(this,${m},${PLAZOS[i]},${cuotas[i]})">${cuotas[i] > 0 ? formatearNumero(cuotas[i]) : '-'}</td>`;
+            for (let i = 0; i < 8; i++) html += `<td onclick="seleccionarCuota(this,${m},${PLAZOS[i]},${cuotas[i]})" style="cursor:pointer;">${cuotas[i] > 0 ? formatearNumero(cuotas[i]) : '-'}</td>`;
             html += "</tr>"; tbody.innerHTML = html;
             document.getElementById('simResultado').style.display = 'none';
         });
@@ -270,8 +271,14 @@
             document.getElementById('confirmToast').style.display = 'block'; setTimeout(() => document.getElementById('confirmToast').style.display = 'none', 3000);
         });
 
-        configurarInputNumerico('ciCliente'); configurarInputNumerico('montoSimulador');
-        function configurarInputNumerico(id) { const inp = document.getElementById(id); if (!inp) return; inp.addEventListener('input', function() { let r = this.value.replace(/\./g, ''); if (!isNaN(r) && r !== '') this.value = formatearNumero(parseInt(r)); }); inp.addEventListener('blur', function() { let r = parsearNumero(this.value); if (r > 0) this.value = formatearNumero(r); else this.value = ''; }); }
+        // Solo aplicamos la máscara de puntos al campo CI, no al select de montos.
+        configurarInputNumerico('ciCliente');
+        function configurarInputNumerico(id) {
+            const inp = document.getElementById(id);
+            if (!inp) return;
+            inp.addEventListener('input', function() { let r = this.value.replace(/\./g, ''); if (!isNaN(r) && r !== '') this.value = formatearNumero(parseInt(r)); });
+            inp.addEventListener('blur', function() { let r = parsearNumero(this.value); if (r > 0) this.value = formatearNumero(r); else this.value = ''; });
+        }
     </script>
 </body>
 </html>
