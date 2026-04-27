@@ -14,7 +14,7 @@
         :root {
             --azul-marino: #0a2540; --dorado: #d4a853; --blanco: #ffffff;
             --gris-perla: #f5f6fa; --gris-borde: #e2e6ed; --texto: #1a1f2e;
-            --whatsapp: #25D366; --rojo: #c62828;
+            --whatsapp: #25D366;
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -67,6 +67,7 @@
         @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
         .security-badge { display: flex; align-items: center; gap: 8px; background: #e8f5e9; border: 1px solid #a5d6a7; border-radius: 8px; padding: 8px 12px; margin: 10px 0; font-size: 11px; color: #2e7d32; font-weight: 600; }
         .social-proof { text-align: center; font-size: 10px; color: #888; margin-top: 8px; }
+        .bloqueo-msg { background: #e3f2fd; border: 1px solid #90caf9; border-radius: 10px; padding: 15px; text-align: center; color: #0d47a1; font-weight: 600; }
     </style>
 </head>
 <body>
@@ -89,7 +90,7 @@
                 <div id="simResultado" style="display:none; text-align:center; margin-top:15px;">
                     <div style="font-size:24px;font-weight:800;color:var(--azul-marino);" id="cuotaMostrada">0 Gs</div>
                     <p style="font-size:12px;color:#5a6070;" id="detalleMostrado"></p>
-                    <button class="btn btn-whatsapp" onclick="activarFormulario()">💰 QUIERO SABER SI CALIFICO</button>
+                    <button class="btn btn-whatsapp" id="btnQuieroCalificar" onclick="activarFormulario()">💰 QUIERO SABER SI CALIFICO</button>
                 </div>
 
                 <!-- SECCIÓN 2: FORMULARIO POR PASOS (oculto hasta simular) -->
@@ -123,8 +124,8 @@
                                     <option value="con">Con Informconf</option>
                                 </select>
                             </div>
-                            <div id="infoconfBloqueo" style="display:none; background:#ffebee; border:1px solid #c62828; border-radius:10px; padding:15px; text-align:center; color:#b71c1c; font-weight:700;">
-                                ❌ Agradecemos tu interés. Actualmente solo operamos con clientes sin Informconf. Si tu situación cambia, escribinos a tking.asesor@gmail.com
+                            <div id="infoconfBloqueo" style="display:none;" class="bloqueo-msg">
+                                Gracias por tu interés. Nuestra política actual solo permite operar con clientes sin Informconf, si tu situación cambia, no dudes en escribirnos a tking.asesor@gmail.com
                             </div>
                             <button type="button" class="btn btn-primary" id="btnPaso1Siguiente" onclick="siguientePaso(2)">SIGUIENTE</button>
                         </div>
@@ -244,6 +245,9 @@
             document.getElementById('formularioContainer').style.display = 'block';
             document.getElementById('formularioContainer').scrollIntoView({behavior:'smooth'});
             irPaso(1);
+            // Ocultar para siempre el botón "Quiero Calificar"
+            document.getElementById('btnQuieroCalificar').style.display = 'none';
+            document.getElementById('btnQuieroCalificar').disabled = true;
         }
 
         function irPaso(n) {
@@ -277,14 +281,12 @@
         function validarPaso2() {
             const perfil = document.getElementById('perfil').value;
             if (!perfil) { alert("Seleccioná tu perfil laboral."); return false; }
-            // Verificar que las ubicaciones estén completas
             const ubicaciones = document.querySelectorAll('.ubicacion-input');
             for (let i = 0; i < ubicaciones.length; i++) {
                 if (!ubicaciones[i].value.trim()) {
                     alert("Completá todas las direcciones."); return false;
                 }
             }
-            // No es obligatorio marcar ningún checkbox del checklist, pero sí completar ubicaciones
             return true;
         }
 
@@ -385,10 +387,11 @@
                 await fetch(URL_GOOGLE_SHEETS, { method: "POST", mode: "no-cors", headers: { "Content-Type": "application/json" }, body: JSON.stringify(datosSheet) });
                 setTimeout(() => {
                     window.open("https://wa.me/"+NUMERO_WHATSAPP+"?text="+encodeURIComponent(mensajeWa),"_blank");
-                    btnEnviar.textContent = 'ENVIAR SOLICITUD POR WHATSAPP';
-                    btnEnviar.disabled = false;
                     document.getElementById('confirmToast').style.display = 'block';
-                    setTimeout(() => document.getElementById('confirmToast').style.display = 'none', 3000);
+                    setTimeout(() => {
+                        document.getElementById('confirmToast').style.display = 'none';
+                        window.location.reload();
+                    }, 3000);
                 }, 2000);
             }, 2000);
         });
