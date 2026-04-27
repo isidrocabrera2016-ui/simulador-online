@@ -352,15 +352,14 @@
             const checks = document.querySelectorAll('#checklistItems input[type="checkbox"]');
             let tiene = [], falta = [];
             checks.forEach(ch => { if (ch.checked) tiene.push(ch.value); else falta.push(ch.value); });
-            const ubicaciones = Array.from(document.querySelectorAll('.ubicacion-input')).map(inp => inp.value.trim()).filter(v => v);
+            const ubicaciones = Array.from(document.querySelectorAll('.ubicacion-input')).map(inp => inp.value.trim());
 
-            let checklistMsg = (tiene.length > 0 ? 'TIENE:\n' + tiene.map(i => '  * ' + i).join('\n') : '') + (falta.length > 0 ? '\nFALTA:\n' + falta.map(i => '  * ' + i).join('\n') : '');
-            let ubicacionesMsg = ubicaciones.length > 0 ? 'DIRECCIONES:\n' + ubicaciones.map((u, i) => '  * ' + (PERFILES[perfil].ubicaciones[i] || 'Ubicación') + ': ' + u).join('\n') : '';
-
+            const checklistMsg = (tiene.length > 0 ? 'TIENE:\n' + tiene.map(i => '  * ' + i).join('\n') : '') + (falta.length > 0 ? '\nFALTA:\n' + falta.map(i => '  * ' + i).join('\n') : '');
+            const ubicacionesMsg = ubicaciones.length > 0 ? 'DIRECCIONES:\n' + ubicaciones.map((u, i) => '  * ' + u).join('\n') : '';
             const cuotaMsg = `Cuota de interés: ${cuotaSeleccionada.plazo} cuotas de Gs. ${formatearNumero(cuotaSeleccionada.cuota)}`;
             const prefijo = (monto >= 10000000) ? '🚨 URGENTE - V.I.P. 🚨\n' : '';
 
-            let mensajeWa = `${prefijo}Hola Isidro! Soy ${nombre}, completé tu Simulador TKING.\n\n` +
+            const mensajeWa = `${prefijo}Hola Isidro! Soy ${nombre}, completé tu Simulador TKING.\n\n` +
                 `CI: ${ci}\nEdad: ${edad} años\nWhatsApp: ${telefono}\nCiudad: ${ciudad}\n` +
                 `Perfil: ${perfilLabel}\nMonto solicitado: Gs. ${formatearNumero(monto)}\nIngreso: Gs. ${formatearNumero(ingreso)}\n${cuotaMsg}\n\n` +
                 `DOCUMENTACIÓN:\n${checklistMsg}\n${ubicacionesMsg}\nREFERENCIAS:\nRef1 (Familiar): ${ref1}\nRef2: ${ref2}\nRef3: ${ref3}\nOBSERVACIONES:\n${observaciones}\n\n📎 Tengo los docs listos. ¿Qué sigue?`;
@@ -382,8 +381,8 @@
                     window.open("https://wa.me/"+NUMERO_WHATSAPP+"?text="+encodeURIComponent(mensajeWa),"_blank");
                     document.getElementById('confirmToast').style.display = 'block';
                     setTimeout(() => { document.getElementById('confirmToast').style.display = 'none'; window.location.reload(); }, 3000);
-                }, 2000);
-            }, 2000);
+                }, 500);
+            }, 500);
         });
 
         configurarInputNumerico('ciCliente'); configurarInputNumerico('ingresoMensual');
