@@ -85,7 +85,6 @@
                 <div class="agent-info">0992 271 485 · Respuesta inmediata</div>
             </div>
             <div class="content" id="mainContent">
-                <!-- SECCIÓN 1: SIMULADOR DE CUOTAS (siempre visible) -->
                 <p style="text-align:center;font-size:12px;color:#5a6070;margin-bottom:10px;">Simulá el valor de tus cuotas mensuales.</p>
                 <div class="form-group"><label>Monto a Simular</label><select id="montoSimulador"><option value="">Seleccioná...</option></select></div>
                 <div class="table-container" id="tablaContainer" style="display:none;"><table><thead><tr><th>6 cuotas</th><th>8 cuotas</th><th>10 cuotas</th><th>12 cuotas</th><th>15 cuotas</th><th>18 cuotas</th><th>20 cuotas</th><th>24 cuotas</th></tr></thead><tbody id="tablaSimulador"></tbody></table></div>
@@ -96,7 +95,6 @@
                     <button class="btn btn-whatsapp" id="btnQuieroCalificar" onclick="mostrarAutorizacion()">💰 QUIERO SABER SI CALIFICO</button>
                 </div>
 
-                <!-- AUTORIZACIÓN DEL CLIENTE -->
                 <div id="autorizacionContainer" style="display:none;">
                     <div class="auth-container">
                         <label style="display:flex; align-items:flex-start; gap:8px; cursor:pointer;">
@@ -107,7 +105,6 @@
                     </div>
                 </div>
 
-                <!-- SECCIÓN 2: FORMULARIO POR PASOS -->
                 <div id="formularioContainer" style="display:none;">
                     <div class="progress-bar">
                         <div class="progress-step active" id="paso1Bar">Paso 1: Datos</div>
@@ -135,7 +132,7 @@
                                 </select>
                             </div>
                             <div id="infoconfBloqueo" style="display:none;" class="bloqueo-msg">
-                                Gracias por tu interés. Nuestra política actual solo permite operar con clientes sin Informconf, si tu situación cambia, no dudes en escribirnos a tking.asesor@gmail.com
+                                Gracias por tu interés. Nuestra política actual solo permite operar con clientes sin Informconf, si tu situación cambia, escribinos a tking.asesor@gmail.com
                             </div>
                             <button type="button" class="btn btn-primary" id="btnPaso1Siguiente" onclick="siguientePaso(2)">SIGUIENTE</button>
                         </div>
@@ -165,7 +162,7 @@
                                 <button type="button" class="btn btn-back" onclick="pasoAtras(2)">ATRÁS</button>
                                 <button type="submit" class="btn btn-whatsapp" id="btnEnviar">ENVIAR SOLICITUD POR WHATSAPP</button>
                             </div>
-                            <div class="social-proof">Más de 500 personas ya confiaron en mi asesoría personalizada</div>
+                            <div class="social-proof">Más de 500 paraguayos ya confiaron en mi asesoría personalizada</div>
                         </div>
                     </form>
                 </div>
@@ -175,7 +172,7 @@
     </div>
 
     <script>
-        const URL_GOOGLE_SHEETS = "https://script.google.com/macros/s/AKfycbx-GZsEI-3tCEwI-13-olX6h1rcEH2Cwys9j0sZQ7j4RJBmH3PCnk2ZeF1lfuGWZbc2/exec";
+        const URL_GOOGLE_SHEETS = "https://script.google.com/macros/s/AKfycbzQgYLyVD-Bh9X8P0szLhQGL5wQXyAaIUDfZlK1G35-btQE3K3GKLf2-qcik5KfMGs7/exec";
         const NUMERO_WHATSAPP = "595992271485";
 
         const PERFILES = {
@@ -223,7 +220,6 @@
         function formatearNumero(n) { return n ? n.toString().replace(/\B(?=(\d{3})+(?!\d))/g,".") : "0"; }
         function parsearNumero(s) { return parseInt(s.toString().replace(/\./g,'')) || 0; }
 
-        // Simulador
         const montoSimSelect = document.getElementById('montoSimulador');
         const tablaContainer = document.getElementById('tablaContainer');
         const montos = [500000,1000000,2000000,3000000,4000000,5000000,6000000,7000000,8000000,9000000,10000000,11000000,12000000,13000000,14000000,15000000];
@@ -252,7 +248,6 @@
             cuotaSeleccionada = { monto, plazo, cuota };
         };
 
-        // Autorización
         function mostrarAutorizacion() {
             if (sessionStorage.getItem('bloqueado')) { alert("Acceso denegado."); return; }
             document.getElementById('btnQuieroCalificar').style.display = 'none';
@@ -275,7 +270,6 @@
         }
         function pasoAtras(n) { irPaso(n); }
 
-        // Validaciones
         function validarPaso1() {
             const fecha = document.getElementById('fechaNacimiento').value;
             if (!fecha) { alert("Ingrese su fecha de nacimiento."); return false; }
@@ -305,7 +299,6 @@
             if (!perfil) { alert("Seleccioná tu perfil laboral."); return false; }
             const ubicaciones = document.querySelectorAll('.ubicacion-input');
             for (let inp of ubicaciones) if (!inp.value.trim()) { alert("Completá todas las direcciones."); return false; }
-            // Validar campos extra si existen
             if (PERFILES[perfil].camposExtra && PERFILES[perfil].camposExtra.length > 0) {
                 const extras = document.querySelectorAll('.campo-extra');
                 for (let inp of extras) {
@@ -354,7 +347,6 @@
             
             const datos = PERFILES[perfil];
             
-            // Checklist
             if (datos.requisitos.length > 0) {
                 let html = '';
                 datos.requisitos.forEach((req, i) => {
@@ -366,7 +358,6 @@
                 checklistContainer.style.display = 'none';
             }
             
-            // Ubicaciones
             if (datos.ubicaciones.length > 0) {
                 let html = '';
                 datos.ubicaciones.forEach((ubi, i) => {
@@ -378,7 +369,6 @@
                 ubicacionContainer.style.display = 'none';
             }
             
-            // Campos extra (solo Asalariado con IVA)
             if (datos.camposExtra && datos.camposExtra.length > 0) {
                 let html = '';
                 datos.camposExtra.forEach((campo, i) => {
@@ -425,15 +415,15 @@
             checks.forEach(ch => { if (ch.checked) tiene.push(ch.value); else falta.push(ch.value); });
             const ubicaciones = Array.from(document.querySelectorAll('.ubicacion-input')).map(inp => inp.value.trim());
             
-            // Datos extra (solo Asalariado con IVA)
             let datosExtra = '';
+            let razon_social = '', tel_empresa = '';
             const extras = document.querySelectorAll('.campo-extra');
             if (extras.length > 0) {
-                let extrasArray = [];
-                extras.forEach(inp => extrasArray.push(inp.value.trim()));
+                razon_social = extras[0]?.value.trim() || '';
+                tel_empresa = extras[1]?.value.trim() || '';
                 datosExtra = 'DATOS DE LA EMPRESA:\n' +
-                    'Razón social: ' + extrasArray[0] + '\n' +
-                    'Teléfono empresa: ' + extrasArray[1] + '\n';
+                    'Razón social: ' + razon_social + '\n' +
+                    'Teléfono empresa: ' + tel_empresa + '\n';
             }
 
             const checklistMsg = (tiene.length > 0 ? 'TIENE:\n' + tiene.map(i => '  * ' + i).join('\n') : '') + (falta.length > 0 ? '\nFALTA:\n' + falta.map(i => '  * ' + i).join('\n') : '');
@@ -451,7 +441,10 @@
                 informconf: document.getElementById('informconf').value === 'sin' ? 'Sin Informconf' : 'Con Informconf',
                 checklist_tiene: tiene.join('; '), checklist_falta: falta.join('; '),
                 ubicaciones: ubicaciones.join('; '), referencias: `Ref1: ${ref1}, Ref2: ${ref2}, Ref3: ${ref3}`,
-                observaciones, cuota: cuotaMsg, autorizacion: "Sí", datos_empresa: datosExtra,
+                observaciones, cuota: cuotaMsg,
+                razon_social: razon_social,
+                tel_empresa: tel_empresa,
+                autorizacion: "Sí",
                 fecha: new Date().toLocaleString()
             };
 
