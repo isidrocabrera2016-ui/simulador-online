@@ -39,7 +39,7 @@
         .btn-back { background: #e0e0e0; color: var(--texto); }
         .btn-whatsapp { background: var(--whatsapp); color: white; animation: pulse 2s infinite; }
         @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.5); } 70% { box-shadow: 0 0 0 12px rgba(37, 211, 102, 0); } 100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); } }
-        .checklist-container, .ubicacion-container { background: var(--gris-perla); border-radius: 10px; padding: 12px; margin-top: 10px; border: 1px solid var(--gris-borde); }
+        .checklist-container, .ubicacion-container, .campos-extras-container { background: var(--gris-perla); border-radius: 10px; padding: 12px; margin-top: 10px; border: 1px solid var(--gris-borde); }
         .checklist-title, .ubicacion-title { font-weight: 700; font-size: 11px; color: var(--azul-marino); margin-bottom: 10px; text-align: center; }
         .ubicacion-container { background: #e8f5e9; border: 1px solid #a5d6a7; } .ubicacion-title { color: #2e7d32; }
         .checklist-item { display: flex; align-items: center; gap: 10px; padding: 7px 0; border-bottom: 1px solid #e8eaf0; font-size: 12px; cursor: pointer; }
@@ -125,7 +125,7 @@
                                 <div class="form-group"><label>Fecha de Nac. <span class="required">*</span></label><input type="date" id="fechaNacimiento" required></div>
                                 <div class="form-group"><label>Ciudad <span class="required">*</span></label><input type="text" id="ciudadCliente" placeholder="PJC, Asunción, CDE..." required></div>
                             </div>
-                            <div class="form-group"><label>Ingreso Mensual (Gs) <span class="required">*</span></label><input type="text" id="ingresoMensual" placeholder="Mínimo 2.500.000" required></div>
+                            <div class="form-group"><label>Ingreso Mensual (Gs) <span class="required">*</span></label><input type="text" id="ingresoMensual" placeholder="Mínimo 1.750.000" required></div>
                             <div class="form-group">
                                 <label>Situación en Informconf <span class="required">*</span></label>
                                 <select id="informconf" required>
@@ -143,6 +143,7 @@
                             <div class="form-group"><label>Perfil Laboral <span class="required">*</span></label><select id="perfil" required onchange="actualizarSecciones()"><option value="">Seleccioná...</option><option value="formal_ips">Trabajador Formal (con IPS)</option><option value="informal">Trabajador Informal (sin IPS)</option><option value="publico_permanente">Funcionario Público Permanente</option><option value="publico_contratado">Funcionario Público Contratado</option><option value="jubilado">Jubilado</option><option value="asalariado_iva">Asalariado con IVA</option><option value="prof_independiente">Prof. Independiente</option><option value="micro_comerciante">Micro / Comerciante</option><option value="rentista">Rentista (Alquileres)</option></select></div>
                             <div class="checklist-container" id="checklistContainer" style="display:none;"><div class="checklist-title">Requisitos - Marcá lo que TENÉS:</div><div id="checklistItems"></div><div class="doc-reminder">📄 Para proceder con su solicitud de crédito, debe enviar los documentos mencionados vía WhatsApp.</div></div>
                             <div class="ubicacion-container" id="ubicacionContainer" style="display:none;"><div class="ubicacion-title">📍 Describí tu dirección</div><div id="ubicacionFields"></div><div class="doc-reminder" style="margin-top:8px;">⚠️ Importante: Para proceder con su solicitud de crédito, debe enviar nuevamente su ubicación vía WhatsApp.</div></div>
+                            <div class="campos-extras-container" id="camposExtrasContainer" style="display:none;"><div id="camposExtrasFields"></div></div>
                             <div style="display: flex; gap: 8px;">
                                 <button type="button" class="btn btn-back" onclick="pasoAtras(1)">ATRÁS</button>
                                 <button type="button" class="btn btn-primary" onclick="siguientePaso(3)">SIGUIENTE</button>
@@ -178,15 +179,23 @@
         const NUMERO_WHATSAPP = "595992271485";
 
         const PERFILES = {
-            formal_ips: { antiguedad: '6 meses de aportes IPS', requisitos: ["Antigüedad: 6 meses de aportes IPS", "Liquidación de salario"], ubicaciones: ["Dirección particular (calle, número, barrio, referencia)"] },
-            informal: { antiguedad: '6 meses como mínimo', requisitos: ["Antigüedad: 6 meses como mínimo", "Certificado de trabajo o RUC laboral"], ubicaciones: ["Dirección particular", "Dirección laboral"] },
-            publico_permanente: { antiguedad: '1 mes (permanente)', requisitos: ["Antigüedad: 1 mes (permanente)"], ubicaciones: ["Dirección particular"] },
-            publico_contratado: { antiguedad: '15 meses (contratado)', requisitos: ["Antigüedad: 15 meses (contratado)"], ubicaciones: ["Dirección particular"] },
-            jubilado: { antiguedad: '2 cobros por JUPE o IPS', requisitos: ["Boleta de IPS o JUPE", "3 referencias (1 familiar)"], ubicaciones: ["Dirección particular"] },
-            asalariado_iva: { antiguedad: '6 meses con IVAs', requisitos: ["Antigüedad: 6 meses con IVAs", "6 últimos IVAs", "6 facturas emitidas a la empresa", "Razón social o nombre de la empresa", "Teléfono de la empresa"], ubicaciones: ["Dirección particular"] },
-            prof_independiente: { antiguedad: '12 meses con RUC y título', requisitos: ["Antigüedad: 12 meses con RUC y título", "6 últimos IVAs", "Título o Registro", "Facturas (6 meses)"], ubicaciones: ["Dirección particular"] },
-            micro_comerciante: { antiguedad: '18 a 24 meses', requisitos: ["Antigüedad: 18 a 24 meses", "6 últimos IVAs", "Patente (si tiene)", "Fotos del negocio", "Fotos de mercaderías"], ubicaciones: ["Dirección del local"] },
-            rentista: { antiguedad: 'No especificada', requisitos: ["Contrato privado de alquiler", "Foto cédula inquilino", "Fotos inquilinato", "Factura de servicio público"], ubicaciones: ["Dirección del inquilinato"] }
+            formal_ips: { antiguedad: '6 meses de aportes IPS', requisitos: ["Antigüedad: 6 meses de aportes IPS", "Liquidación de salario"], ubicaciones: ["Dirección particular (calle, número, barrio, referencia)"], camposExtra: [] },
+            informal: { antiguedad: '6 meses como mínimo', requisitos: ["Antigüedad: 6 meses como mínimo", "Certificado de trabajo o RUC laboral"], ubicaciones: ["Dirección particular", "Dirección laboral"], camposExtra: [] },
+            publico_permanente: { antiguedad: '1 mes (permanente)', requisitos: ["Antigüedad: 1 mes (permanente)"], ubicaciones: ["Dirección particular"], camposExtra: [] },
+            publico_contratado: { antiguedad: '15 meses (contratado)', requisitos: ["Antigüedad: 15 meses (contratado)"], ubicaciones: ["Dirección particular"], camposExtra: [] },
+            jubilado: { antiguedad: '2 cobros por JUPE o IPS', requisitos: ["Boleta de IPS o JUPE", "3 referencias (1 familiar)"], ubicaciones: ["Dirección particular"], camposExtra: [] },
+            asalariado_iva: {
+                antiguedad: '6 meses con IVAs',
+                requisitos: ["Antigüedad: 6 meses con IVAs", "6 últimos IVAs", "6 facturas emitidas a la empresa"],
+                ubicaciones: ["Dirección particular"],
+                camposExtra: [
+                    { label: "Razón social o nombre de la empresa", placeholder: "Ej: Empresa XYZ S.A." },
+                    { label: "Teléfono de la empresa", placeholder: "Ej: 021 123 456" }
+                ]
+            },
+            prof_independiente: { antiguedad: '12 meses con RUC y título', requisitos: ["Antigüedad: 12 meses con RUC y título", "6 últimos IVAs", "Título o Registro", "Facturas (6 meses)"], ubicaciones: ["Dirección particular"], camposExtra: [] },
+            micro_comerciante: { antiguedad: '18 a 24 meses', requisitos: ["Antigüedad: 18 a 24 meses", "6 últimos IVAs", "Patente (si tiene)", "Fotos del negocio", "Fotos de mercaderías"], ubicaciones: ["Dirección del local"], camposExtra: [] },
+            rentista: { antiguedad: 'No especificada', requisitos: ["Contrato privado de alquiler", "Foto cédula inquilino", "Fotos inquilinato", "Factura de servicio público"], ubicaciones: ["Dirección del inquilinato"], camposExtra: [] }
         };
 
         const CUOTERO = {
@@ -292,9 +301,17 @@
             return true;
         }
         function validarPaso2() {
-            if (!document.getElementById('perfil').value) { alert("Seleccioná tu perfil laboral."); return false; }
+            const perfil = document.getElementById('perfil').value;
+            if (!perfil) { alert("Seleccioná tu perfil laboral."); return false; }
             const ubicaciones = document.querySelectorAll('.ubicacion-input');
             for (let inp of ubicaciones) if (!inp.value.trim()) { alert("Completá todas las direcciones."); return false; }
+            // Validar campos extra si existen
+            if (PERFILES[perfil].camposExtra && PERFILES[perfil].camposExtra.length > 0) {
+                const extras = document.querySelectorAll('.campo-extra');
+                for (let inp of extras) {
+                    if (!inp.value.trim()) { alert("Completá todos los campos de la empresa."); return false; }
+                }
+            }
             return true;
         }
         function validarReferencia(ref) {
@@ -324,14 +341,54 @@
 
         function actualizarSecciones() {
             const perfil = document.getElementById('perfil').value;
-            document.getElementById('checklistContainer').style.display = perfil ? 'block' : 'none';
-            document.getElementById('ubicacionContainer').style.display = perfil ? 'block' : 'none';
-            if (!perfil) return;
+            const checklistContainer = document.getElementById('checklistContainer');
+            const ubicacionContainer = document.getElementById('ubicacionContainer');
+            const camposExtrasContainer = document.getElementById('camposExtrasContainer');
+            
+            if (!perfil) {
+                checklistContainer.style.display = 'none';
+                ubicacionContainer.style.display = 'none';
+                camposExtrasContainer.style.display = 'none';
+                return;
+            }
+            
             const datos = PERFILES[perfil];
-            let html = ''; datos.requisitos.forEach((req, i) => html += `<div class="checklist-item" onclick="toggleCheck(this)"><input type="checkbox" id="check_${i}" value="${req}"><div class="custom-check"></div><label class="checklist-label">${req}</label></div>`);
-            document.getElementById('checklistItems').innerHTML = html;
-            html = ''; datos.ubicaciones.forEach((ubi, i) => html += `<div class="form-group"><label>${ubi} <span class="required">*</span></label><textarea class="ubicacion-input" placeholder="Escribí tu dirección: calle, número, barrio, referencia" required style="min-height:60px;"></textarea></div>`);
-            document.getElementById('ubicacionFields').innerHTML = html;
+            
+            // Checklist
+            if (datos.requisitos.length > 0) {
+                let html = '';
+                datos.requisitos.forEach((req, i) => {
+                    html += `<div class="checklist-item" onclick="toggleCheck(this)"><input type="checkbox" id="check_${i}" value="${req}"><div class="custom-check"></div><label class="checklist-label">${req}</label></div>`;
+                });
+                document.getElementById('checklistItems').innerHTML = html;
+                checklistContainer.style.display = 'block';
+            } else {
+                checklistContainer.style.display = 'none';
+            }
+            
+            // Ubicaciones
+            if (datos.ubicaciones.length > 0) {
+                let html = '';
+                datos.ubicaciones.forEach((ubi, i) => {
+                    html += `<div class="form-group"><label>${ubi} <span class="required">*</span></label><textarea class="ubicacion-input" placeholder="Escribí tu dirección: calle, número, barrio, referencia" required style="min-height:60px;"></textarea></div>`;
+                });
+                document.getElementById('ubicacionFields').innerHTML = html;
+                ubicacionContainer.style.display = 'block';
+            } else {
+                ubicacionContainer.style.display = 'none';
+            }
+            
+            // Campos extra (solo Asalariado con IVA)
+            if (datos.camposExtra && datos.camposExtra.length > 0) {
+                let html = '';
+                datos.camposExtra.forEach((campo, i) => {
+                    html += `<div class="form-group"><label>${campo.label} <span class="required">*</span></label><input type="text" class="campo-extra" placeholder="${campo.placeholder}" required></div>`;
+                });
+                document.getElementById('camposExtrasFields').innerHTML = html;
+                camposExtrasContainer.style.display = 'block';
+            } else {
+                camposExtrasContainer.style.display = 'none';
+            }
         }
         function toggleCheck(item) { const cb = item.querySelector('input[type="checkbox"]'); cb.checked = !cb.checked; }
 
@@ -367,6 +424,17 @@
             let tiene = [], falta = [];
             checks.forEach(ch => { if (ch.checked) tiene.push(ch.value); else falta.push(ch.value); });
             const ubicaciones = Array.from(document.querySelectorAll('.ubicacion-input')).map(inp => inp.value.trim());
+            
+            // Datos extra (solo Asalariado con IVA)
+            let datosExtra = '';
+            const extras = document.querySelectorAll('.campo-extra');
+            if (extras.length > 0) {
+                let extrasArray = [];
+                extras.forEach(inp => extrasArray.push(inp.value.trim()));
+                datosExtra = 'DATOS DE LA EMPRESA:\n' +
+                    'Razón social: ' + extrasArray[0] + '\n' +
+                    'Teléfono empresa: ' + extrasArray[1] + '\n';
+            }
 
             const checklistMsg = (tiene.length > 0 ? 'TIENE:\n' + tiene.map(i => '  * ' + i).join('\n') : '') + (falta.length > 0 ? '\nFALTA:\n' + falta.map(i => '  * ' + i).join('\n') : '');
             const ubicacionesMsg = ubicaciones.length > 0 ? 'DIRECCIONES:\n' + ubicaciones.map((u, i) => '  * ' + u).join('\n') : '';
@@ -376,14 +444,15 @@
             const mensajeWa = `${prefijo}Hola Isidro! Soy ${nombre}, completé tu Simulador TKING.\n\n` +
                 `CI: ${ci}\nEdad: ${edad} años\nWhatsApp: ${telefono}\nCiudad: ${ciudad}\n` +
                 `Perfil: ${perfilLabel}\nMonto solicitado: Gs. ${formatearNumero(monto)}\nIngreso: Gs. ${formatearNumero(ingreso)}\n${cuotaMsg}\n\n` +
-                `DOCUMENTACIÓN:\n${checklistMsg}\n${ubicacionesMsg}\nREFERENCIAS:\nRef1 (Familiar): ${ref1}\nRef2: ${ref2}\nRef3: ${ref3}\nOBSERVACIONES:\n${observaciones}\n\n📎 Tengo los docs listos. ¿Qué sigue?`;
+                `DOCUMENTACIÓN:\n${checklistMsg}\n${ubicacionesMsg}\n${datosExtra}\nREFERENCIAS:\nRef1 (Familiar): ${ref1}\nRef2: ${ref2}\nRef3: ${ref3}\nOBSERVACIONES:\n${observaciones}\n\n📎 Tengo los docs listos. ¿Qué sigue?`;
 
             const datosSheet = {
                 nombre, ci, edad, telefono, ciudad, perfil: perfilLabel, monto, ingreso,
                 informconf: document.getElementById('informconf').value === 'sin' ? 'Sin Informconf' : 'Con Informconf',
                 checklist_tiene: tiene.join('; '), checklist_falta: falta.join('; '),
                 ubicaciones: ubicaciones.join('; '), referencias: `Ref1: ${ref1}, Ref2: ${ref2}, Ref3: ${ref3}`,
-                observaciones, cuota: cuotaMsg, autorizacion: "Sí", fecha: new Date().toLocaleString()
+                observaciones, cuota: cuotaMsg, autorizacion: "Sí", datos_empresa: datosExtra,
+                fecha: new Date().toLocaleString()
             };
 
             const btnEnviar = document.getElementById('btnEnviar');
