@@ -123,9 +123,9 @@
                             </div>
                             <div class="row-2">
                                 <div class="form-group"><label>Fecha de Nac. <span class="required">*</span></label><input type="date" id="fechaNacimiento" required></div>
-                                <div class="form-group"><label>Ciudad <span class="required">*</span></label><input type="text" id="ciudadCliente" placeholder="PJC, Asunción, CDE..." required></div>
+                                <div class="form-group"><label>Ciudad <span class="required">*</span></label><input type="text" id="ciudadCliente" placeholder="Asunción, CDE..." required></div>
                             </div>
-                            <div class="form-group"><label>Ingreso Mensual (Gs) <span class="required">*</span></label><input type="text" id="ingresoMensual" placeholder="2.500.000" required></div>
+                            <div class="form-group"><label>Ingreso Mensual (Gs) <span class="required">*</span></label><input type="text" id="ingresoMensual" placeholder="Mínimo 2.500.000" required></div>
                             <div class="form-group">
                                 <label>Situación en Informconf <span class="required">*</span></label>
                                 <select id="informconf" required>
@@ -174,7 +174,7 @@
     </div>
 
     <script>
-        const URL_GOOGLE_SHEETS = "https://script.google.com/macros/s/AKfycbzkAaHjRmX-cTyMFC3TfR7o50FXx0Rq9LmboG6nDrwypEodo8v1XCt88HBq_eswvaw/exec";
+        const URL_GOOGLE_SHEETS = "https://script.google.com/macros/s/AKfycbwIeKDNSNVEX5PL8yxliqEOrOhdzlNQvx2KgI86cmgkq87Adg-mZbae4xK20U5SfVg/exec";
         const NUMERO_WHATSAPP = "595992271485";
 
         const PERFILES = {
@@ -183,7 +183,7 @@
             publico_permanente: { antiguedad: '1 mes (permanente)', requisitos: ["Antigüedad: 1 mes (permanente)"], ubicaciones: ["Dirección particular"] },
             publico_contratado: { antiguedad: '15 meses (contratado)', requisitos: ["Antigüedad: 15 meses (contratado)"], ubicaciones: ["Dirección particular"] },
             jubilado: { antiguedad: '2 cobros por JUPE o IPS', requisitos: ["Boleta de IPS o JUPE", "3 referencias (1 familiar)"], ubicaciones: ["Dirección particular"] },
-            asalariado_iva: { antiguedad: '6 meses con IVAs', requisitos: ["Antigüedad: 6 meses con IVAs", "6 últimos IVAs", "6 facturas emitidas"], ubicaciones: ["Dirección particular"] },
+            asalariado_iva: { antiguedad: '6 meses con IVAs', requisitos: ["Antigüedad: 6 meses con IVAs", "6 últimos IVAs", "6 facturas emitidas a la empresa", "Razón social o nombre de la empresa", "Teléfono de la empresa"], ubicaciones: ["Dirección particular"] },
             prof_independiente: { antiguedad: '12 meses con RUC y título', requisitos: ["Antigüedad: 12 meses con RUC y título", "6 últimos IVAs", "Título o Registro", "Facturas (6 meses)"], ubicaciones: ["Dirección particular"] },
             micro_comerciante: { antiguedad: '18 a 24 meses', requisitos: ["Antigüedad: 18 a 24 meses", "6 últimos IVAs", "Patente (si tiene)", "Fotos del negocio", "Fotos de mercaderías"], ubicaciones: ["Dirección del local"] },
             rentista: { antiguedad: 'No especificada', requisitos: ["Contrato privado de alquiler", "Foto cédula inquilino", "Fotos inquilinato", "Factura de servicio público"], ubicaciones: ["Dirección del inquilinato"] }
@@ -287,6 +287,8 @@
             if (!document.getElementById('nombreCliente').value.trim() || !document.getElementById('ciCliente').value.trim() || !document.getElementById('telefonoCliente').value.trim() || !document.getElementById('ciudadCliente').value.trim() || !document.getElementById('ingresoMensual').value.trim()) {
                 alert("Completá todos los datos del Paso 1."); return false;
             }
+            const ingreso = parsearNumero(document.getElementById('ingresoMensual').value);
+            if (ingreso < 1750000) { alert("El ingreso mínimo es Gs. 1.750.000."); return false; }
             return true;
         }
         function validarPaso2() {
@@ -295,10 +297,22 @@
             for (let inp of ubicaciones) if (!inp.value.trim()) { alert("Completá todas las direcciones."); return false; }
             return true;
         }
+        function validarReferencia(ref) {
+            if (!ref || ref.trim() === "") return false;
+            const partes = ref.split(' ');
+            return partes.length >= 3;
+        }
         function validarPaso3() {
-            if (!document.getElementById('ref1').value.trim() || !document.getElementById('ref2').value.trim() || !document.getElementById('ref3').value.trim() || !document.getElementById('observaciones').value.trim()) {
+            const ref1 = document.getElementById('ref1').value.trim();
+            const ref2 = document.getElementById('ref2').value.trim();
+            const ref3 = document.getElementById('ref3').value.trim();
+            const obs = document.getElementById('observaciones').value.trim();
+            if (!ref1 || !ref2 || !ref3 || !obs) {
                 alert("Completá todos los campos del Paso 3."); return false;
             }
+            if (!validarReferencia(ref1)) { alert("La Referencia 1 debe contener Nombre, Apellido y Celular."); return false; }
+            if (!validarReferencia(ref2)) { alert("La Referencia 2 debe contener Nombre, Apellido y Celular."); return false; }
+            if (!validarReferencia(ref3)) { alert("La Referencia 3 debe contener Nombre, Apellido y Celular."); return false; }
             return true;
         }
         function siguientePaso(n) {
