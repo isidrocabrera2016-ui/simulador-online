@@ -170,12 +170,24 @@
                         <div class="step-content" id="paso2">
                             <div class="form-group"><label>Perfil Laboral <span class="required">*</span></label><select id="perfil" required onchange="actualizarSecciones()"><option value="">Seleccioná...</option><option value="formal_ips">Trabajador Formal (con IPS)</option><option value="formal_iva">Trabajador Formal (con IVA)</option><option value="informal">Trabajador Informal (sin IPS)</option><option value="publico_permanente">Funcionario Público Permanente</option><option value="publico_contratado">Funcionario Público Contratado</option><option value="micro_iva">Microempresa con IVA</option><option value="micro_patente">Microempresa con Patente</option><option value="micro_sin_patente">Microempresa sin Patente</option><option value="prof_independiente">Profesional Independiente (graduados universitarios)</option></select></div>
                             <div class="checklist-container" id="checklistContainer" style="display:none;"><div class="checklist-title">Requisitos indispensables - Marcá los documentos que TENÉS:</div><div id="checklistItems"></div><div class="doc-reminder">📄 Para continuar con su evaluación, envíe los documentos solicitados por WhatsApp.</div></div>
-                            <div class="form-group"><label>Dirección (Calle) <span class="required">*</span></label><input type="text" id="direccionCalle" placeholder="Calle" required></div>
-                            <div class="row-2">
-                                <div class="form-group"><label>Número <span class="required">*</span></label><input type="text" id="direccionNumero" placeholder="Número" required></div>
-                                <div class="form-group"><label>Barrio <span class="required">*</span></label><input type="text" id="direccionBarrio" placeholder="Barrio" required></div>
+                            <div id="direccionParticularContainer" class="form-group" style="margin-top:15px;">
+                                <label style="color: rgba(255,255,255,0.6); margin-bottom:10px;">DIRECCIÓN PARTICULAR</label>
+                                <div class="form-group"><label>Calle <span class="required">*</span></label><input type="text" id="direccionCalle" placeholder="Calle" required></div>
+                                <div class="row-2">
+                                    <div class="form-group"><label>Número <span class="required">*</span></label><input type="text" id="direccionNumero" placeholder="Número" required></div>
+                                    <div class="form-group"><label>Barrio <span class="required">*</span></label><input type="text" id="direccionBarrio" placeholder="Barrio" required></div>
+                                </div>
+                                <div class="doc-reminder" style="margin-top:10px;">📍 Recuerde enviar su ubicación exacta por WhatsApp para completar la solicitud.</div>
                             </div>
-                            <div class="doc-reminder" style="margin-top:10px;">📍 Recuerde enviar su ubicación exacta por WhatsApp para completar la solicitud.</div>
+                            <div id="direccionEmpresaContainer" style="display:none; margin-top:15px; border-top: 1px solid rgba(255,255,255,0.1); padding-top:15px;">
+                                <label style="color: rgba(255,255,255,0.6); margin-bottom:10px;">DIRECCIÓN DE LA EMPRESA</label>
+                                <div class="form-group"><label>Calle <span class="required">*</span></label><input type="text" id="direccionEmpresaCalle" placeholder="Calle" required></div>
+                                <div class="row-2">
+                                    <div class="form-group"><label>Número <span class="required">*</span></label><input type="text" id="direccionEmpresaNumero" placeholder="Número" required></div>
+                                    <div class="form-group"><label>Barrio <span class="required">*</span></label><input type="text" id="direccionEmpresaBarrio" placeholder="Barrio" required></div>
+                                </div>
+                                <div class="doc-reminder" style="margin-top:10px;">📍 Recuerde enviar la ubicación exacta de la empresa por WhatsApp.</div>
+                            </div>
                             <div class="campos-extras-container" id="camposExtrasContainer" style="display:none; margin-top: 15px;"><div id="camposExtrasFields"></div></div>
                             <div style="display: flex; gap: 10px;">
                                 <button type="button" class="btn btn-back" onclick="pasoAtras(1)">ATRÁS</button>
@@ -207,12 +219,20 @@
     </div>
 
     <script>
-        const URL_GOOGLE_SHEETS = "https://script.google.com/macros/s/AKfycbxUK6E-1Puk3DLuvUAufrEgpSIdU5ED0VUSuNY5352RQqxLOI4rOx3k5X4RmDazrNzj/exec";
+        const URL_GOOGLE_SHEETS = "https://script.google.com/macros/s/AKfycbwVBXflsdZo6KYY3Px_QDO-YXnazrGIKfbOk0KiBFHCVVYfyjvMQNivGxBmcAwmsfSA/exec";
         const NUMERO_WHATSAPP = "595992271485";
 
         const PERFILES = {
             formal_ips: { antiguedad: '6 meses de aportes IPS', requisitos: ["Antigüedad: 6 meses de aportes IPS", "Liquidación de salario"], ubicaciones: [], camposExtra: [] },
-            formal_iva: { antiguedad: '6 meses con IVAs', requisitos: ["Antigüedad: 6 meses con IVAs", "6 últimos IVAs", "6 facturas emitidas a la empresa"], ubicaciones: [], camposExtra: [{ label: "Razón social o nombre de la empresa", placeholder: "Ej: Empresa XYZ S.A." }, { label: "Teléfono de la empresa", placeholder: "Ej: 021 123 456" }] },
+            formal_iva: {
+                antiguedad: '6 meses con IVAs',
+                requisitos: ["Antigüedad: 6 meses con IVAs", "6 últimos IVAs", "6 facturas emitidas a la empresa"],
+                ubicaciones: [],
+                camposExtra: [
+                    { label: "Razón social o nombre de la empresa", placeholder: "Ej: Empresa XYZ S.A." },
+                    { label: "Teléfono de la empresa", placeholder: "Ej: 021 123 456" }
+                ]
+            },
             informal: { antiguedad: '6 meses como mínimo', requisitos: ["Antigüedad: 6 meses como mínimo", "Certificado de trabajo o RUC laboral"], ubicaciones: [], camposExtra: [] },
             publico_permanente: { antiguedad: '1 mes (permanente)', requisitos: ["Antigüedad: 1 mes (permanente)"], ubicaciones: [], camposExtra: [] },
             publico_contratado: { antiguedad: '15 meses (contratado)', requisitos: ["Antigüedad: 15 meses (contratado)"], ubicaciones: [], camposExtra: [] },
@@ -347,7 +367,13 @@
             const calle = document.getElementById('direccionCalle').value.trim();
             const numero = document.getElementById('direccionNumero').value.trim();
             const barrio = document.getElementById('direccionBarrio').value.trim();
-            if (!calle || !numero || !barrio) { alert("Completá la dirección (Calle, Número y Barrio)."); return false; }
+            if (!calle || !numero || !barrio) { alert("Completá la dirección particular (Calle, Número y Barrio)."); return false; }
+            if (perfil === 'formal_iva') {
+                const empresaCalle = document.getElementById('direccionEmpresaCalle').value.trim();
+                const empresaNumero = document.getElementById('direccionEmpresaNumero').value.trim();
+                const empresaBarrio = document.getElementById('direccionEmpresaBarrio').value.trim();
+                if (!empresaCalle || !empresaNumero || !empresaBarrio) { alert("Completá la dirección de la empresa (Calle, Número y Barrio)."); return false; }
+            }
             if (PERFILES[perfil].camposExtra && PERFILES[perfil].camposExtra.length > 0) {
                 const extras = document.querySelectorAll('.campo-extra');
                 for (let inp of extras) { if (!inp.value.trim()) { alert("Completá todos los campos de la empresa."); return false; } }
@@ -388,6 +414,8 @@
             const perfil = document.getElementById('perfil').value;
             document.getElementById('checklistContainer').style.display = perfil ? 'block' : 'none';
             document.getElementById('camposExtrasContainer').style.display = perfil ? 'block' : 'none';
+            document.getElementById('direccionEmpresaContainer').style.display = perfil === 'formal_iva' ? 'block' : 'none';
+            
             if (!perfil) return;
             const datos = PERFILES[perfil];
             let html = ''; datos.requisitos.forEach((req, i) => html += `<div class="checklist-item" onclick="toggleCheck(this)"><input type="checkbox" id="check_${i}" value="${req}"><div class="custom-check"></div><label class="checklist-label">${req}</label></div>`); document.getElementById('checklistItems').innerHTML = html;
@@ -423,6 +451,12 @@
             const calle = document.getElementById('direccionCalle').value.trim();
             const numero = document.getElementById('direccionNumero').value.trim();
             const barrio = document.getElementById('direccionBarrio').value.trim();
+            let empresaCalle = '', empresaNumero = '', empresaBarrio = '';
+            if (perfil === 'formal_iva') {
+                empresaCalle = document.getElementById('direccionEmpresaCalle').value.trim();
+                empresaNumero = document.getElementById('direccionEmpresaNumero').value.trim();
+                empresaBarrio = document.getElementById('direccionEmpresaBarrio').value.trim();
+            }
             if (!cuotaSeleccionada) { alert("Seleccioná una cuota en el simulador."); return; }
 
             const enviosRestantes = 2 - getEnvioCount(ci);
@@ -446,7 +480,10 @@
             }
 
             const checklistMsg = (tiene.length > 0 ? 'TIENE:\n' + tiene.map(i => '  * ' + i).join('\n') : '') + (falta.length > 0 ? '\nFALTA:\n' + falta.map(i => '  * ' + i).join('\n') : '');
-            const direccionMsg = `Dirección: ${calle} ${numero}, Barrio ${barrio}`;
+            let direccionMsg = `Dirección particular: ${calle} ${numero}, Barrio ${barrio}`;
+            if (perfil === 'formal_iva') {
+                direccionMsg += `\nDirección de la empresa: ${empresaCalle} ${empresaNumero}, Barrio ${empresaBarrio}`;
+            }
             const cuotaMsg = `Cuota de interés: ${cuotaSeleccionada.plazo} cuotas de Gs. ${formatearNumero(cuotaSeleccionada.cuota)}`;
             
             const mensajeWa = `Hola Isidro! Soy ${nombre}, completé tu formulario de crédito.\n\n` +
