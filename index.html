@@ -64,11 +64,8 @@
             100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
         }
 
-        .checklist-container, .ubicacion-container, .campos-extras-container {
-            background: rgba(255,255,255,0.02); border-radius: 12px; padding: 15px; margin-top: 15px; border: 1px solid rgba(255,255,255,0.08);
-        }
-        .checklist-title, .ubicacion-title { font-weight: 700; font-size: 12px; color: var(--accent-gold); margin-bottom: 12px; text-align: center; }
-        .ubicacion-container { background: rgba(46, 204, 113, 0.03); border: 1px solid rgba(46, 204, 113, 0.2); }
+        .checklist-container { background: rgba(255,255,255,0.02); border-radius: 12px; padding: 15px; margin-top: 15px; border: 1px solid rgba(255,255,255,0.08); }
+        .checklist-title { font-weight: 700; font-size: 12px; color: var(--accent-gold); margin-bottom: 12px; text-align: center; }
         .checklist-item { display: flex; align-items: center; gap: 10px; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 12px; color: rgba(255,255,255,0.8); cursor: pointer; }
         .checklist-item:last-child { border-bottom: none; } .checklist-item input[type="checkbox"] { display: none; }
         .custom-check { width: 22px; height: 22px; border: 2px solid rgba(255,255,255,0.3); border-radius: 4px; display: flex; align-items: center; justify-content: center; background: transparent; }
@@ -171,10 +168,15 @@
                             <button type="button" class="btn btn-primary" id="btnPaso1Siguiente" onclick="siguientePaso(2)">SIGUIENTE</button>
                         </div>
                         <div class="step-content" id="paso2">
-                            <div class="form-group"><label>Perfil Laboral <span class="required">*</span></label><select id="perfil" required onchange="actualizarSecciones()"><option value="">Seleccioná...</option><option value="formal_ips">Trabajador Formal (con IPS)</option><option value="formal_iva">Trabajador Formal (con IVA)</option><option value="informal">Trabajador Informal (sin IPS)</option><option value="publico_permanente">Funcionario Público Permanente</option><option value="publico_contratado">Funcionario Público Contratado</option><option value="micro_iva">Microempresa con IVA</option><option value="micro_patente">Microempresa con Patente</option><option value="micro_sin_patente">Microempresa sin Patente</option><option value="prof_independiente">Profesional Independiente</option></select></div>
-                            <div class="checklist-container" id="checklistContainer" style="display:none;"><div class="checklist-title">Requisitos - Marcá lo que TENÉS:</div><div id="checklistItems"></div><div class="doc-reminder">📄 Para proceder con su solicitud de crédito, debe enviar los documentos mencionados vía WhatsApp.</div></div>
-                            <div class="ubicacion-container" id="ubicacionContainer" style="display:none;"><div class="ubicacion-title">📍 Describí tu dirección</div><div id="ubicacionFields"></div><div class="doc-reminder" style="margin-top:10px;">⚠️ Para proceder con su solicitud, debe enviar su ubicación vía WhatsApp.</div></div>
-                            <div class="campos-extras-container" id="camposExtrasContainer" style="display:none;"><div id="camposExtrasFields"></div></div>
+                            <div class="form-group"><label>Perfil Laboral <span class="required">*</span></label><select id="perfil" required onchange="actualizarSecciones()"><option value="">Seleccioná...</option><option value="formal_ips">Trabajador Formal (con IPS)</option><option value="formal_iva">Trabajador Formal (con IVA)</option><option value="informal">Trabajador Informal (sin IPS)</option><option value="publico_permanente">Funcionario Público Permanente</option><option value="publico_contratado">Funcionario Público Contratado</option><option value="micro_iva">Microempresa con IVA</option><option value="micro_patente">Microempresa con Patente</option><option value="micro_sin_patente">Microempresa sin Patente</option><option value="prof_independiente">Profesional Independiente (graduados universitarios)</option></select></div>
+                            <div class="checklist-container" id="checklistContainer" style="display:none;"><div class="checklist-title">Requisitos indispensables - Marcá los documentos que TENÉS:</div><div id="checklistItems"></div><div class="doc-reminder">📄 Para continuar con su evaluación, envíe los documentos solicitados por WhatsApp.</div></div>
+                            <div class="form-group"><label>Dirección (Calle) <span class="required">*</span></label><input type="text" id="direccionCalle" placeholder="Calle" required></div>
+                            <div class="row-2">
+                                <div class="form-group"><label>Número <span class="required">*</span></label><input type="text" id="direccionNumero" placeholder="Número" required></div>
+                                <div class="form-group"><label>Barrio <span class="required">*</span></label><input type="text" id="direccionBarrio" placeholder="Barrio" required></div>
+                            </div>
+                            <div class="doc-reminder" style="margin-top:10px;">📍 Recuerde enviar su ubicación exacta por WhatsApp para completar la solicitud.</div>
+                            <div class="campos-extras-container" id="camposExtrasContainer" style="display:none; margin-top: 15px;"><div id="camposExtrasFields"></div></div>
                             <div style="display: flex; gap: 10px;">
                                 <button type="button" class="btn btn-back" onclick="pasoAtras(1)">ATRÁS</button>
                                 <button type="button" class="btn btn-primary" onclick="siguientePaso(3)">SIGUIENTE</button>
@@ -184,13 +186,13 @@
                             <div class="form-group"><label>Ref. 1 (Familiar) <span class="required">*</span></label><input type="text" id="ref1" placeholder="Nombre, Apellido y Celular" required></div>
                             <div class="form-group"><label>Ref. 2 (Personal) <span class="required">*</span></label><input type="text" id="ref2" placeholder="Nombre, Apellido y Celular" required></div>
                             <div class="form-group"><label>Ref. 3 (Personal) <span class="required">*</span></label><input type="text" id="ref3" placeholder="Nombre, Apellido y Celular" required></div>
-                            <div class="form-group"><label>Observaciones <span class="required">*</span></label><textarea id="observaciones" placeholder="Si te falta algo o querés aclarar algún detalle..." required></textarea></div>
+                            <div class="form-group"><label>Observaciones generales <span class="required">*</span></label><textarea id="observaciones" placeholder="Aclare cualquier detalle relevante o documento faltante..." required></textarea></div>
                             <div class="security-badge">
                                 <svg width="18" height="18" viewBox="0 0 24 24" fill="#2ECC71"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/></svg>
                                 Evaluación 100% Segura y Confidencial
                             </div>
                             <div class="doc-reminder" style="margin-bottom:15px;">
-                                📎 <strong>Recordatorio:</strong> Para proceder con su solicitud, debe enviar los documentos faltantes y su ubicación por WhatsApp.
+                                📎 <strong>Recordatorio:</strong> Para continuar con su evaluación, envíe los documentos solicitados por WhatsApp.
                             </div>
                             <div style="display: flex; gap: 10px;">
                                 <button type="button" class="btn btn-back" onclick="pasoAtras(2)">ATRÁS</button>
@@ -205,46 +207,27 @@
     </div>
 
     <script>
-        const URL_GOOGLE_SHEETS = "https://script.google.com/macros/s/AKfycbxCw47w7LsF1haWmkR69Nsl_4Ba8iFNWLiFMUfTwIm2ypzt4GlbTX8DcbolhEmu-T0/exec";
+        const URL_GOOGLE_SHEETS = "https://script.google.com/macros/s/AKfycbxUK6E-1Puk3DLuvUAufrEgpSIdU5ED0VUSuNY5352RQqxLOI4rOx3k5X4RmDazrNzj/exec";
         const NUMERO_WHATSAPP = "595992271485";
 
         const PERFILES = {
-            formal_ips: { antiguedad: '6 meses de aportes IPS', requisitos: ["Antigüedad: 6 meses de aportes IPS", "Liquidación de salario"], ubicaciones: ["Dirección particular (calle, número, barrio, referencia)"], camposExtra: [] },
-            formal_iva: {
-                antiguedad: '6 meses con IVAs',
-                requisitos: ["Antigüedad: 6 meses con IVAs", "6 últimos IVAs", "6 facturas emitidas a la empresa"],
-                ubicaciones: ["Dirección particular"],
-                camposExtra: [
-                    { label: "Razón social o nombre de la empresa", placeholder: "Ej: Empresa XYZ S.A." },
-                    { label: "Teléfono de la empresa", placeholder: "Ej: 021 123 456" }
-                ]
-            },
-            informal: { antiguedad: '6 meses como mínimo', requisitos: ["Antigüedad: 6 meses como mínimo", "Certificado de trabajo o RUC laboral"], ubicaciones: ["Dirección particular", "Dirección laboral"], camposExtra: [] },
-            publico_permanente: { antiguedad: '1 mes (permanente)', requisitos: ["Antigüedad: 1 mes (permanente)"], ubicaciones: ["Dirección particular"], camposExtra: [] },
-            publico_contratado: { antiguedad: '15 meses (contratado)', requisitos: ["Antigüedad: 15 meses (contratado)"], ubicaciones: ["Dirección particular"], camposExtra: [] },
-            micro_iva: { antiguedad: '18 meses con IVAs', requisitos: ["Antigüedad: 18 meses con IVAs", "6 últimos IVAs", "Fotos del negocio (local y fachada)"], ubicaciones: ["Dirección del local"], camposExtra: [] },
-            micro_patente: { antiguedad: '18 meses con Patente', requisitos: ["Antigüedad: 18 meses con Patente", "6 últimos IVAs", "Patente actual", "Fotos del negocio", "Fotos de mercaderías"], ubicaciones: ["Dirección del local"], camposExtra: [] },
-            micro_sin_patente: { antiguedad: '24 meses demostrables', requisitos: ["Antigüedad: 24 meses demostrables", "Fotos del negocio (fachada e interior)", "Fotos de las mercaderías"], ubicaciones: ["Dirección del local"], camposExtra: [] },
-            prof_independiente: { antiguedad: '12 meses con RUC y título', requisitos: ["Antigüedad: 12 meses con RUC y título", "6 últimos IVAs", "Título o Registro", "Facturas (6 meses)"], ubicaciones: ["Dirección particular"], camposExtra: [] }
+            formal_ips: { antiguedad: '6 meses de aportes IPS', requisitos: ["Antigüedad: 6 meses de aportes IPS", "Liquidación de salario"], ubicaciones: [], camposExtra: [] },
+            formal_iva: { antiguedad: '6 meses con IVAs', requisitos: ["Antigüedad: 6 meses con IVAs", "6 últimos IVAs", "6 facturas emitidas a la empresa"], ubicaciones: [], camposExtra: [{ label: "Razón social o nombre de la empresa", placeholder: "Ej: Empresa XYZ S.A." }, { label: "Teléfono de la empresa", placeholder: "Ej: 021 123 456" }] },
+            informal: { antiguedad: '6 meses como mínimo', requisitos: ["Antigüedad: 6 meses como mínimo", "Certificado de trabajo o RUC laboral"], ubicaciones: [], camposExtra: [] },
+            publico_permanente: { antiguedad: '1 mes (permanente)', requisitos: ["Antigüedad: 1 mes (permanente)"], ubicaciones: [], camposExtra: [] },
+            publico_contratado: { antiguedad: '15 meses (contratado)', requisitos: ["Antigüedad: 15 meses (contratado)"], ubicaciones: [], camposExtra: [] },
+            micro_iva: { antiguedad: '18 meses con IVAs', requisitos: ["Antigüedad: 18 meses con IVAs", "6 últimos IVAs", "Fotos del negocio (local y fachada)"], ubicaciones: [], camposExtra: [] },
+            micro_patente: { antiguedad: '18 meses con Patente', requisitos: ["Antigüedad: 18 meses con Patente", "6 últimos IVAs", "Patente actual", "Fotos del negocio", "Fotos de mercaderías"], ubicaciones: [], camposExtra: [] },
+            micro_sin_patente: { antiguedad: '24 meses demostrables', requisitos: ["Antigüedad: 24 meses demostrables", "Fotos del negocio (fachada e interior)", "Fotos de las mercaderías"], ubicaciones: [], camposExtra: [] },
+            prof_independiente: { antiguedad: '12 meses con RUC y título', requisitos: ["Antigüedad: 12 meses con RUC y título", "6 últimos IVAs", "Título o Registro", "Facturas (6 meses)"], ubicaciones: [], camposExtra: [] }
         };
 
         const CUOTERO = {
-            500000: [118000,92000,75000,64000,0,0,0,0],
             1000000: [235000,182000,150000,127000,112000,101000,96000,90000],
             2000000: [465000,358000,292500,254000,223000,201000,191000,177000],
             3000000: [685000,535000,435000,380000,334000,302000,287000,266000],
             4000000: [900000,700000,571000,507000,445000,402000,382000,354000],
-            5000000: [1150000,885000,712000,633000,555000,503000,478000,443000],
-            6000000: [1333000,1009000,853000,758000,663000,601000,571000,526000],
-            7000000: [1556000,1178000,993000,885000,774000,701000,666000,573000],
-            8000000: [1700000,1321000,1092000,969000,840000,756000,714000,656000],
-            9000000: [1912000,1485000,1227000,1090000,945000,851000,804000,738000],
-            10000000: [2124000,1651000,1365000,1211000,1049000,945000,893000,820000],
-            11000000: [2336000,1817000,1501000,1332000,1155000,1040000,984000,902000],
-            12000000: [2549000,1980000,1636000,1454000,1259000,1135000,1074000,983000],
-            13000000: [2761000,2143000,1773000,1574000,1364000,1229000,1163000,1065000],
-            14000000: [2974000,2308000,1909000,1696000,1468000,1323000,1252000,1147000],
-            15000000: [3187000,2479000,2050000,1818000,1574000,1420000,1343000,1230000]
+            5000000: [1150000,885000,712000,633000,555000,503000,478000,443000]
         };
         const PLAZOS = [6,8,10,12,15,18,20,24];
 
@@ -253,28 +236,19 @@
         function formatearNumero(n) { return n ? n.toString().replace(/\B(?=(\d{3})+(?!\d))/g,".") : "0"; }
         function parsearNumero(s) { return parseInt(s.toString().replace(/\./g,'')) || 0; }
 
-        // --- CONTROL DE ENVÍOS POR CI ---
         function getEnvioCount(ci) {
             const envios = JSON.parse(localStorage.getItem('ic_envios_ci')) || {};
             const key = ci.replace(/\D/g, '');
             const entry = envios[key];
-            if (entry) {
-                const hoy = new Date().toDateString();
-                if (entry.fecha !== hoy) return 0;
-                return entry.contador;
-            }
+            if (entry) { const hoy = new Date().toDateString(); if (entry.fecha !== hoy) return 0; return entry.contador; }
             return 0;
         }
         function registrarEnvio(ci) {
             const envios = JSON.parse(localStorage.getItem('ic_envios_ci')) || {};
             const key = ci.replace(/\D/g, '');
-            envios[key] = {
-                fecha: new Date().toDateString(),
-                contador: getEnvioCount(ci) + 1
-            };
+            envios[key] = { fecha: new Date().toDateString(), contador: getEnvioCount(ci) + 1 };
             localStorage.setItem('ic_envios_ci', JSON.stringify(envios));
         }
-
         function actualizarIntentosUI() {
             const ci = document.getElementById('ciCliente').value;
             const count = getEnvioCount(ci);
@@ -282,23 +256,15 @@
             const el = document.getElementById('ciIntentosRestantes');
             if (ci.trim() !== "") {
                 el.textContent = 'Te quedan ' + restantes + ' envío(s) hoy.';
-                if (restantes <= 0) {
-                    document.getElementById('btnPaso1Siguiente').disabled = true;
-                    alert("Ya completaste los 2 envíos disponibles por hoy para este CI. Vuelva mañana o consulte por otra vía.");
-                } else {
-                    document.getElementById('btnPaso1Siguiente').disabled = false;
-                }
-            } else {
-                el.textContent = '';
-            }
+                if (restantes <= 0) { document.getElementById('btnPaso1Siguiente').disabled = true; alert("Ya completaste los 2 envíos disponibles por hoy para este CI. Vuelva mañana o consulte por otra vía."); }
+                else { document.getElementById('btnPaso1Siguiente').disabled = false; }
+            } else { el.textContent = ''; }
         }
-
         document.getElementById('ciCliente').addEventListener('input', actualizarIntentosUI);
-        // --- FIN CONTROL DE ENVÍOS ---
 
         const montoSimSelect = document.getElementById('montoSimulador');
         const tablaContainer = document.getElementById('tablaContainer');
-        const montos = [500000,1000000,2000000,3000000,4000000,5000000,6000000,7000000,8000000,9000000,10000000,11000000,12000000,13000000,14000000,15000000];
+        const montos = [1000000,2000000,3000000,4000000,5000000];
         montos.forEach(val => { const opt = document.createElement('option'); opt.value = val; opt.text = formatearNumero(val) + " Gs"; montoSimSelect.appendChild(opt); });
 
         montoSimSelect.addEventListener('change', function() {
@@ -378,11 +344,20 @@
         function validarPaso2() {
             const perfil = document.getElementById('perfil').value;
             if (!perfil) { alert("Seleccioná tu perfil laboral."); return false; }
-            const ubicaciones = document.querySelectorAll('.ubicacion-input');
-            for (let inp of ubicaciones) if (!inp.value.trim()) { alert("Completá todas las direcciones."); return false; }
+            const calle = document.getElementById('direccionCalle').value.trim();
+            const numero = document.getElementById('direccionNumero').value.trim();
+            const barrio = document.getElementById('direccionBarrio').value.trim();
+            if (!calle || !numero || !barrio) { alert("Completá la dirección (Calle, Número y Barrio)."); return false; }
             if (PERFILES[perfil].camposExtra && PERFILES[perfil].camposExtra.length > 0) {
                 const extras = document.querySelectorAll('.campo-extra');
                 for (let inp of extras) { if (!inp.value.trim()) { alert("Completá todos los campos de la empresa."); return false; } }
+            }
+            const checks = document.querySelectorAll('#checklistItems input[type="checkbox"]');
+            let algunoMarcado = false;
+            checks.forEach(ch => { if (ch.checked) algunoMarcado = true; });
+            if (PERFILES[perfil].requisitos.length > 0 && !algunoMarcado) {
+                alert("Debe marcar al menos uno de los requisitos indispensables del perfil seleccionado.");
+                return false;
             }
             return true;
         }
@@ -412,12 +387,10 @@
         function actualizarSecciones() {
             const perfil = document.getElementById('perfil').value;
             document.getElementById('checklistContainer').style.display = perfil ? 'block' : 'none';
-            document.getElementById('ubicacionContainer').style.display = perfil ? 'block' : 'none';
             document.getElementById('camposExtrasContainer').style.display = perfil ? 'block' : 'none';
             if (!perfil) return;
             const datos = PERFILES[perfil];
             let html = ''; datos.requisitos.forEach((req, i) => html += `<div class="checklist-item" onclick="toggleCheck(this)"><input type="checkbox" id="check_${i}" value="${req}"><div class="custom-check"></div><label class="checklist-label">${req}</label></div>`); document.getElementById('checklistItems').innerHTML = html;
-            html = ''; datos.ubicaciones.forEach((ubi, i) => html += `<div class="form-group"><label>${ubi} <span class="required">*</span></label><textarea class="ubicacion-input" placeholder="Escribí tu dirección: calle, número, barrio, referencia" required style="min-height:60px;"></textarea></div>`); document.getElementById('ubicacionFields').innerHTML = html;
             html = ''; 
             if (datos.camposExtra && datos.camposExtra.length > 0) {
                 document.getElementById('camposExtrasContainer').style.display = 'block';
@@ -447,6 +420,9 @@
             const ref1 = document.getElementById('ref1').value.trim();
             const ref2 = document.getElementById('ref2').value.trim();
             const ref3 = document.getElementById('ref3').value.trim();
+            const calle = document.getElementById('direccionCalle').value.trim();
+            const numero = document.getElementById('direccionNumero').value.trim();
+            const barrio = document.getElementById('direccionBarrio').value.trim();
             if (!cuotaSeleccionada) { alert("Seleccioná una cuota en el simulador."); return; }
 
             const enviosRestantes = 2 - getEnvioCount(ci);
@@ -461,7 +437,6 @@
             const checks = document.querySelectorAll('#checklistItems input[type="checkbox"]');
             let tiene = [], falta = [];
             checks.forEach(ch => { if (ch.checked) tiene.push(ch.value); else falta.push(ch.value); });
-            const ubicaciones = Array.from(document.querySelectorAll('.ubicacion-input')).map(inp => inp.value.trim());
             
             let razon_social = '', tel_empresa = '';
             const extras = document.querySelectorAll('.campo-extra');
@@ -471,13 +446,13 @@
             }
 
             const checklistMsg = (tiene.length > 0 ? 'TIENE:\n' + tiene.map(i => '  * ' + i).join('\n') : '') + (falta.length > 0 ? '\nFALTA:\n' + falta.map(i => '  * ' + i).join('\n') : '');
-            const ubicacionesMsg = ubicaciones.length > 0 ? 'DIRECCIONES:\n' + ubicaciones.map((u, i) => '  * ' + u).join('\n') : '';
+            const direccionMsg = `Dirección: ${calle} ${numero}, Barrio ${barrio}`;
             const cuotaMsg = `Cuota de interés: ${cuotaSeleccionada.plazo} cuotas de Gs. ${formatearNumero(cuotaSeleccionada.cuota)}`;
             
             const mensajeWa = `Hola Isidro! Soy ${nombre}, completé tu formulario de crédito.\n\n` +
                 `CI: ${ci}\nEdad: ${edad} años\nWhatsApp: ${telefono}\nCiudad: ${ciudad}\n` +
                 `Perfil: ${perfilLabel}\nMonto solicitado: Gs. ${formatearNumero(monto)}\nIngreso: Gs. ${formatearNumero(ingreso)}\n${cuotaMsg}\n\n` +
-                `DOCUMENTACIÓN:\n${checklistMsg}\n${ubicacionesMsg}\nREFERENCIAS:\nRef1 (Familiar): ${ref1}\nRef2: ${ref2}\nRef3: ${ref3}\nOBSERVACIONES:\n${observaciones}\n` +
+                `DOCUMENTACIÓN:\n${checklistMsg}\n${direccionMsg}\nREFERENCIAS:\nRef1 (Familiar): ${ref1}\nRef2: ${ref2}\nRef3: ${ref3}\nOBSERVACIONES:\n${observaciones}\n` +
                 (razon_social ? `\nDATOS DE LA EMPRESA:\nRazón social: ${razon_social}\nTeléfono empresa: ${tel_empresa}\n` : '') +
                 `\n📎 Tengo los docs listos. ¿Qué sigue?`;
 
@@ -485,8 +460,8 @@
                 nombre, ci, edad, telefono, ciudad, perfil: perfilLabel, monto, ingreso,
                 informconf: document.getElementById('informconf').value === 'sin' ? 'Sin Informconf' : 'Con Informconf',
                 checklist_tiene: tiene.join('; '), checklist_falta: falta.join('; '),
-                ubicaciones: ubicaciones.join('; '), referencias: `Ref1: ${ref1}, Ref2: ${ref2}, Ref3: ${ref3}`,
-                observaciones, cuota: cuotaMsg,
+                calle, numero, barrio,
+                referencias: `Ref1: ${ref1}, Ref2: ${ref2}, Ref3: ${ref3}`, observaciones, cuota: cuotaMsg,
                 razon_social: razon_social, tel_empresa: tel_empresa,
                 autorizacion: "Sí", fecha: new Date().toLocaleString()
             };
@@ -525,16 +500,12 @@
             document.getElementById('waBtnFlotante').style.display = 'none';
         }
 
-        // Pre-carga de perfil desde parámetro ?perfil=...
         const urlParams = new URLSearchParams(window.location.search);
         const perfilParam = urlParams.get('perfil');
         if (perfilParam && PERFILES[perfilParam]) {
             document.addEventListener('DOMContentLoaded', () => {
                 const perfilSelect = document.getElementById('perfil');
-                if (perfilSelect) {
-                    perfilSelect.value = perfilParam;
-                    actualizarSecciones();
-                }
+                if (perfilSelect) { perfilSelect.value = perfilParam; actualizarSecciones(); }
             });
         }
     </script>
