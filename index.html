@@ -433,9 +433,10 @@
             window.open("https://wa.me/"+NUMERO_WHATSAPP+"?text="+encodeURIComponent("Hola Isidro! Vi tu plataforma y quisiera recibir atención personalizada."),"_blank");
         }
 
-        document.getElementById('formularioEvaluacion').addEventListener('submit', async function(e) {
+        document.getElementById('formularioEvaluacion').addEventListener('submit', function(e) {
             e.preventDefault();
             if (sessionStorage.getItem('bloqueado') || !validarPaso3()) return;
+
             const nombre = document.getElementById('nombreCliente').value.trim();
             const ci = document.getElementById('ciCliente').value.trim();
             const telefono = document.getElementById('telefonoCliente').value.trim();
@@ -502,22 +503,17 @@
                 razon_social: razon_social, tel_empresa: tel_empresa,
                 autorizacion: "Sí", fecha: new Date().toLocaleString()
             };
-
-            const btnEnviar = document.getElementById('btnEnviar');
-            btnEnviar.textContent = '⏳ Preparando informe...'; btnEnviar.disabled = true;
             
-            setTimeout(async () => {
-                btnEnviar.textContent = '✅ ¡Listo! Abriendo WhatsApp...';
-                await fetch(URL_GOOGLE_SHEETS, { method: "POST", mode: "no-cors", headers: { "Content-Type": "application/json" }, body: JSON.stringify(datosSheet) });
-                registrarEnvio(ci);
-                setTimeout(() => {
-                    window.open("https://wa.me/"+NUMERO_WHATSAPP+"?text="+encodeURIComponent(mensajeWa),"_blank");
-                    btnEnviar.textContent = 'ENVIAR SOLICITUD POR WHATSAPP';
-                    btnEnviar.disabled = false;
-                    document.getElementById('confirmToast').style.display = 'block';
-                    setTimeout(() => { document.getElementById('confirmToast').style.display = 'none'; window.location.reload(); }, 3000);
-                }, 500);
-            }, 800);
+            fetch(URL_GOOGLE_SHEETS, { method: "POST", mode: "no-cors", headers: { "Content-Type": "application/json" }, body: JSON.stringify(datosSheet) }).catch(err => console.log(err));
+            registrarEnvio(ci);
+
+            document.getElementById('confirmToast').style.display = 'block';
+            window.open("https://wa.me/"+NUMERO_WHATSAPP+"?text="+encodeURIComponent(mensajeWa),"_blank");
+            
+            setTimeout(() => {
+                document.getElementById('confirmToast').style.display = 'none';
+                window.location.reload();
+            }, 3000);
         });
 
         configurarInputNumerico('ciCliente'); configurarInputNumerico('ingresoMensual');
