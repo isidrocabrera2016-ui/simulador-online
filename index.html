@@ -3,74 +3,105 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>TKING - Créditos Rápidos y Seguros</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230a2540'/><text x='50' y='68' font-size='55' text-anchor='middle' fill='%23d4a853' font-family='Arial' font-weight='bold'>TK</text></svg>">
-    <meta property="og:title" content="TKING - Solicitá tu Crédito Rápido y Fácil">
+    <title>Isidro Cabrera · Asesoría de Crédito</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230B0F19'/><text x='50' y='68' font-size='55' text-anchor='middle' fill='%232ECC71' font-family='Arial' font-weight='bold'>IC</text></svg>">
+    <meta property="og:title" content="Isidro Cabrera · Asesoría de Crédito">
     <meta property="og:description" content="Evaluá tu crédito en 2 minutos, sin compromiso.">
     <meta property="og:image" content="https://isidrocabrera2016-ui.github.io/simulador-online/1000318336.png">
     <meta property="og:url" content="https://isidrocabrera2016-ui.github.io/simulador-online/">
     <meta property="og:type" content="website">
     <style>
         :root {
-            --azul-marino: #0a2540; --dorado: #d4a853; --blanco: #ffffff;
-            --gris-perla: #f5f6fa; --gris-borde: #e2e6ed; --texto: #1a1f2e;
+            --bg-deep: #0B0F19; --accent-gold: #2ECC71; --white: #ffffff;
+            --grey-soft: #f5f6fa; --grey-border: #e2e6ed; --text-main: #1a1f2e;
             --whatsapp: #25D366;
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'Segoe UI', system-ui, sans-serif;
-            background: linear-gradient(160deg, #0a2540 0%, #0d3b66 50%, #f5f6fa 100%);
+            background: var(--bg-deep);
             min-height: 100vh; padding: 10px; display: flex; justify-content: center; align-items: flex-start; overflow-x: hidden;
         }
         .container { width: 100%; max-width: 500px; z-index: 1; }
-        .app-card { background: var(--blanco); border-radius: 18px; overflow: hidden; box-shadow: 0 20px 50px rgba(10, 37, 64, 0.3); margin-bottom: 80px; }
-        .header { background: linear-gradient(135deg, #0a2540 0%, #0d3b66 100%); padding: 22px 16px; color: white; text-align: center; border-bottom: 2px solid var(--dorado); }
-        .header .logo { font-size: 26px; font-weight: 800; } .header .logo span { color: var(--dorado); }
-        .header .subtitle { font-size: 11px; opacity: 0.9; } .header .agent-info { margin-top: 10px; font-size: 10px; background: rgba(212, 168, 83, 0.2); display: inline-block; padding: 6px 14px; border-radius: 50px; }
-        .content { padding: 14px; }
-        .form-group { margin-bottom: 12px; }
-        label { display: block; font-size: 10px; font-weight: 700; margin-bottom: 4px; color: #3a4455; text-transform: uppercase; }
+        .app-card {
+            background: rgba(255,255,255,0.02); border-radius: 25px; overflow: hidden;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.4); margin-bottom: 80px;
+            backdrop-filter: blur(15px); border: 1px solid rgba(255,255,255,0.08);
+        }
+        .header {
+            background: transparent; padding: 30px 20px; color: white; text-align: center;
+            border-bottom: 1px solid rgba(46, 204, 113, 0.4);
+        }
+        .header .logo { font-size: 28px; font-weight: 800; letter-spacing: -0.5px; }
+        .header .logo span { color: var(--accent-gold); }
+        .header .subtitle { font-size: 13px; opacity: 0.9; margin-top: 4px; letter-spacing: 0.5px; }
+        .header .agent-info { margin-top: 15px; font-size: 11px; background: rgba(46, 204, 113, 0.1); display: inline-flex; align-items: center; gap: 8px; padding: 8px 18px; border-radius: 50px; border: 1px solid rgba(46, 204, 113, 0.2); }
+        .avatar-mini { width: 24px; height: 24px; border-radius: 50%; background: var(--accent-gold); display: flex; align-items: center; justify-content: center; color: var(--bg-deep); font-weight: 800; font-size: 12px; }
+
+        .content { padding: 20px; }
+        .form-group { margin-bottom: 16px; }
+        label { display: block; font-size: 10px; font-weight: 700; margin-bottom: 5px; color: rgba(255,255,255,0.6); text-transform: uppercase; letter-spacing: 0.8px; }
         label .required { color: #e53935; }
-        input, select, textarea { width: 100%; padding: 12px; border: 2px solid var(--gris-borde); border-radius: 8px; font-size: 14px; background: var(--blanco); color: var(--texto); }
-        input:focus, select:focus, textarea:focus { outline: none; border-color: var(--azul-marino); box-shadow: 0 0 0 3px rgba(10, 37, 64, 0.1); }
-        .row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; } .row-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
-        .btn { width: 100%; padding: 13px; border: none; border-radius: 8px; font-size: 14px; font-weight: 700; cursor: pointer; margin-top: 6px; }
-        .btn-primary { background: linear-gradient(135deg, #0a2540, #0d3b66); color: var(--dorado); border: 1px solid var(--dorado); }
-        .btn-back { background: #e0e0e0; color: var(--texto); }
+
+        input, select, textarea {
+            width: 100%; padding: 14px 16px; border: 1px solid rgba(255,255,255,0.1); border-radius: 12px;
+            font-size: 14px; background: rgba(255,255,255,0.05); color: var(--white);
+            transition: all 0.2s;
+        }
+        input:focus, select:focus, textarea:focus { outline: none; border-color: var(--accent-gold); box-shadow: 0 0 0 3px rgba(46, 204, 113, 0.15); }
+        option { background: #1A1D2E; }
+
+        .row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; } .row-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+        .btn { width: 100%; padding: 15px; border: none; border-radius: 12px; font-size: 15px; font-weight: 700; cursor: pointer; margin-top: 8px; letter-spacing: 0.5px; transition: all 0.2s; }
+        .btn-primary { background: rgba(46, 204, 113, 0.15); color: var(--accent-gold); border: 1px solid rgba(46, 204, 113, 0.3); }
+        .btn-primary:hover { background: rgba(46, 204, 113, 0.25); }
+        .btn-back { background: rgba(255,255,255,0.05); color: rgba(255,255,255,0.7); }
         .btn-whatsapp { background: var(--whatsapp); color: white; animation: pulse 2s infinite; }
-        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.5); } 70% { box-shadow: 0 0 0 12px rgba(37, 211, 102, 0); } 100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); } }
-        .checklist-container, .ubicacion-container, .campos-extras-container { background: var(--gris-perla); border-radius: 10px; padding: 12px; margin-top: 10px; border: 1px solid var(--gris-borde); }
-        .checklist-title, .ubicacion-title { font-weight: 700; font-size: 11px; color: var(--azul-marino); margin-bottom: 10px; text-align: center; }
-        .ubicacion-container { background: #e8f5e9; border: 1px solid #a5d6a7; } .ubicacion-title { color: #2e7d32; }
-        .checklist-item { display: flex; align-items: center; gap: 10px; padding: 7px 0; border-bottom: 1px solid #e8eaf0; font-size: 12px; cursor: pointer; }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.5); }
+            70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+        }
+
+        .checklist-container, .ubicacion-container, .campos-extras-container {
+            background: rgba(255,255,255,0.02); border-radius: 12px; padding: 15px; margin-top: 15px; border: 1px solid rgba(255,255,255,0.08);
+        }
+        .checklist-title, .ubicacion-title { font-weight: 700; font-size: 12px; color: var(--accent-gold); margin-bottom: 12px; text-align: center; }
+        .ubicacion-container { background: rgba(46, 204, 113, 0.03); border: 1px solid rgba(46, 204, 113, 0.2); }
+        .checklist-item { display: flex; align-items: center; gap: 10px; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 12px; color: rgba(255,255,255,0.8); cursor: pointer; }
         .checklist-item:last-child { border-bottom: none; } .checklist-item input[type="checkbox"] { display: none; }
-        .custom-check { width: 22px; height: 22px; border: 2px solid #b0b8c4; border-radius: 4px; display: flex; align-items: center; justify-content: center; background: white; }
-        .checklist-item input:checked + .custom-check { background: var(--azul-marino); border-color: var(--azul-marino); }
-        .custom-check::after { content: '✓'; color: white; font-size: 14px; font-weight: 800; display: none; }
+        .custom-check { width: 22px; height: 22px; border: 2px solid rgba(255,255,255,0.3); border-radius: 4px; display: flex; align-items: center; justify-content: center; background: transparent; }
+        .checklist-item input:checked + .custom-check { background: var(--accent-gold); border-color: var(--accent-gold); }
+        .custom-check::after { content: '✓'; color: var(--bg-deep); font-size: 14px; font-weight: 800; display: none; }
         .checklist-item input:checked + .custom-check::after { display: block; }
-        .table-container { overflow-x: auto; border-radius: 10px; border: 1px solid var(--gris-borde); margin-top: 10px; }
+
+        .table-container { overflow-x: auto; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); margin-top: 15px; }
         table { width: 100%; border-collapse: collapse; font-size: 11px; min-width: 600px; }
-        th { background: var(--azul-marino); padding: 10px 6px; color: var(--dorado); font-size: 10px; }
-        td { padding: 10px 6px; text-align: center; border-bottom: 1px solid #e8eaf0; cursor: pointer; }
-        td.selected { background: var(--azul-marino); color: var(--dorado); font-weight: 800; }
-        .footer-note { font-size: 10px; text-align: center; color: rgba(255,255,255,0.7); margin-top: 12px; }
-        .wa-float-btn { position: fixed; right: 12px; bottom: 20px; width: 55px; height: 55px; background: var(--whatsapp); border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 998; box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4); animation: floatPulse 2s infinite; cursor: pointer; }
+        th { background: rgba(46, 204, 113, 0.1); padding: 12px 6px; color: var(--accent-gold); font-size: 10px; letter-spacing: 0.5px; }
+        td { padding: 12px 6px; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.05); cursor: pointer; color: rgba(255,255,255,0.8); }
+        td.selected { background: var(--accent-gold); color: var(--bg-deep); font-weight: 800; }
+        .footer-note { font-size: 10px; text-align: center; color: rgba(255, 255, 255, 0.4); margin-top: 16px; }
+
+        .wa-float-btn { position: fixed; right: 15px; bottom: 25px; width: 55px; height: 55px; background: var(--whatsapp); border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 998; box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4); animation: floatPulse 2s infinite; cursor: pointer; }
         .wa-float-btn svg { width: 28px; height: 28px; fill: white; } .wa-float-text { font-size: 8px; color: white; font-weight: 700; margin-top: -2px; }
         @keyframes floatPulse { 0% { box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4); } 50% { box-shadow: 0 6px 30px rgba(37, 211, 102, 0.7); } 100% { box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4); } }
         .confirm-toast { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); background: #2e7d32; color: white; padding: 14px 28px; border-radius: 50px; font-weight: 700; font-size: 15px; z-index: 1001; box-shadow: 0 8px 20px rgba(0,0,0,0.3); display: none; }
-        .doc-reminder { background: #fff8e1; border: 1px solid var(--dorado); border-radius: 10px; padding: 10px; margin-top: 8px; font-size: 11px; color: #5d4037; text-align: center; }
-        .progress-bar { display: flex; margin-bottom: 15px; }
-        .progress-step { flex: 1; text-align: center; font-size: 10px; font-weight: 700; color: #b0b8c4; padding-bottom: 8px; border-bottom: 3px solid var(--gris-borde); }
-        .progress-step.active { color: var(--azul-marino); border-bottom-color: var(--dorado); }
+        .doc-reminder { background: rgba(46, 204, 113, 0.05); border: 1px solid rgba(46, 204, 113, 0.3); border-radius: 10px; padding: 10px; margin-top: 8px; font-size: 11px; color: var(--accent-gold); text-align: center; }
+        .progress-bar { display: flex; margin-bottom: 20px; }
+        .progress-step { flex: 1; text-align: center; font-size: 10px; font-weight: 700; color: rgba(255,255,255,0.3); padding-bottom: 8px; border-bottom: 3px solid rgba(255,255,255,0.1); }
+        .progress-step.active { color: var(--accent-gold); border-bottom-color: var(--accent-gold); }
         .step-content { display: none; }
         .step-content.active { display: block; animation: fadeIn 0.3s ease; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
-        .security-badge { display: flex; align-items: center; gap: 8px; background: #e8f5e9; border: 1px solid #a5d6a7; border-radius: 8px; padding: 8px 12px; margin: 10px 0; font-size: 11px; color: #2e7d32; font-weight: 600; }
-        .social-proof { text-align: center; font-size: 10px; color: #888; margin-top: 8px; }
-        .bloqueo-msg { background: #e3f2fd; border: 1px solid #90caf9; border-radius: 10px; padding: 15px; text-align: center; color: #0d47a1; font-weight: 600; }
-        .auth-container { background: #e8f5e9; border: 2px solid var(--dorado); border-radius: 12px; padding: 16px; margin-top: 20px; }
-        .auth-container label { font-size: 12px; text-transform: none; letter-spacing: 0; display: flex; align-items: flex-start; gap: 8px; }
-        .auth-container input[type="checkbox"] { width: 20px; height: 20px; accent-color: var(--azul-marino); flex-shrink: 0; margin-top: 2px; }
+        .security-badge { display: flex; align-items: center; gap: 8px; background: rgba(46, 204, 113, 0.05); border: 1px solid rgba(46, 204, 113, 0.2); border-radius: 8px; padding: 10px 14px; margin: 15px 0; font-size: 11px; color: var(--accent-gold); font-weight: 600; }
+        .social-proof { text-align: center; font-size: 10px; color: rgba(255,255,255,0.3); margin-top: 10px; }
+        .bloqueo-msg { background: rgba(46, 204, 113, 0.03); border: 1px solid rgba(46, 204, 113, 0.2); border-radius: 12px; padding: 20px; text-align: center; color: var(--accent-gold); font-weight: 600; }
+        .auth-container { background: rgba(46, 204, 113, 0.02); border: 1px solid rgba(46, 204, 113, 0.3); border-radius: 12px; padding: 20px; margin-top: 20px; }
+        .auth-container label { font-size: 12px; text-transform: none; letter-spacing: 0; display: flex; align-items: flex-start; gap: 8px; color: rgba(255,255,255,0.7); }
+        .auth-container input[type="checkbox"] { width: 20px; height: 20px; accent-color: var(--accent-gold); flex-shrink: 0; margin-top: 2px; }
+
+        .intentos-restantes { font-size: 10px; color: var(--accent-gold); text-align: right; margin-top: 4px; }
     </style>
 </head>
 <body>
@@ -81,17 +112,20 @@
         <div class="app-card">
             <div class="header">
                 <div class="logo">ISIDRO <span>CABRERA</span></div>
-                <div class="subtitle">Asesoría Profesional de Crédito</div>
-                <div class="agent-info">0992 271 485 · Respuesta inmediata</div>
+                <div class="subtitle">Asesoría de Crédito</div>
+                <div class="agent-info">
+                    <div class="avatar-mini">IC</div>
+                    0992 271 485 · tking.asesor@gmail.com
+                </div>
             </div>
             <div class="content" id="mainContent">
-                <p style="text-align:center;font-size:12px;color:#5a6070;margin-bottom:10px;">Simulá el valor de tus cuotas mensuales.</p>
+                <p style="text-align:center;font-size:13px;color:rgba(255,255,255,0.5);margin-bottom:15px;">Simulá el valor de tus cuotas mensuales.</p>
                 <div class="form-group"><label>Monto a Simular</label><select id="montoSimulador"><option value="">Seleccioná...</option></select></div>
                 <div class="table-container" id="tablaContainer" style="display:none;"><table><thead><tr><th>6 cuotas</th><th>8 cuotas</th><th>10 cuotas</th><th>12 cuotas</th><th>15 cuotas</th><th>18 cuotas</th><th>20 cuotas</th><th>24 cuotas</th></tr></thead><tbody id="tablaSimulador"></tbody></table></div>
-                <p style="font-size:9px;color:#888;text-align:center;margin-top:4px;">Cuotas de referencia. Sujeto a evaluación crediticia.</p>
-                <div id="simResultado" style="display:none; text-align:center; margin-top:15px;">
-                    <div style="font-size:24px;font-weight:800;color:var(--azul-marino);" id="cuotaMostrada">0 Gs</div>
-                    <p style="font-size:12px;color:#5a6070;" id="detalleMostrado"></p>
+                <p style="font-size:9px;color:rgba(255,255,255,0.3);text-align:center;margin-top:5px;">Cuotas de referencia. Sujeto a evaluación crediticia.</p>
+                <div id="simResultado" style="display:none; text-align:center; margin-top:20px;">
+                    <div style="font-size:28px;font-weight:800;color:var(--accent-gold);" id="cuotaMostrada">0 Gs</div>
+                    <p style="font-size:13px;color:rgba(255,255,255,0.5);" id="detalleMostrado"></p>
                     <button class="btn btn-whatsapp" id="btnQuieroCalificar" onclick="mostrarAutorizacion()">💰 QUIERO SABER SI CALIFICO</button>
                 </div>
 
@@ -99,9 +133,9 @@
                     <div class="auth-container">
                         <label style="display:flex; align-items:flex-start; gap:8px; cursor:pointer;">
                             <input type="checkbox" id="autorizacionCheck" required>
-                            <span>Declaro que voluntariamente estoy brindando mis datos personales. De ser necesaria, autorizo la verificación de mis datos en centrales de riesgo crediticio. Soy responsable de la veracidad de la información proporcionada.</span>
+                            <span>Declaro que voluntariamente estoy brindando mis datos personales. De ser necesaria, autorizo la verificación en centrales de riesgo crediticio. Soy responsable de la veracidad de la información proporcionada.</span>
                         </label>
-                        <button type="button" class="btn btn-primary" onclick="confirmarAutorizacion()" style="margin-top:12px;">CONTINUAR CON LA SOLICITUD</button>
+                        <button type="button" class="btn btn-primary" onclick="confirmarAutorizacion()" style="margin-top:15px;">CONTINUAR CON LA SOLICITUD</button>
                     </div>
                 </div>
 
@@ -114,8 +148,8 @@
                     <form id="formularioEvaluacion">
                         <div class="step-content active" id="paso1">
                             <div class="row-3">
-                                <div class="form-group"><label>Nombre <span class="required">*</span></label><input type="text" id="nombreCliente" placeholder="Nombre" required></div>
-                                <div class="form-group"><label>CI N.° <span class="required">*</span></label><input type="text" id="ciCliente" placeholder="1.234.567" required></div>
+                                <div class="form-group"><label>Nombre Completo <span class="required">*</span></label><input type="text" id="nombreCliente" placeholder="Nombre y Apellido" required></div>
+                                <div class="form-group"><label>CI N.° <span class="required">*</span></label><input type="text" id="ciCliente" placeholder="1234567" inputmode="numeric" required><div id="ciIntentosRestantes" class="intentos-restantes"></div></div>
                                 <div class="form-group"><label>WhatsApp <span class="required">*</span></label><input type="tel" id="telefonoCliente" placeholder="0971..." required></div>
                             </div>
                             <div class="row-2">
@@ -124,7 +158,7 @@
                             </div>
                             <div class="form-group"><label>Ingreso Mensual (Gs) <span class="required">*</span></label><input type="text" id="ingresoMensual" placeholder="Mínimo 1.750.000" required></div>
                             <div class="form-group">
-                                <label>Situación en Informconf <span class="required">*</span></label>
+                                <label>Informconf <span class="required">*</span></label>
                                 <select id="informconf" required>
                                     <option value="">Seleccioná...</option>
                                     <option value="sin">Sin Informconf</option>
@@ -132,16 +166,16 @@
                                 </select>
                             </div>
                             <div id="infoconfBloqueo" style="display:none;" class="bloqueo-msg">
-                                Gracias por tu interés. Nuestra política actual solo permite operar con clientes sin Informconf, si tu situación cambia, escribinos a tking.asesor@gmail.com
+                                Gracias por tu interés. Solo trabajamos con clientes sin Informconf. Si tu situación cambia, escribinos a tking.asesor@gmail.com
                             </div>
                             <button type="button" class="btn btn-primary" id="btnPaso1Siguiente" onclick="siguientePaso(2)">SIGUIENTE</button>
                         </div>
                         <div class="step-content" id="paso2">
-                            <div class="form-group"><label>Perfil Laboral <span class="required">*</span></label><select id="perfil" required onchange="actualizarSecciones()"><option value="">Seleccioná...</option><option value="formal_ips">Trabajador Formal (con IPS)</option><option value="informal">Trabajador Informal (sin IPS)</option><option value="publico_permanente">Funcionario Público Permanente</option><option value="publico_contratado">Funcionario Público Contratado</option><option value="jubilado">Jubilado</option><option value="asalariado_iva">Asalariado con IVA</option><option value="prof_independiente">Prof. Independiente</option><option value="micro_comerciante">Micro / Comerciante</option><option value="rentista">Rentista (Alquileres)</option></select></div>
+                            <div class="form-group"><label>Perfil Laboral <span class="required">*</span></label><select id="perfil" required onchange="actualizarSecciones()"><option value="">Seleccioná...</option><option value="formal_ips">Trabajador Formal (con IPS)</option><option value="formal_iva">Trabajador Formal (con IVA)</option><option value="informal">Trabajador Informal (sin IPS)</option><option value="publico_permanente">Funcionario Público Permanente</option><option value="publico_contratado">Funcionario Público Contratado</option><option value="micro_iva">Microempresa con IVA</option><option value="micro_patente">Microempresa con Patente</option><option value="micro_sin_patente">Microempresa sin Patente</option><option value="prof_independiente">Profesional Independiente</option></select></div>
                             <div class="checklist-container" id="checklistContainer" style="display:none;"><div class="checklist-title">Requisitos - Marcá lo que TENÉS:</div><div id="checklistItems"></div><div class="doc-reminder">📄 Para proceder con su solicitud de crédito, debe enviar los documentos mencionados vía WhatsApp.</div></div>
-                            <div class="ubicacion-container" id="ubicacionContainer" style="display:none;"><div class="ubicacion-title">📍 Describí tu dirección</div><div id="ubicacionFields"></div><div class="doc-reminder" style="margin-top:8px;">⚠️ Importante: Para proceder con su solicitud de crédito, debe enviar nuevamente su ubicación vía WhatsApp.</div></div>
+                            <div class="ubicacion-container" id="ubicacionContainer" style="display:none;"><div class="ubicacion-title">📍 Describí tu dirección</div><div id="ubicacionFields"></div><div class="doc-reminder" style="margin-top:10px;">⚠️ Para proceder con su solicitud, debe enviar su ubicación vía WhatsApp.</div></div>
                             <div class="campos-extras-container" id="camposExtrasContainer" style="display:none;"><div id="camposExtrasFields"></div></div>
-                            <div style="display: flex; gap: 8px;">
+                            <div style="display: flex; gap: 10px;">
                                 <button type="button" class="btn btn-back" onclick="pasoAtras(1)">ATRÁS</button>
                                 <button type="button" class="btn btn-primary" onclick="siguientePaso(3)">SIGUIENTE</button>
                             </div>
@@ -152,36 +186,31 @@
                             <div class="form-group"><label>Ref. 3 (Personal) <span class="required">*</span></label><input type="text" id="ref3" placeholder="Nombre, Apellido y Celular" required></div>
                             <div class="form-group"><label>Observaciones <span class="required">*</span></label><textarea id="observaciones" placeholder="Si te falta algo o querés aclarar algún detalle..." required></textarea></div>
                             <div class="security-badge">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="#2e7d32"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/></svg>
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="#2ECC71"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/></svg>
                                 Evaluación 100% Segura y Confidencial
                             </div>
-                            <div class="doc-reminder" style="margin-bottom:12px;">
-                                📎 <strong>Recordatorio:</strong> Para proceder con su solicitud de crédito, debe enviar los documentos faltantes y su ubicación por WhatsApp.
+                            <div class="doc-reminder" style="margin-bottom:15px;">
+                                📎 <strong>Recordatorio:</strong> Para proceder con su solicitud, debe enviar los documentos faltantes y su ubicación por WhatsApp.
                             </div>
-                            <div style="display: flex; gap: 8px;">
+                            <div style="display: flex; gap: 10px;">
                                 <button type="button" class="btn btn-back" onclick="pasoAtras(2)">ATRÁS</button>
                                 <button type="submit" class="btn btn-whatsapp" id="btnEnviar">ENVIAR SOLICITUD POR WHATSAPP</button>
                             </div>
-                            <div class="social-proof">Más de 500 paraguayos ya confiaron en mi asesoría personalizada</div>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
-        <p class="footer-note">Isidro Cabrera · Asesoría Profesional de Crédito · tking.asesor@gmail.com</p>
+        <p class="footer-note">Isidro Cabrera · Asesoría de Crédito · tking.asesor@gmail.com</p>
     </div>
 
     <script>
-        const URL_GOOGLE_SHEETS = "https://script.google.com/macros/s/AKfycbxCw47w7LsF1haWmkR69Nsl_4Ba8iFNWLiFMUfTwIm2ypzt4GlbTX8DcbolhEmu-T0/exec";
+        const URL_GOOGLE_SHEETS = "TU_URL_DE_GOOGLE_APPS_SCRIPT";
         const NUMERO_WHATSAPP = "595992271485";
 
         const PERFILES = {
             formal_ips: { antiguedad: '6 meses de aportes IPS', requisitos: ["Antigüedad: 6 meses de aportes IPS", "Liquidación de salario"], ubicaciones: ["Dirección particular (calle, número, barrio, referencia)"], camposExtra: [] },
-            informal: { antiguedad: '6 meses como mínimo', requisitos: ["Antigüedad: 6 meses como mínimo", "Certificado de trabajo o RUC laboral"], ubicaciones: ["Dirección particular", "Dirección laboral"], camposExtra: [] },
-            publico_permanente: { antiguedad: '1 mes (permanente)', requisitos: ["Antigüedad: 1 mes (permanente)"], ubicaciones: ["Dirección particular"], camposExtra: [] },
-            publico_contratado: { antiguedad: '15 meses (contratado)', requisitos: ["Antigüedad: 15 meses (contratado)"], ubicaciones: ["Dirección particular"], camposExtra: [] },
-            jubilado: { antiguedad: '2 cobros por JUPE o IPS', requisitos: ["Boleta de IPS o JUPE", "3 referencias (1 familiar)"], ubicaciones: ["Dirección particular"], camposExtra: [] },
-            asalariado_iva: {
+            formal_iva: {
                 antiguedad: '6 meses con IVAs',
                 requisitos: ["Antigüedad: 6 meses con IVAs", "6 últimos IVAs", "6 facturas emitidas a la empresa"],
                 ubicaciones: ["Dirección particular"],
@@ -190,9 +219,13 @@
                     { label: "Teléfono de la empresa", placeholder: "Ej: 021 123 456" }
                 ]
             },
-            prof_independiente: { antiguedad: '12 meses con RUC y título', requisitos: ["Antigüedad: 12 meses con RUC y título", "6 últimos IVAs", "Título o Registro", "Facturas (6 meses)"], ubicaciones: ["Dirección particular"], camposExtra: [] },
-            micro_comerciante: { antiguedad: '18 a 24 meses', requisitos: ["Antigüedad: 18 a 24 meses", "6 últimos IVAs", "Patente (si tiene)", "Fotos del negocio", "Fotos de mercaderías"], ubicaciones: ["Dirección del local"], camposExtra: [] },
-            rentista: { antiguedad: 'No especificada', requisitos: ["Contrato privado de alquiler", "Foto cédula inquilino", "Fotos inquilinato", "Factura de servicio público"], ubicaciones: ["Dirección del inquilinato"], camposExtra: [] }
+            informal: { antiguedad: '6 meses como mínimo', requisitos: ["Antigüedad: 6 meses como mínimo", "Certificado de trabajo o RUC laboral"], ubicaciones: ["Dirección particular", "Dirección laboral"], camposExtra: [] },
+            publico_permanente: { antiguedad: '1 mes (permanente)', requisitos: ["Antigüedad: 1 mes (permanente)"], ubicaciones: ["Dirección particular"], camposExtra: [] },
+            publico_contratado: { antiguedad: '15 meses (contratado)', requisitos: ["Antigüedad: 15 meses (contratado)"], ubicaciones: ["Dirección particular"], camposExtra: [] },
+            micro_iva: { antiguedad: '18 meses con IVAs', requisitos: ["Antigüedad: 18 meses con IVAs", "6 últimos IVAs", "Fotos del negocio (local y fachada)"], ubicaciones: ["Dirección del local"], camposExtra: [] },
+            micro_patente: { antiguedad: '18 meses con Patente', requisitos: ["Antigüedad: 18 meses con Patente", "6 últimos IVAs", "Patente actual", "Fotos del negocio", "Fotos de mercaderías"], ubicaciones: ["Dirección del local"], camposExtra: [] },
+            micro_sin_patente: { antiguedad: '24 meses demostrables', requisitos: ["Antigüedad: 24 meses demostrables", "Fotos del negocio (fachada e interior)", "Fotos de las mercaderías"], ubicaciones: ["Dirección del local"], camposExtra: [] },
+            prof_independiente: { antiguedad: '12 meses con RUC y título', requisitos: ["Antigüedad: 12 meses con RUC y título", "6 últimos IVAs", "Título o Registro", "Facturas (6 meses)"], ubicaciones: ["Dirección particular"], camposExtra: [] }
         };
 
         const CUOTERO = {
@@ -220,6 +253,49 @@
         function formatearNumero(n) { return n ? n.toString().replace(/\B(?=(\d{3})+(?!\d))/g,".") : "0"; }
         function parsearNumero(s) { return parseInt(s.toString().replace(/\./g,'')) || 0; }
 
+        // --- CONTROL DE ENVÍOS POR CI ---
+        function getEnvioCount(ci) {
+            const envios = JSON.parse(localStorage.getItem('ic_envios_ci')) || {};
+            const key = ci.replace(/\D/g, '');
+            const entry = envios[key];
+            if (entry) {
+                const hoy = new Date().toDateString();
+                if (entry.fecha !== hoy) return 0;
+                return entry.contador;
+            }
+            return 0;
+        }
+        function registrarEnvio(ci) {
+            const envios = JSON.parse(localStorage.getItem('ic_envios_ci')) || {};
+            const key = ci.replace(/\D/g, '');
+            envios[key] = {
+                fecha: new Date().toDateString(),
+                contador: getEnvioCount(ci) + 1
+            };
+            localStorage.setItem('ic_envios_ci', JSON.stringify(envios));
+        }
+
+        function actualizarIntentosUI() {
+            const ci = document.getElementById('ciCliente').value;
+            const count = getEnvioCount(ci);
+            const restantes = Math.max(0, 2 - count);
+            const el = document.getElementById('ciIntentosRestantes');
+            if (ci.trim() !== "") {
+                el.textContent = 'Te quedan ' + restantes + ' envío(s) hoy.';
+                if (restantes <= 0) {
+                    document.getElementById('btnPaso1Siguiente').disabled = true;
+                    alert("Ya completaste los 2 envíos disponibles por hoy para este CI. Vuelva mañana o consulte por otra vía.");
+                } else {
+                    document.getElementById('btnPaso1Siguiente').disabled = false;
+                }
+            } else {
+                el.textContent = '';
+            }
+        }
+
+        document.getElementById('ciCliente').addEventListener('input', actualizarIntentosUI);
+        // --- FIN CONTROL DE ENVÍOS ---
+
         const montoSimSelect = document.getElementById('montoSimulador');
         const tablaContainer = document.getElementById('tablaContainer');
         const montos = [500000,1000000,2000000,3000000,4000000,5000000,6000000,7000000,8000000,9000000,10000000,11000000,12000000,13000000,14000000,15000000];
@@ -227,7 +303,7 @@
 
         montoSimSelect.addEventListener('change', function() {
             const m = parseInt(this.value);
-            if (!m) { tablaContainer.style.display = 'none'; document.getElementById('simResultado').style.display = 'none'; cuotaSeleccionada = null; return; }
+            if (!m) { tablaContainer.style.display = 'none'; document.getElementById('simResultado').style.display = 'none'; return; }
             tablaContainer.style.display = 'block';
             const cuotas = CUOTERO[m];
             const tbody = document.getElementById('tablaSimulador');
@@ -251,7 +327,6 @@
         function mostrarAutorizacion() {
             if (sessionStorage.getItem('bloqueado')) { alert("Acceso denegado."); return; }
             document.getElementById('btnQuieroCalificar').style.display = 'none';
-            document.getElementById('btnQuieroCalificar').disabled = true;
             document.getElementById('autorizacionContainer').style.display = 'block';
             document.getElementById('autorizacionContainer').scrollIntoView({behavior:'smooth'});
         }
@@ -287,11 +362,17 @@
                 sessionStorage.setItem('bloqueado', '1');
                 return false;
             }
-            if (!document.getElementById('nombreCliente').value.trim() || !document.getElementById('ciCliente').value.trim() || !document.getElementById('telefonoCliente').value.trim() || !document.getElementById('ciudadCliente').value.trim() || !document.getElementById('ingresoMensual').value.trim()) {
-                alert("Completá todos los datos del Paso 1."); return false;
-            }
-            const ingreso = parsearNumero(document.getElementById('ingresoMensual').value);
+            const nombre = document.getElementById('nombreCliente').value.trim();
+            if (!nombre || nombre.split(' ').length < 2) { alert("Debe ingresar su Nombre y Apellido completos."); return false; }
+            const ci = document.getElementById('ciCliente').value.trim();
+            const telefono = document.getElementById('telefonoCliente').value.trim();
+            const ciudad = document.getElementById('ciudadCliente').value.trim();
+            const ingresoRaw = document.getElementById('ingresoMensual').value.trim();
+            if (!ci || !telefono || !ciudad || !ingresoRaw) { alert("Completá todos los datos del Paso 1."); return false; }
+            const ingreso = parsearNumero(ingresoRaw);
             if (ingreso < 1750000) { alert("El ingreso mínimo es Gs. 1.750.000."); return false; }
+            const enviosRestantes = 2 - getEnvioCount(ci);
+            if (enviosRestantes <= 0) { alert("Ya completaste los 2 envíos disponibles por hoy para este CI. Vuelva mañana o consulte por otra vía."); return false; }
             return true;
         }
         function validarPaso2() {
@@ -301,9 +382,7 @@
             for (let inp of ubicaciones) if (!inp.value.trim()) { alert("Completá todas las direcciones."); return false; }
             if (PERFILES[perfil].camposExtra && PERFILES[perfil].camposExtra.length > 0) {
                 const extras = document.querySelectorAll('.campo-extra');
-                for (let inp of extras) {
-                    if (!inp.value.trim()) { alert("Completá todos los campos de la empresa."); return false; }
-                }
+                for (let inp of extras) { if (!inp.value.trim()) { alert("Completá todos los campos de la empresa."); return false; } }
             }
             return true;
         }
@@ -317,9 +396,7 @@
             const ref2 = document.getElementById('ref2').value.trim();
             const ref3 = document.getElementById('ref3').value.trim();
             const obs = document.getElementById('observaciones').value.trim();
-            if (!ref1 || !ref2 || !ref3 || !obs) {
-                alert("Completá todos los campos del Paso 3."); return false;
-            }
+            if (!ref1 || !ref2 || !ref3 || !obs) { alert("Completá todos los campos del Paso 3."); return false; }
             if (!validarReferencia(ref1)) { alert("La Referencia 1 debe contener Nombre, Apellido y Celular."); return false; }
             if (!validarReferencia(ref2)) { alert("La Referencia 2 debe contener Nombre, Apellido y Celular."); return false; }
             if (!validarReferencia(ref3)) { alert("La Referencia 3 debe contener Nombre, Apellido y Celular."); return false; }
@@ -334,57 +411,25 @@
 
         function actualizarSecciones() {
             const perfil = document.getElementById('perfil').value;
-            const checklistContainer = document.getElementById('checklistContainer');
-            const ubicacionContainer = document.getElementById('ubicacionContainer');
-            const camposExtrasContainer = document.getElementById('camposExtrasContainer');
-            
-            if (!perfil) {
-                checklistContainer.style.display = 'none';
-                ubicacionContainer.style.display = 'none';
-                camposExtrasContainer.style.display = 'none';
-                return;
-            }
-            
+            document.getElementById('checklistContainer').style.display = perfil ? 'block' : 'none';
+            document.getElementById('ubicacionContainer').style.display = perfil ? 'block' : 'none';
+            document.getElementById('camposExtrasContainer').style.display = perfil ? 'block' : 'none';
+            if (!perfil) return;
             const datos = PERFILES[perfil];
-            
-            if (datos.requisitos.length > 0) {
-                let html = '';
-                datos.requisitos.forEach((req, i) => {
-                    html += `<div class="checklist-item" onclick="toggleCheck(this)"><input type="checkbox" id="check_${i}" value="${req}"><div class="custom-check"></div><label class="checklist-label">${req}</label></div>`;
-                });
-                document.getElementById('checklistItems').innerHTML = html;
-                checklistContainer.style.display = 'block';
-            } else {
-                checklistContainer.style.display = 'none';
-            }
-            
-            if (datos.ubicaciones.length > 0) {
-                let html = '';
-                datos.ubicaciones.forEach((ubi, i) => {
-                    html += `<div class="form-group"><label>${ubi} <span class="required">*</span></label><textarea class="ubicacion-input" placeholder="Escribí tu dirección: calle, número, barrio, referencia" required style="min-height:60px;"></textarea></div>`;
-                });
-                document.getElementById('ubicacionFields').innerHTML = html;
-                ubicacionContainer.style.display = 'block';
-            } else {
-                ubicacionContainer.style.display = 'none';
-            }
-            
+            let html = ''; datos.requisitos.forEach((req, i) => html += `<div class="checklist-item" onclick="toggleCheck(this)"><input type="checkbox" id="check_${i}" value="${req}"><div class="custom-check"></div><label class="checklist-label">${req}</label></div>`); document.getElementById('checklistItems').innerHTML = html;
+            html = ''; datos.ubicaciones.forEach((ubi, i) => html += `<div class="form-group"><label>${ubi} <span class="required">*</span></label><textarea class="ubicacion-input" placeholder="Escribí tu dirección: calle, número, barrio, referencia" required style="min-height:60px;"></textarea></div>`); document.getElementById('ubicacionFields').innerHTML = html;
+            html = ''; 
             if (datos.camposExtra && datos.camposExtra.length > 0) {
-                let html = '';
-                datos.camposExtra.forEach((campo, i) => {
-                    html += `<div class="form-group"><label>${campo.label} <span class="required">*</span></label><input type="text" class="campo-extra" placeholder="${campo.placeholder}" required></div>`;
-                });
-                document.getElementById('camposExtrasFields').innerHTML = html;
-                camposExtrasContainer.style.display = 'block';
-            } else {
-                camposExtrasContainer.style.display = 'none';
-            }
+                document.getElementById('camposExtrasContainer').style.display = 'block';
+                datos.camposExtra.forEach((campo, i) => html += `<div class="form-group"><label>${campo.label} <span class="required">*</span></label><input type="text" class="campo-extra" placeholder="${campo.placeholder}" required></div>`);
+            } else { document.getElementById('camposExtrasContainer').style.display = 'none'; }
+            document.getElementById('camposExtrasFields').innerHTML = html;
         }
         function toggleCheck(item) { const cb = item.querySelector('input[type="checkbox"]'); cb.checked = !cb.checked; }
 
         function abrirWhatsAppDirecto() {
             if (sessionStorage.getItem('bloqueado')) return;
-            window.open("https://wa.me/"+NUMERO_WHATSAPP+"?text="+encodeURIComponent("Hola Isidro! Vi tu plataforma TKING y quisiera recibir atención personalizada."),"_blank");
+            window.open("https://wa.me/"+NUMERO_WHATSAPP+"?text="+encodeURIComponent("Hola Isidro! Vi tu plataforma y quisiera recibir atención personalizada."),"_blank");
         }
 
         document.getElementById('formularioEvaluacion').addEventListener('submit', async function(e) {
@@ -404,6 +449,9 @@
             const ref3 = document.getElementById('ref3').value.trim();
             if (!cuotaSeleccionada) { alert("Seleccioná una cuota en el simulador."); return; }
 
+            const enviosRestantes = 2 - getEnvioCount(ci);
+            if (enviosRestantes <= 0) { alert("Ya completaste los 2 envíos disponibles por hoy para este CI. Vuelva mañana o consulte por otra vía."); return; }
+
             const hoy = new Date(); const nac = new Date(fechaNac);
             let edad = hoy.getFullYear() - nac.getFullYear();
             const mes = hoy.getMonth() - nac.getMonth();
@@ -415,26 +463,23 @@
             checks.forEach(ch => { if (ch.checked) tiene.push(ch.value); else falta.push(ch.value); });
             const ubicaciones = Array.from(document.querySelectorAll('.ubicacion-input')).map(inp => inp.value.trim());
             
-            let datosExtra = '';
             let razon_social = '', tel_empresa = '';
             const extras = document.querySelectorAll('.campo-extra');
             if (extras.length > 0) {
                 razon_social = extras[0]?.value.trim() || '';
                 tel_empresa = extras[1]?.value.trim() || '';
-                datosExtra = 'DATOS DE LA EMPRESA:\n' +
-                    'Razón social: ' + razon_social + '\n' +
-                    'Teléfono empresa: ' + tel_empresa + '\n';
             }
 
             const checklistMsg = (tiene.length > 0 ? 'TIENE:\n' + tiene.map(i => '  * ' + i).join('\n') : '') + (falta.length > 0 ? '\nFALTA:\n' + falta.map(i => '  * ' + i).join('\n') : '');
             const ubicacionesMsg = ubicaciones.length > 0 ? 'DIRECCIONES:\n' + ubicaciones.map((u, i) => '  * ' + u).join('\n') : '';
             const cuotaMsg = `Cuota de interés: ${cuotaSeleccionada.plazo} cuotas de Gs. ${formatearNumero(cuotaSeleccionada.cuota)}`;
-            const prefijo = (monto >= 10000000) ? '🚨 URGENTE - V.I.P. 🚨\n' : '';
-
-            const mensajeWa = `${prefijo}Hola Isidro! Soy ${nombre}, completé tu Simulador TKING.\n\n` +
+            
+            const mensajeWa = `Hola Isidro! Soy ${nombre}, completé tu formulario de crédito.\n\n` +
                 `CI: ${ci}\nEdad: ${edad} años\nWhatsApp: ${telefono}\nCiudad: ${ciudad}\n` +
                 `Perfil: ${perfilLabel}\nMonto solicitado: Gs. ${formatearNumero(monto)}\nIngreso: Gs. ${formatearNumero(ingreso)}\n${cuotaMsg}\n\n` +
-                `DOCUMENTACIÓN:\n${checklistMsg}\n${ubicacionesMsg}\n${datosExtra}\nREFERENCIAS:\nRef1 (Familiar): ${ref1}\nRef2: ${ref2}\nRef3: ${ref3}\nOBSERVACIONES:\n${observaciones}\n\n📎 Tengo los docs listos. ¿Qué sigue?`;
+                `DOCUMENTACIÓN:\n${checklistMsg}\n${ubicacionesMsg}\nREFERENCIAS:\nRef1 (Familiar): ${ref1}\nRef2: ${ref2}\nRef3: ${ref3}\nOBSERVACIONES:\n${observaciones}\n` +
+                (razon_social ? `\nDATOS DE LA EMPRESA:\nRazón social: ${razon_social}\nTeléfono empresa: ${tel_empresa}\n` : '') +
+                `\n📎 Tengo los docs listos. ¿Qué sigue?`;
 
             const datosSheet = {
                 nombre, ci, edad, telefono, ciudad, perfil: perfilLabel, monto, ingreso,
@@ -442,35 +487,33 @@
                 checklist_tiene: tiene.join('; '), checklist_falta: falta.join('; '),
                 ubicaciones: ubicaciones.join('; '), referencias: `Ref1: ${ref1}, Ref2: ${ref2}, Ref3: ${ref3}`,
                 observaciones, cuota: cuotaMsg,
-                razon_social: razon_social,
-                tel_empresa: tel_empresa,
-                autorizacion: "Sí",
-                fecha: new Date().toLocaleString()
+                razon_social: razon_social, tel_empresa: tel_empresa,
+                autorizacion: "Sí", fecha: new Date().toLocaleString()
             };
 
             const btnEnviar = document.getElementById('btnEnviar');
-            btnEnviar.textContent = '⏳ Analizando tu perfil...'; btnEnviar.disabled = true;
+            btnEnviar.textContent = '⏳ Preparando informe...'; btnEnviar.disabled = true;
+            
             setTimeout(async () => {
-                btnEnviar.textContent = '✅ ¡Solicitud prioritaria encontrada!';
+                btnEnviar.textContent = '✅ ¡Listo! Abriendo WhatsApp...';
                 await fetch(URL_GOOGLE_SHEETS, { method: "POST", mode: "no-cors", headers: { "Content-Type": "application/json" }, body: JSON.stringify(datosSheet) });
+                registrarEnvio(ci);
                 setTimeout(() => {
                     window.open("https://wa.me/"+NUMERO_WHATSAPP+"?text="+encodeURIComponent(mensajeWa),"_blank");
+                    btnEnviar.textContent = 'ENVIAR SOLICITUD POR WHATSAPP';
+                    btnEnviar.disabled = false;
                     document.getElementById('confirmToast').style.display = 'block';
                     setTimeout(() => { document.getElementById('confirmToast').style.display = 'none'; window.location.reload(); }, 3000);
                 }, 500);
-            }, 500);
+            }, 800);
         });
 
         configurarInputNumerico('ciCliente'); configurarInputNumerico('ingresoMensual');
         function configurarInputNumerico(id) {
             const inp = document.getElementById(id); if (!inp) return;
-            inp.addEventListener('input', function() { let r = this.value.replace(/\./g, ''); if (!isNaN(r) && r !== '') this.value = formatearNumero(parseInt(r)); });
+            inp.addEventListener('input', function() { let r = this.value.replace(/\D/g, ''); if (r !== '') this.value = formatearNumero(parseInt(r)); });
             inp.addEventListener('blur', function() { let r = parsearNumero(this.value); if (r > 0) this.value = formatearNumero(r); else this.value = ''; });
         }
-
-        const urlParams = new URLSearchParams(window.location.search);
-        const perfilParam = urlParams.get('perfil');
-        if (perfilParam && PERFILES[perfilParam]) document.addEventListener('DOMContentLoaded', () => { const ps = document.getElementById('perfil'); if (ps) { ps.value = perfilParam; actualizarSecciones(); } });
 
         const hoyFecha = new Date();
         document.getElementById('fechaNacimiento').setAttribute('max', `${hoyFecha.getFullYear()-18}-12-31`);
@@ -480,6 +523,19 @@
             document.getElementById('infoconfBloqueo').style.display = 'block';
             document.getElementById('btnPaso1Siguiente').style.display = 'none';
             document.getElementById('waBtnFlotante').style.display = 'none';
+        }
+
+        // Pre-carga de perfil desde parámetro ?perfil=...
+        const urlParams = new URLSearchParams(window.location.search);
+        const perfilParam = urlParams.get('perfil');
+        if (perfilParam && PERFILES[perfilParam]) {
+            document.addEventListener('DOMContentLoaded', () => {
+                const perfilSelect = document.getElementById('perfil');
+                if (perfilSelect) {
+                    perfilSelect.value = perfilParam;
+                    actualizarSecciones();
+                }
+            });
         }
     </script>
 </body>
