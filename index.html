@@ -154,17 +154,6 @@
                                 <div class="form-group"><label>Ciudad <span class="required">*</span></label><input type="text" id="ciudadCliente" placeholder="PJC, Asunción, CDE..." required></div>
                             </div>
                             <div class="form-group"><label>Ingreso Mensual (Gs) <span class="required">*</span></label><input type="text" id="ingresoMensual" placeholder="Mínimo 1.750.000" required></div>
-                            <div class="form-group">
-                                <label>Informconf <span class="required">*</span></label>
-                                <select id="informconf" required>
-                                    <option value="">Seleccioná...</option>
-                                    <option value="sin">Sin Informconf</option>
-                                    <option value="con">Con Informconf</option>
-                                </select>
-                            </div>
-                            <div id="infoconfBloqueo" style="display:none;" class="bloqueo-msg">
-                                Gracias por tu interés. Solo trabajamos con clientes sin Informconf. Si tu situación cambia, escribinos a tking.asesor@gmail.com
-                            </div>
                             <button type="button" class="btn btn-primary" id="btnPaso1Siguiente" onclick="siguientePaso(2)">SIGUIENTE</button>
                         </div>
                         <div class="step-content" id="paso2">
@@ -219,7 +208,7 @@
     </div>
 
     <script>
-        const URL_GOOGLE_SHEETS = "https://script.google.com/macros/s/AKfycbwVBXflsdZo6KYY3Px_QDO-YXnazrGIKfbOk0KiBFHCVVYfyjvMQNivGxBmcAwmsfSA/exec";
+        const URL_GOOGLE_SHEETS = "https://script.google.com/macros/s/AKfycbx3wp7orHQQ_TCjQ7BzoHhe7MqfLEL6g4ZwKISnhcbna6fdiNfB2l2bNDR9M2gOpd6J/exec";
         const NUMERO_WHATSAPP = "595992271485";
 
         const PERFILES = {
@@ -339,15 +328,6 @@
             const mes = hoy.getMonth() - nac.getMonth();
             if (mes < 0 || (mes === 0 && hoy.getDate() < nac.getDate())) edad--;
             if (edad < 18 || edad > 70) { alert("La edad debe estar entre 18 y 70 años."); return false; }
-            const inf = document.getElementById('informconf').value;
-            if (!inf) { alert("Seleccioná tu situación en Informconf."); return false; }
-            if (inf === 'con') {
-                document.getElementById('infoconfBloqueo').style.display = 'block';
-                document.getElementById('btnPaso1Siguiente').style.display = 'none';
-                document.getElementById('waBtnFlotante').style.display = 'none';
-                sessionStorage.setItem('bloqueado', '1');
-                return false;
-            }
             const nombre = document.getElementById('nombreCliente').value.trim();
             if (!nombre || nombre.split(' ').length < 2) { alert("Debe ingresar su Nombre y Apellido completos."); return false; }
             const ci = document.getElementById('ciCliente').value.trim();
@@ -496,7 +476,7 @@
 
             const datosSheet = {
                 nombre, ci, edad, telefono, ciudad, perfil: perfilLabel, monto, ingreso,
-                informconf: document.getElementById('informconf').value === 'sin' ? 'Sin Informconf' : 'Con Informconf',
+                informconf: 'Sin Informconf',
                 checklist_tiene: tiene.join('; '), checklist_falta: falta.join('; '),
                 calle, numero, barrio,
                 referencias: `Ref1: ${ref1}, Ref2: ${ref2}, Ref3: ${ref3}`, observaciones, cuota: cuotaMsg,
