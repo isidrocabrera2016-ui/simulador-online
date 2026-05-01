@@ -8,8 +8,6 @@
     <meta property="og:title" content="Isidro Cabrera · Asesoría de Crédito">
     <meta property="og:description" content="Evaluá tu crédito en 2 minutos, sin compromiso.">
     <meta property="og:image" content="https://isidrocabrera2016-ui.github.io/simulador-online/1000318336.png">
-    <meta property="og:url" content="https://isidrocabrera2016-ui.github.io/simulador-online/">
-    <meta property="og:type" content="website">
     <style>
         :root {
             --bg-deep: #0B0F19; --accent-gold: #2ECC71; --white: #ffffff;
@@ -92,11 +90,9 @@
         @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
         .security-badge { display: flex; align-items: center; gap: 8px; background: rgba(46, 204, 113, 0.05); border: 1px solid rgba(46, 204, 113, 0.2); border-radius: 8px; padding: 10px 14px; margin: 15px 0; font-size: 11px; color: var(--accent-gold); font-weight: 600; }
         .social-proof { text-align: center; font-size: 10px; color: rgba(255,255,255,0.3); margin-top: 10px; }
-        .bloqueo-msg { background: rgba(46, 204, 113, 0.03); border: 1px solid rgba(46, 204, 113, 0.2); border-radius: 12px; padding: 20px; text-align: center; color: var(--accent-gold); font-weight: 600; }
         .auth-container { background: rgba(46, 204, 113, 0.02); border: 1px solid rgba(46, 204, 113, 0.3); border-radius: 12px; padding: 20px; margin-top: 20px; }
         .auth-container label { font-size: 12px; text-transform: none; letter-spacing: 0; display: flex; align-items: flex-start; gap: 8px; color: rgba(255,255,255,0.7); }
         .auth-container input[type="checkbox"] { width: 20px; height: 20px; accent-color: var(--accent-gold); flex-shrink: 0; margin-top: 2px; }
-
         .intentos-restantes { font-size: 10px; color: var(--accent-gold); text-align: right; margin-top: 4px; }
     </style>
 </head>
@@ -150,7 +146,7 @@
                             </div>
                             <div class="row-2">
                                 <div class="form-group"><label>Fecha de Nac. <span class="required">*</span></label><input type="date" id="fechaNacimiento" required></div>
-                                <div class="form-group"><label>Ciudad <span class="required">*</span></label><input type="text" id="ciudadCliente" placeholder="PJC, Asunción, CDE..." required></div>
+                                <div class="form-group"><label>Ciudad <span class="required">*</span></label><input type="text" id="ciudadCliente" placeholder="Asunción, CDE..." required></div>
                             </div>
                             <div class="form-group"><label>Ingreso Mensual (Gs) <span class="required">*</span></label><input type="text" id="ingresoMensual" placeholder="Mínimo 1.750.000" required></div>
                             <button type="button" class="btn btn-primary" id="btnPaso1Siguiente" onclick="siguientePaso(2)">SIGUIENTE</button>
@@ -196,7 +192,7 @@
                             </div>
                             <div style="display: flex; gap: 10px;">
                                 <button type="button" class="btn btn-back" onclick="pasoAtras(2)">ATRÁS</button>
-                                <button type="button" class="btn btn-whatsapp" id="btnEnviar">ENVIAR SOLICITUD POR WHATSAPP</button>
+                                <button type="button" class="btn btn-whatsapp" id="btnEnviar" onclick="enviarSolicitud()">ENVIAR SOLICITUD POR WHATSAPP</button>
                             </div>
                         </div>
                     </form>
@@ -207,8 +203,7 @@
     </div>
 
     <script>
-        // Reemplace esto con su URL real de Google Apps Script
-        const URL_GOOGLE_SHEETS = "https://script.google.com/macros/s/AKfycby_ZpNOjJAFHV3gvuPWo1mHEMRvVhHuAjNg-nh2pIUOaIr7hE4zbuv1gshXVTxVzsz0/exec";
+        const URL_GOOGLE_SHEETS = "TU_URL_DE_GOOGLE_APPS_SCRIPT";
         const NUMERO_WHATSAPP = "595992271485";
 
         const PERFILES = {
@@ -413,8 +408,7 @@
             window.open("https://wa.me/"+NUMERO_WHATSAPP+"?text="+encodeURIComponent("Hola Isidro! Vi tu plataforma y quisiera recibir atención personalizada."),"_blank");
         }
 
-        document.getElementById('formularioEvaluacion').addEventListener('submit', function(e) {
-            e.preventDefault();
+        function enviarSolicitud() {
             if (sessionStorage.getItem('bloqueado') || !validarPaso3()) return;
 
             const nombre = document.getElementById('nombreCliente').value.trim();
@@ -494,7 +488,7 @@
                 document.getElementById('confirmToast').style.display = 'none';
                 window.location.reload();
             }, 3000);
-        });
+        }
 
         configurarInputNumerico('ciCliente'); configurarInputNumerico('ingresoMensual');
         function configurarInputNumerico(id) {
